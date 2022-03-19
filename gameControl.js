@@ -16,16 +16,22 @@ class Game {
 		// movie clips
 		this.elev = this.root.elevator_mc;
 		this.win = this.root.elevatorWindow_mc;
+		this.bank = this.root.town_mc;
 
-		this.root.btnOpenDoor.on('click', function() { game.elev.gotoAndPlay('openDoor'); });
-		this.root.btnCloseDoor.on('click', function() { game.elev.gotoAndPlay('closeDoor'); });
-		this.root.btnTownDown.on('click', function() { 
-			game.elev.gotoAndPlay('townDown'); 
-			game.win.gotoAndPlay('townDown'); 
+		// bank
+		this.root.btnBankOpen.on('click', function() { game.bank.gotoAndPlay('openDoor'); });
+		this.root.btnBankClose.on('click', function() { game.bank.gotoAndPlay('closeDoor'); });
+		
+		// elevator
+		this.root.btnElevOpen.on('click', function() { game.elev.gotoAndPlay('openDoor'); });
+		this.root.btnElevClose.on('click', function() { game.elev.gotoAndPlay('closeDoor'); });
+		this.root.btnElevDown.on('click', function() {  
+			game.elev.gotoAndPlay('elevDown'); 
+			game.win.gotoAndPlay('windowDown'); 
 		});
-		this.root.btnTunnelDown.on('click', function() { 
-			game.elev.gotoAndPlay('tunnelDown'); 
-			game.win.gotoAndPlay('tunnelDown'); 
+		this.root.btnElevUp.on('click', function() { 
+			game.elev.gotoAndPlay('elevUp'); 
+			game.win.gotoAndPlay('windowUp'); 
 		});
 	}
 }
