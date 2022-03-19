@@ -2163,7 +2163,7 @@ p.nominalBounds = new cjs.Rectangle(30,-220,132.5,1287.4);
 
 
 // stage content:
-(lib.gameBoard_v06 = function(mode,startPosition,loop,reversed) {
+(lib.gameBoard = function(mode,startPosition,loop,reversed) {
 if (loop == null) { loop = true; }
 if (reversed == null) { reversed = false; }
 	var props = new Object();
