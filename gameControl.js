@@ -4,6 +4,7 @@
 // global variables
 var gameStage, root, lib, miner;
 var elev, win, bank, minerWalk;
+var createJS = this.createjs;
 
 function gameInit(stage, exportRoot, compLib) {
 	// adobe globals
@@ -14,6 +15,7 @@ function gameInit(stage, exportRoot, compLib) {
 	// call functions
 	initMovieClips();
 	eventHandlers();
+	initMiner();
 }
 
 function initMovieClips() {
@@ -24,6 +26,21 @@ function initMovieClips() {
 	
 	// town
 	bank = root.town_mc;
+	
+	// miner
+	minerWalk = root.miner_walking_mc;
+}
+
+function initMiner() {
+	miner = {
+		"X": 830,
+		"Y": 675,
+		"bank": 1000,
+		"mc": 'minerWalk',
+		"dir": 'left',
+		"loc": 'tunnel',
+		"tool": 'none'
+	};
 }
 
 function eventHandlers() {
@@ -42,4 +59,19 @@ function eventHandlers() {
 		elev.gotoAndPlay('elevUp'); 
 		win.gotoAndPlay('windowUp'); 
 	});
+	
+	//miner
+	root.btnWalkLeft.on('click', function() { minerWalking(315); });
+}
+
+function minerWalking(newX) {
+	var dir;
+	var temp = minerWalk;
+	
+	// left or right of current position
+	if(miner.X > newX) { dir = 'left'; }
+	else { dir = 'right'; }
+	
+	minerWalk.gotoAndPlay('walk');
+	createJS.Tween.get(minerWalk).to({x: newX}, 2000).on('complete', function() { minerWalk.gotoAndStop(0); });
 }
