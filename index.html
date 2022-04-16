@@ -7,7 +7,8 @@
 	
 	<script src="https://code.createjs.com/1.0.0/createjs.min.js"></script> 
 	<script src="themine.js"></script> 
-	<script src="gameControl.js"></script>
+	<script src="MineGame.js"></script>
+	<script src="MinerClass.js"></script>
 </head>
 
 <body onload="init();" style="margin:0px;">
@@ -27,6 +28,7 @@
 <script>
 	// global variables
 	var canvas, anim_container, dom_overlay_container, fnStartAnimation, stage, exportRoot;
+	var root, lib, mineGame, miner;
 	init();
 	
 	function init() {
@@ -72,7 +74,11 @@
 		
 		// initialize game
 		fnStartAnimation();
-		gameInit(stage, exportRoot, compLib);
+		root = exportRoot;
+		lib = compLib;
+		mineGame = new MineGame();
+		miner = new MinerClass();
+//		gameInit(stage, exportRoot, compLib);
 	}
 </script>
 </html>
