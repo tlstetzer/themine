@@ -10,11 +10,7 @@ class MineGame {
 		this.init();
 		this.eventHandlers();
 	}
-	
-	init() {
-		
-	}
-	
+
 	eventHandlers() {
 		// turn
 		root.btnTurnLeft.on('click', function() { 

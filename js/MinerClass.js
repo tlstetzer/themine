@@ -5,27 +5,27 @@
 class MinerClass {
 	constructor() {
 		this.miner = root.miner_mc;
-		this.miner.gotoAndStop('faceLeft');
-		this.miner.dir = 'left';
+		this.miner.visible = false;
+		this.miner.gotoAndStop('faceRight');
+		this.dir = 'right';
+		this.loc = 'bank';
+		this.tool = 'none';
+		this.visible = false;
 	}
-	
-	facing() {
-		return this.miner.dir;
-	}
-	
+
 	turn(direction) {
 		if(direction === 'left') {
 			this.miner.gotoAndPlay('turnLeft');
 		} else {
 			this.miner.gotoAndPlay('turnRight');
 		}
-		this.miner.dir = direction;
+		this.dir = direction;
 	}
 	
 	turnAround() {
-		if(this.facing() === 'left') {
+		if(this.dir === 'left') {
 			this.turn('right');
-		} else if(this.facing() === 'right') {
+		} else {
 			this.turn('left');
 		} 
 	}
@@ -45,14 +45,16 @@ class MinerClass {
 	}
 	
 	walkAndTurn() {
-		if(this.facing() === 'left') {
+		if(this.dir === 'left') {
 			this.miner.gotoAndPlay('walkLeft');
 			createjs.Tween.get(this.miner).to({x: 305}, 4000).on('complete', function() { this.target.gotoAndPlay('turnRight'); });
-			this.miner.dir = 'right';
+			this.dir = 'right';
 		} else {
 			this.miner.gotoAndPlay('walkRight');
 			createjs.Tween.get(this.miner).to({x: 785}, 4000).on('complete', function() { this.target.gotoAndPlay('turnLeft'); });
-			this.miner.dir = 'left';
+			this.dir = 'left';
 		}
 	}
+	
+	setVisible(mode) { this.miner.visible = mode; }
 }
