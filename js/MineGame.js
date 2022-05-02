@@ -3,13 +3,14 @@
 
 // global variables
 var buttonFirst = true;
-var disp;
+var disp, tools;
 
 // JavaScript Document
 class MineGame {
 	constructor() {
 //		miner.setLocation('bank');
 		disp = root.displayArea_mc;
+		tools = root.displayArea_mc.minerTools_mc;
 		this.eventHandlers();
 	}
 	
@@ -24,9 +25,26 @@ class MineGame {
 	}
 
 	eventHandlers() {
-		root.btnExitBank.on('click', function() { disp.gotoAndPlay('exitBank'); });
-		root.btnElevDown.on('click', function() { disp.gotoAndPlay('elevatorDown'); });
-		root.btnElevUp.on('click', function() { disp.gotoAndPlay('goToBank'); });
+		root.btnExitBank.on('click', function() { 
+			disp.miner_mc.visible = true;
+			tools.visible = false;
+			disp.gotoAndPlay('exitBank'); 
+		});
+		root.btnElevDown.on('click', function() { 
+			disp.miner_mc.visible = true;
+			tools.visible = false;
+			disp.gotoAndPlay('elevatorDown'); 
+		});
+		root.btnElevUp.on('click', function() { 
+			disp.miner_mc.visible = true;
+			tools.visible = false;
+			disp.gotoAndPlay('goToBank'); 
+		});
+		root.btnPickaxe.on('click', function() { 
+			disp.miner_mc.visible = false;
+			tools.visible = true;
+			tools.gotoAndPlay('raisePickaxe'); 
+		});
 	}
 
 }
