@@ -45,6 +45,16 @@ class MineGame {
 			tools.visible = true;
 			tools.gotoAndPlay('raisePickaxe'); 
 		});
+		root.btnJackhammer.on('click', function() { 
+			disp.miner_mc.visible = false;
+			tools.visible = true;
+			tools.gotoAndPlay('Jackhammer'); 
+		});
+		root.btnExplosive.on('click', function() { 
+			disp.miner_mc.visible = false;
+			tools.visible = true;
+			disp.gotoAndPlay('Explosion'); 
+		});
 	}
 
 }
