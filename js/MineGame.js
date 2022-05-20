@@ -1,16 +1,14 @@
-/* global mineGame, root */
+/* global root */
 /* eslint no-unused-vars: 0 */
 
 // global variables
 var buttonFirst = true;
-var disp, tools;
+var anim;
 
 // JavaScript Document
 class MineGame {
 	constructor() {
-//		miner.setLocation('bank');
-		disp = root.displayArea_mc;
-		tools = root.displayArea_mc.minerTools_mc;
+		anim = root.animation_mc;
 		this.eventHandlers();
 	}
 	
@@ -25,35 +23,30 @@ class MineGame {
 	}
 
 	eventHandlers() {
-		root.btnExitBank.on('click', function() { 
-			disp.miner_mc.visible = true;
-			tools.visible = false;
-			disp.gotoAndPlay('exitBank'); 
+		$('#btnExit').on('click', function() { 
+			anim.gotoAndPlay('exitBank'); 
 		});
-		root.btnElevDown.on('click', function() { 
-			disp.miner_mc.visible = true;
-			tools.visible = false;
-			disp.gotoAndPlay('elevatorDown'); 
+		$('#btnDown').on('click', function() { 
+			anim.gotoAndPlay('elevatorDown'); 
 		});
-		root.btnElevUp.on('click', function() { 
-			disp.miner_mc.visible = true;
-			tools.visible = false;
-			disp.gotoAndPlay('goToBank'); 
+		$('#btnPickaxe').on('click', function() {
+			anim.miner_mc.gotoAndPlay('pickaxe'); 
+			anim.miner_mc.gotoAndPlay('raisePickaxe'); 
 		});
-		root.btnPickaxe.on('click', function() { 
-			disp.miner_mc.visible = false;
-			tools.visible = true;
-			tools.gotoAndPlay('raisePickaxe'); 
+		$('#btnJackhammer').on('click', function() { 
+			anim.miner_mc.gotoAndPlay('jackhammer'); 
+			anim.miner_mc.gotoAndPlay('drill'); 
 		});
-		root.btnJackhammer.on('click', function() { 
-			disp.miner_mc.visible = false;
-			tools.visible = true;
-			tools.gotoAndPlay('Jackhammer'); 
+		$('#btnDynamite').on('click', function() { 
+			anim.gotoAndPlay('explosive'); 
+			anim.gotoAndPlay('plunge'); 
 		});
-		root.btnExplosive.on('click', function() { 
-			disp.miner_mc.visible = false;
-			tools.visible = true;
-			disp.gotoAndPlay('Explosion'); 
+		$('#btnPump').on('click', function() { 
+			anim.gotoAndPlay('pump'); 
+			anim.gotoAndPlay('turnOn'); 
+		});
+		$('#btnBank').on('click', function() { 
+			anim.gotoAndPlay('depositGold'); 
 		});
 	}
 
