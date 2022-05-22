@@ -43,7 +43,7 @@ class MineGame {
 		});
 		$('#btnPump').on('click', function() { 
 			anim.gotoAndPlay('pump'); 
-			anim.gotoAndPlay('turnOn'); 
+			anim.gotoAndPlay('pumpOn'); 
 		});
 		$('#btnBank').on('click', function() { 
 			anim.gotoAndPlay('depositGold'); 
