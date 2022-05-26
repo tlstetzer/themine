@@ -48,6 +48,12 @@ class MineGame {
 		$('#btnBank').on('click', function() { 
 			anim.gotoAndPlay('depositGold'); 
 		});
+		$('#btnCaveIn').on('click', function() { 
+			anim.gotoAndPlay('caveIn'); 
+		});
+		$('#btnSpring').on('click', function() { 
+			anim.gotoAndPlay('spring'); 
+		});
 	}
 
 }
