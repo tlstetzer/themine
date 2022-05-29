@@ -1504,7 +1504,7 @@ if (reversed == null) { reversed = false; }
 	var props = new Object();
 	props.mode = mode;
 	props.startPosition = startPosition;
-	props.labels = {rock:0};
+	props.labels = {rock:0,dug:1,gold:2,hard:3,"water":4,caveIn:5,interest:6};
 	props.loop = loop;
 	props.reversed = reversed;
 	cjs.MovieClip.apply(this,[props]);
@@ -1513,25 +1513,94 @@ if (reversed == null) { reversed = false; }
 	this.frame_0 = function() {
 		this.stop();
 	}
+	this.frame_1 = function() {
+		this.stop();
+	}
+	this.frame_2 = function() {
+		this.stop();
+	}
+	this.frame_3 = function() {
+		this.stop();
+	}
+	this.frame_4 = function() {
+		this.stop();
+	}
+	this.frame_5 = function() {
+		this.stop();
+	}
+	this.frame_6 = function() {
+		this.stop();
+	}
 
 	// actions tween:
-	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(6));
+	this.timeline.addTween(cjs.Tween.get(this).call(this.frame_0).wait(1).call(this.frame_1).wait(1).call(this.frame_2).wait(1).call(this.frame_3).wait(1).call(this.frame_4).wait(1).call(this.frame_5).wait(1).call(this.frame_6).wait(1));
 
-	// Background
+	// Effect
 	this.shape = new cjs.Shape();
-	this.shape.graphics.f().s("#9D9D9D").ss(1,2,0,3).p("AiLiLIEXAAIAAEXIkXAAg");
-	this.shape.setTransform(0.5,0.5);
+	this.shape.graphics.f().s("#4D4D00").ss(1,1,1).p("AAlgcIADgRABBgHIAGgLIAGgLQgEgNgMgEQgBAAAAgBQgMgEgIAGIAEgMIAAAAQgHgpg1ARQgVAVgMAbIAFAMIgBABAhTAcQgEAVAMASQASAJAOgFIAAAAQABABACAAQAHADAHAJQAjAIAPgNQABgBAFgDIAbgTQADgDABgDQAAgCAAgDAA5A4QALgCADgCQAFgMAAgMQAUgUgZgaAg3AVQAAgOANgRIgDgKIgcATQgJAMgBAR");
+	this.shape.setTransform(-0.9914,0.5282);
 
 	this.shape_1 = new cjs.Shape();
-	this.shape_1.graphics.f("#9D9D9D").s().p("AiLCMIAAkXIEXAAIAAEXg");
-	this.shape_1.setTransform(0.5,0.5);
+	this.shape_1.graphics.f("#828200").s().p("AgaBUQgHgJgHgDIgDgBIAAAAQgOAFgSgJQgMgSAEgVIAAAAQABgRAJgMIAcgTIABgBIgFgMQAMgbAVgVQA1gRAHApIAAAAIgEAMQAIgGAMAEIABABQAMAEAEANIgGALQAZAagUAUQAAAMgFAMQgDACgLACQADgDABgDIAAgFIAAAFQgBADgDADIgbATIgGAEQgJAIgQAAQgLAAgOgDgAg3AVQAAgOANgRIgDgKIADAKQgNARAAAOgABBgHIAGgLgAAlgcIADgRg");
+	this.shape_1.setTransform(-0.9914,0.5282);
 
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_1},{t:this.shape}]}).to({state:[]},1).wait(5));
+	this.shape_2 = new cjs.Shape();
+	this.shape_2.graphics.f().s("#A7A7A7").ss(0.5,2,0,3).p("ACQiQIABAAAAWhpIA7AAAAWgcIA7AAACRhpIg9AAIAAAnIA5AAAAWhCIA+AAAAWgcIAAgmAAWhpIAAgnIB3AAACRgcIg9AAIAAAnIg+AAIg7AAIg6AAIgxAAAAWBYIA+AAIA5AAACRAxIg9AAIAAAnAAWAxIA7AAAAWAxIAAgmAAWB+IA7AAACRB+Ig9AAIAAATACNALIg5AAAAWB+IAAgmAhfhpIA6AAIA7AAAhfgcIA6AAIA7AAAglhCIAAgnAhfhCIA6AAIA7AAAhfgcIAAgmAiQiQIAxAAIB1AAAiQhpIAxAAIAAgnAiQgcIAxAAAiQhCIAxAAAhfBYIA6AAIAAgnIA7AAAhfAxIA6AAAhfAxIAAgmAhfB+IA6AAIA7AAAglCRIAAgTAhfB+IAAgmAiQBYIAxAAAiQB+IAxAAAiQAxIAxAAAglALIAAgnAglBYIA7AA");
+	this.shape_2.setTransform(0.5,0.65);
+
+	this.shape_3 = new cjs.Shape();
+	this.shape_3.graphics.f("#580000").s().p("ABUCRIAAgTIA9AAIAAATgABUCRIh5AAIAAgTIg6AAIAAgnIA6AAIA7AAIAAAnIA7AAIg7AAIAAgnIA+AAIA5AAIg5AAIAAgnIA9AAIAABOIg9AAIAAATgAAWB+Ig7AAgAglCRIhrAAIAAgTIAAgnIAAgnIAAglIAAgoIAAgmIAAgmIAAgmIAxAAIAAAmIgxAAIAxAAIAAgmIB1AAIAAAmIA7AAIg7AAIAAgmIB3AAIADAAIABAAIAAAmIg9AAIAAAmIg+AAIA+AAIAAgmIA9AAIAABMIg9AAIAAAoIg+AAIg7AAIAAgoIAAAoIg6AAIgxAAIAxAAIAAAlIA6AAIAAAnIg6AAIgxAAIAxAAIAAAnIA6AAIAAATgAhfB+IgxAAgAhfAwIgxAAgAglgdIA7AAIA7AAIg7AAIAAgmIg7AAIA7AAIAAAmIg7AAIg6AAIAAgmIAAAmIgxAAIAxAAgACNhDIg5AAgAhfhDIA6AAIg6AAIgxAAgAglhDIAAgmIg6AAIA6AAgAAWhpIg7AAgAAWBXIg7AAIAAgnIg6AAIAAglIA6AAIA7AAIAAAlIA7AAIg7AAIAAglIA+AAIA5AAIg5AAIAAgoIA9AAIAABNIg9AAIAAAngAAWAwIg7AAgAAWBXgAglBXgAhfAwgAAWALgAhfgdgAAWhDgACRhpg");
+	this.shape_3.setTransform(0.5,0.65);
+
+	this.shape_4 = new cjs.Shape();
+	this.shape_4.graphics.f().s("#3399CC").ss(1,2,0,3).p("AiPiPIEegBIABEhIkgAAg");
+	this.shape_4.setTransform(0.5004,0.4741);
+
+	this.shape_5 = new cjs.Shape();
+	this.shape_5.graphics.f("#3399CC").s().p("AiQCRIABkgIEegBIABEhg");
+	this.shape_5.setTransform(0.5,0.475);
+
+	this.shape_6 = new cjs.Shape();
+	this.shape_6.graphics.f().s("rgba(0,0,0,0.988)").ss(0.5,1,1).p("ABAhgQAGACAIAGQATAQABAEQAGATADASQgIAUgMAFQgGADgHAAQgFgFgFgEQgKgIgMgGQgJgEgJgCQgCgCgDgCQgXgUAdgSQAJgBAMgOQAAgBABgBABoAhQAEAFAFAGIACAgQgCARgigEQgdgFACgVQAAAAgBgBQgLgPgRgLQgBgBgBgCQgBgCgBgBQgCgDgBgCQgCAFgEACQACAEgDAGAArgCQAIgCAKgHQACAAABgBABXgGQACADACADQAOAUgBAEQAAAFAAAEQgBAQgCAOQAAABgBAAQgFAGgFAEQgNAJgNgEQgBAAgBgBQgDgEgCgEQgCgEgDgDAAqgaQAHAIgDAJQgBADgCAEQgDADgFAEQgKACgJARQAAAAAAABAALAqQACgBABgBQAEgDADgEAALAqQgBAAgBAAQAAABgBABQABgBACgBgAAOAoQACgHADgDAAzA+QgBAFgIAFQgNAHgDgBQgJgBgIgBQgGAGgEgGQAAgCgEgJQABgBABgBQgBgCAAgCQgEACgEgBQADACACACQAFASgKAHQgSgCgQAGQgXACAIgVQAAgBABgBQgIgCgJgEIgRgcQgGgMAUgKQgCgBgCAAQgNgNAGgLQAEgBAEgDQgGgCgGgDIgSgbQgGgPAggNQAhgNAGAgQgDADgBASQADAAACABQADACACAFQAAADABADQgCAFAFAKQAEAGgGAGIAAAAQgBABAAAAQABABACABQgBgBgBgCAA1BeQgIgBgHADQgLABAEgJQACgCAAgFQAAgFAHAAQAHAAAAABQAFADAEADQACAIgFADgAgiARQgDgDgBgBQAAgBAAgBAg0ghQAAAIAAALQgMAIgTgHAgpAJQgCACgDABQgNAHgCgBQgKgBgJgBAgeAdQADgDAEgCAgfAfQgBAFgBAMQAHABABABQABABACABQgBgFgIgQgAgeAdIAAAAQAAABgBABAAJBMQgDgBgCAAQgFgGgCgGAghAwQgBAJAAAMQgKAHgQgEAgWA0QAFAEAFAEAgEA7QgBgFADgEQAFgCAFgEAAKAgQgJAFgPgIQgFgDgEgCQgIgFgDgCQADAEABAIAgwgmQAHgPAPgBQAWAPAXAD");
+	this.shape_6.setTransform(-0.6542,4.1048);
+
+	this.shape_7 = new cjs.Shape();
+	this.shape_7.graphics.f("#313131").s().p("ABPBTQgdgFACgVIAFAHIAFAIIACABQANAEANgJIAKgKIABgBIADgeIAJALIACAgQgCAOgWAAIgMgBgAgBBGQAAgCgEgJIACgCQACAGAFAGIAFABQgDADgDAAQgCAAgCgDgAg8BCQgIgCgJgEIgRgcQgGgMAUgKIATACQACABANgHIAFgDIADACIAAACIAEAEQADAEABAIIAAAAIgBACQgBAFgBAMIgBAVQgGAEgJAAIgLgBgAgMA2IgKgIQgBgFgIgQIABgCIAAAAQADgDAEgCIAJAFQAPAIAJgFQACAEgDAGIgBACIgKAGQgDAEABAFQgDABgDAAIgCAAgAATAYIACADIgHAHQACgHADgDgAhTgTIgMgFIgSgbQgGgPAggNQAhgNAGAgQgDADgBASIAAATQgHAEgJAAQgHAAgIgDg");
+	this.shape_7.setTransform(-0.6542,4.7115);
+
+	this.shape_8 = new cjs.Shape();
+	this.shape_8.graphics.f("#3B3B3B").s().p("AXeHwQACgCAAgFQAAgFAHAAQAHAAAAABIAJAGQADAIgFADQgJgBgHADIgCAAQgIAAADgIgAWBHiIABgCQAQAEALgHIAAgVQAHABABABIADACIAKAIIAFAEQAGASgLAHQgSgCgQAGIgDAAQgTAAAHgTgAYAHnIgDgBIgFgIIgEgHIgCgBQgLgPgRgLIgCgDIACADQARALALAPQgBAFgIAFQgNAHgCgBIgRgCIgGgBQgGgGgCgGIgBgEQAAgFACgEIAMgGIACgCIgBAAQADgGgDgEQAEgCADgFQgDAFgEACQgIAFgRgIIgJgFIgLgHIgEgEIAAgCIgCgDQAEgEAAgEIgCgFQgEgHAAgFIABgDIgBgGQgBgFgEgCIAAAAIgBgGQAHgPAPgBQAWAPAZADQgZgUAegSQAKgBAMgOIAAgCIARgFQAGACAIAGQATAQACAEQAFATADASQgHAUgNAFIAFAGQANAVgBAEIAAAJIgDAeIAAABIgLAKQgJAGgJAAIgHgBgAXKHCIADgCIgDACgAXNHAIAHgHIgCgDQgDADgCAHIAAAAgAXQGxIACAFIgCgFIAAgBQAIgRAKgCIAJgIIgJAIQgKACgIARIAAABIAAAAgAXXF3IASAGQAIAIgDAJIgDAHQAHgCALgHIACgBIAKAJIABAAIABAAIAAAAIAAAAQAGAAAEgCIABgBIgBABQgEACgGAAIAAAAIAAAAIgBAAIgBAAIgKgJQgKgIgMgGIgSgGIgEgEIAEAEgAWBGqIgSgCIgFgBQgNgNAGgMIAIgEQATAHAMgIIABgTQACAAACABQAEACABAFIABAGIgBADQAAAFAEAHIACAFQAAAEgEAEIAAAAIgBABIgEADQgNAGgDAAIAAAAgA4pnuQAfgTAeATg");
+	this.shape_8.setTransform(-147.8,-36.6702);
+
+	this.shape_9 = new cjs.Shape();
+	this.shape_9.graphics.f("rgba(74,74,74,0.247)").s().p("AiQCRIAAkhIEhAAIAAEhg");
+	this.shape_9.setTransform(0.5,0.525);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[]}).to({state:[{t:this.shape_1},{t:this.shape}]},2).to({state:[{t:this.shape_3},{t:this.shape_2}]},1).to({state:[{t:this.shape_5},{t:this.shape_4}]},1).to({state:[{t:this.shape_8},{t:this.shape_7},{t:this.shape_6}]},1).to({state:[{t:this.shape_9}]},1).wait(1));
+
+	// Background
+	this.shape_10 = new cjs.Shape();
+	this.shape_10.graphics.f().s("#9D9D9D").ss(1,2,0,3).p("AiLiLIEXAAIAAEXIkXAAg");
+	this.shape_10.setTransform(0.5,0.5);
+
+	this.shape_11 = new cjs.Shape();
+	this.shape_11.graphics.f("#9D9D9D").s().p("AiLCMIAAkXIEXAAIAAEXg");
+	this.shape_11.setTransform(0.5,0.5);
+
+	this.shape_12 = new cjs.Shape();
+	this.shape_12.graphics.f().s("#484848").ss(1,2,0,3).p("AiLiLIEXAAIAAEXIkXAAg");
+	this.shape_12.setTransform(0.5,0.5);
+
+	this.shape_13 = new cjs.Shape();
+	this.shape_13.graphics.f("#484848").s().p("AiLCMIAAkXIEXAAIAAEXg");
+	this.shape_13.setTransform(0.5,0.5);
+
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_11},{t:this.shape_10}]}).to({state:[{t:this.shape_13},{t:this.shape_12}]},1).to({state:[{t:this.shape_13},{t:this.shape_12}]},1).to({state:[{t:this.shape_13},{t:this.shape_12}]},1).to({state:[{t:this.shape_13},{t:this.shape_12}]},1).to({state:[{t:this.shape_11},{t:this.shape_10}]},1).to({state:[{t:this.shape_11},{t:this.shape_10}]},1).wait(1));
 
 	this._renderFirstFrame();
 
 }).prototype = p = new cjs.MovieClip();
-p.nominalBounds = new cjs.Rectangle(-14.5,-14.5,30,30);
+p.nominalBounds = new cjs.Rectangle(-305.6,-87.1,347.70000000000005,103.19999999999999);
 
 
 (lib.btn_level10 = function(mode,startPosition,loop,reversed) {
@@ -5016,8 +5085,8 @@ if (reversed == null) { reversed = false; }
 
 	// Shaft
 	this.shape_1 = new cjs.Shape();
-	this.shape_1.graphics.f("#484848").s().p("AuIV/MgANgsAIcrgBMgAFAsFg");
-	this.shape_1.setTransform(421.125,-16.625);
+	this.shape_1.graphics.f("#484848").s().p("AuWV3MAADgr0IcrgBMgAFAr9g");
+	this.shape_1.setTransform(420.95,-16.225);
 
 	this.timeline.addTween(cjs.Tween.get(this.shape_1).wait(1));
 
@@ -5042,1252 +5111,1211 @@ if (reversed == null) { reversed = false; }
 	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_3},{t:this.shape_2}]}).wait(1));
 
 	// GameBoard
-	this.p1030 = new lib.game_piece("synched",0);
+	this.p1030 = new lib.game_piece();
 	this.p1030.name = "p1030";
-	this.p1030.setTransform(316.1,111.5);
+	this.p1030.setTransform(315.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0930 = new lib.game_piece("synched",0);
+	this.p0930 = new lib.game_piece();
 	this.p0930.name = "p0930";
-	this.p0930.setTransform(316.1,83.5);
+	this.p0930.setTransform(315.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0830 = new lib.game_piece("synched",0);
+	this.p0830 = new lib.game_piece();
 	this.p0830.name = "p0830";
-	this.p0830.setTransform(316.1,55.5);
+	this.p0830.setTransform(315.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0730 = new lib.game_piece("synched",0);
+	this.p0730 = new lib.game_piece();
 	this.p0730.name = "p0730";
-	this.p0730.setTransform(316.1,27.5);
+	this.p0730.setTransform(315.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0630 = new lib.game_piece("synched",0);
+	this.p0630 = new lib.game_piece();
 	this.p0630.name = "p0630";
-	this.p0630.setTransform(316.1,-0.5);
+	this.p0630.setTransform(315.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0530 = new lib.game_piece("synched",0);
+	this.p0530 = new lib.game_piece();
 	this.p0530.name = "p0530";
-	this.p0530.setTransform(316.1,-28.5);
+	this.p0530.setTransform(315.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0430 = new lib.game_piece("synched",0);
+	this.p0430 = new lib.game_piece();
 	this.p0430.name = "p0430";
-	this.p0430.setTransform(316.1,-56.5);
+	this.p0430.setTransform(315.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0330 = new lib.game_piece("synched",0);
+	this.p0330 = new lib.game_piece();
 	this.p0330.name = "p0330";
-	this.p0330.setTransform(316.1,-84.5);
+	this.p0330.setTransform(315.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0230 = new lib.game_piece("synched",0);
+	this.p0230 = new lib.game_piece();
 	this.p0230.name = "p0230";
-	this.p0230.setTransform(316.1,-112.5);
+	this.p0230.setTransform(315.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0130 = new lib.game_piece("synched",0);
+	this.p0130 = new lib.game_piece();
 	this.p0130.name = "p0130";
-	this.p0130.setTransform(316.1,-140.5);
+	this.p0130.setTransform(315.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1029 = new lib.game_piece("synched",0);
+	this.p1029 = new lib.game_piece();
 	this.p1029.name = "p1029";
-	this.p1029.setTransform(288.1,111.5);
+	this.p1029.setTransform(287.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0929 = new lib.game_piece("synched",0);
+	this.p0929 = new lib.game_piece();
 	this.p0929.name = "p0929";
-	this.p0929.setTransform(288.1,83.5);
+	this.p0929.setTransform(287.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0829 = new lib.game_piece("synched",0);
+	this.p0829 = new lib.game_piece();
 	this.p0829.name = "p0829";
-	this.p0829.setTransform(288.1,55.5);
+	this.p0829.setTransform(287.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0729 = new lib.game_piece("synched",0);
+	this.p0729 = new lib.game_piece();
 	this.p0729.name = "p0729";
-	this.p0729.setTransform(288.1,27.5);
+	this.p0729.setTransform(287.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0629 = new lib.game_piece("synched",0);
+	this.p0629 = new lib.game_piece();
 	this.p0629.name = "p0629";
-	this.p0629.setTransform(288.1,-0.5);
+	this.p0629.setTransform(287.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0529 = new lib.game_piece("synched",0);
+	this.p0529 = new lib.game_piece();
 	this.p0529.name = "p0529";
-	this.p0529.setTransform(288.1,-28.5);
+	this.p0529.setTransform(287.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0429 = new lib.game_piece("synched",0);
+	this.p0429 = new lib.game_piece();
 	this.p0429.name = "p0429";
-	this.p0429.setTransform(288.1,-56.5);
+	this.p0429.setTransform(287.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0329 = new lib.game_piece("synched",0);
+	this.p0329 = new lib.game_piece();
 	this.p0329.name = "p0329";
-	this.p0329.setTransform(288.1,-84.5);
+	this.p0329.setTransform(287.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0229 = new lib.game_piece("synched",0);
+	this.p0229 = new lib.game_piece();
 	this.p0229.name = "p0229";
-	this.p0229.setTransform(288.1,-112.5);
+	this.p0229.setTransform(287.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0129 = new lib.game_piece("synched",0);
+	this.p0129 = new lib.game_piece();
 	this.p0129.name = "p0129";
-	this.p0129.setTransform(288.1,-140.5);
+	this.p0129.setTransform(287.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1028 = new lib.game_piece("synched",0);
+	this.p1028 = new lib.game_piece();
 	this.p1028.name = "p1028";
-	this.p1028.setTransform(260.1,111.5);
+	this.p1028.setTransform(259.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0928 = new lib.game_piece("synched",0);
+	this.p0928 = new lib.game_piece();
 	this.p0928.name = "p0928";
-	this.p0928.setTransform(260.1,83.5);
+	this.p0928.setTransform(259.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0828 = new lib.game_piece("synched",0);
+	this.p0828 = new lib.game_piece();
 	this.p0828.name = "p0828";
-	this.p0828.setTransform(260.1,55.5);
+	this.p0828.setTransform(259.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0728 = new lib.game_piece("synched",0);
+	this.p0728 = new lib.game_piece();
 	this.p0728.name = "p0728";
-	this.p0728.setTransform(260.1,27.5);
+	this.p0728.setTransform(259.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0628 = new lib.game_piece("synched",0);
+	this.p0628 = new lib.game_piece();
 	this.p0628.name = "p0628";
-	this.p0628.setTransform(260.1,-0.5);
+	this.p0628.setTransform(259.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0528 = new lib.game_piece("synched",0);
+	this.p0528 = new lib.game_piece();
 	this.p0528.name = "p0528";
-	this.p0528.setTransform(260.1,-28.5);
+	this.p0528.setTransform(259.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0428 = new lib.game_piece("synched",0);
+	this.p0428 = new lib.game_piece();
 	this.p0428.name = "p0428";
-	this.p0428.setTransform(260.1,-56.5);
+	this.p0428.setTransform(259.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0328 = new lib.game_piece("synched",0);
+	this.p0328 = new lib.game_piece();
 	this.p0328.name = "p0328";
-	this.p0328.setTransform(260.1,-84.5);
+	this.p0328.setTransform(259.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0228 = new lib.game_piece("synched",0);
+	this.p0228 = new lib.game_piece();
 	this.p0228.name = "p0228";
-	this.p0228.setTransform(260.1,-112.5);
+	this.p0228.setTransform(259.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0128 = new lib.game_piece("synched",0);
+	this.p0128 = new lib.game_piece();
 	this.p0128.name = "p0128";
-	this.p0128.setTransform(260.1,-140.5);
+	this.p0128.setTransform(259.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1027 = new lib.game_piece("synched",0);
+	this.p1027 = new lib.game_piece();
 	this.p1027.name = "p1027";
-	this.p1027.setTransform(232.1,111.5);
+	this.p1027.setTransform(231.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0927 = new lib.game_piece("synched",0);
+	this.p0927 = new lib.game_piece();
 	this.p0927.name = "p0927";
-	this.p0927.setTransform(232.1,83.5);
+	this.p0927.setTransform(231.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0827 = new lib.game_piece("synched",0);
+	this.p0827 = new lib.game_piece();
 	this.p0827.name = "p0827";
-	this.p0827.setTransform(232.1,55.5);
+	this.p0827.setTransform(231.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0727 = new lib.game_piece("synched",0);
+	this.p0727 = new lib.game_piece();
 	this.p0727.name = "p0727";
-	this.p0727.setTransform(232.1,27.5);
+	this.p0727.setTransform(231.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0627 = new lib.game_piece("synched",0);
+	this.p0627 = new lib.game_piece();
 	this.p0627.name = "p0627";
-	this.p0627.setTransform(232.1,-0.5);
+	this.p0627.setTransform(231.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0527 = new lib.game_piece("synched",0);
+	this.p0527 = new lib.game_piece();
 	this.p0527.name = "p0527";
-	this.p0527.setTransform(232.1,-28.5);
+	this.p0527.setTransform(231.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0427 = new lib.game_piece("synched",0);
+	this.p0427 = new lib.game_piece();
 	this.p0427.name = "p0427";
-	this.p0427.setTransform(232.1,-56.5);
+	this.p0427.setTransform(231.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0327 = new lib.game_piece("synched",0);
+	this.p0327 = new lib.game_piece();
 	this.p0327.name = "p0327";
-	this.p0327.setTransform(232.1,-84.5);
+	this.p0327.setTransform(231.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0227 = new lib.game_piece("synched",0);
+	this.p0227 = new lib.game_piece();
 	this.p0227.name = "p0227";
-	this.p0227.setTransform(232.1,-112.5);
+	this.p0227.setTransform(231.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0127 = new lib.game_piece("synched",0);
+	this.p0127 = new lib.game_piece();
 	this.p0127.name = "p0127";
-	this.p0127.setTransform(232.1,-140.5);
+	this.p0127.setTransform(231.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1026 = new lib.game_piece("synched",0);
+	this.p1026 = new lib.game_piece();
 	this.p1026.name = "p1026";
-	this.p1026.setTransform(204.1,111.5);
+	this.p1026.setTransform(203.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0926 = new lib.game_piece("synched",0);
+	this.p0926 = new lib.game_piece();
 	this.p0926.name = "p0926";
-	this.p0926.setTransform(204.1,83.5);
+	this.p0926.setTransform(203.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0826 = new lib.game_piece("synched",0);
+	this.p0826 = new lib.game_piece();
 	this.p0826.name = "p0826";
-	this.p0826.setTransform(204.1,55.5);
+	this.p0826.setTransform(203.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0726 = new lib.game_piece("synched",0);
+	this.p0726 = new lib.game_piece();
 	this.p0726.name = "p0726";
-	this.p0726.setTransform(204.1,27.5);
+	this.p0726.setTransform(203.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0626 = new lib.game_piece("synched",0);
+	this.p0626 = new lib.game_piece();
 	this.p0626.name = "p0626";
-	this.p0626.setTransform(204.1,-0.5);
+	this.p0626.setTransform(203.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0526 = new lib.game_piece("synched",0);
+	this.p0526 = new lib.game_piece();
 	this.p0526.name = "p0526";
-	this.p0526.setTransform(204.1,-28.5);
+	this.p0526.setTransform(203.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0426 = new lib.game_piece("synched",0);
+	this.p0426 = new lib.game_piece();
 	this.p0426.name = "p0426";
-	this.p0426.setTransform(204.1,-56.5);
+	this.p0426.setTransform(203.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0326 = new lib.game_piece("synched",0);
+	this.p0326 = new lib.game_piece();
 	this.p0326.name = "p0326";
-	this.p0326.setTransform(204.1,-84.5);
+	this.p0326.setTransform(203.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0226 = new lib.game_piece("synched",0);
+	this.p0226 = new lib.game_piece();
 	this.p0226.name = "p0226";
-	this.p0226.setTransform(204.1,-112.5);
+	this.p0226.setTransform(203.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0126 = new lib.game_piece("synched",0);
+	this.p0126 = new lib.game_piece();
 	this.p0126.name = "p0126";
-	this.p0126.setTransform(204.1,-140.5);
+	this.p0126.setTransform(203.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1025 = new lib.game_piece("synched",0);
+	this.p1025 = new lib.game_piece();
 	this.p1025.name = "p1025";
-	this.p1025.setTransform(176.1,111.5);
+	this.p1025.setTransform(175.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0925 = new lib.game_piece("synched",0);
+	this.p0925 = new lib.game_piece();
 	this.p0925.name = "p0925";
-	this.p0925.setTransform(176.1,83.5);
+	this.p0925.setTransform(175.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0825 = new lib.game_piece("synched",0);
+	this.p0825 = new lib.game_piece();
 	this.p0825.name = "p0825";
-	this.p0825.setTransform(176.1,55.5);
+	this.p0825.setTransform(175.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0725 = new lib.game_piece("synched",0);
+	this.p0725 = new lib.game_piece();
 	this.p0725.name = "p0725";
-	this.p0725.setTransform(176.1,27.5);
+	this.p0725.setTransform(175.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0625 = new lib.game_piece("synched",0);
+	this.p0625 = new lib.game_piece();
 	this.p0625.name = "p0625";
-	this.p0625.setTransform(176.1,-0.5);
+	this.p0625.setTransform(175.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0525 = new lib.game_piece("synched",0);
+	this.p0525 = new lib.game_piece();
 	this.p0525.name = "p0525";
-	this.p0525.setTransform(176.1,-28.5);
+	this.p0525.setTransform(175.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0425 = new lib.game_piece("synched",0);
+	this.p0425 = new lib.game_piece();
 	this.p0425.name = "p0425";
-	this.p0425.setTransform(176.1,-56.5);
+	this.p0425.setTransform(175.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0325 = new lib.game_piece("synched",0);
+	this.p0325 = new lib.game_piece();
 	this.p0325.name = "p0325";
-	this.p0325.setTransform(176.1,-84.5);
+	this.p0325.setTransform(175.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0225 = new lib.game_piece("synched",0);
+	this.p0225 = new lib.game_piece();
 	this.p0225.name = "p0225";
-	this.p0225.setTransform(176.1,-112.5);
+	this.p0225.setTransform(175.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0125 = new lib.game_piece("synched",0);
+	this.p0125 = new lib.game_piece();
 	this.p0125.name = "p0125";
-	this.p0125.setTransform(176.1,-140.5);
+	this.p0125.setTransform(175.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1024 = new lib.game_piece("synched",0);
+	this.p1024 = new lib.game_piece();
 	this.p1024.name = "p1024";
-	this.p1024.setTransform(148.1,111.5);
+	this.p1024.setTransform(147.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0924 = new lib.game_piece("synched",0);
+	this.p0924 = new lib.game_piece();
 	this.p0924.name = "p0924";
-	this.p0924.setTransform(148.1,83.5);
+	this.p0924.setTransform(147.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0824 = new lib.game_piece("synched",0);
+	this.p0824 = new lib.game_piece();
 	this.p0824.name = "p0824";
-	this.p0824.setTransform(148.1,55.5);
+	this.p0824.setTransform(147.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0724 = new lib.game_piece("synched",0);
+	this.p0724 = new lib.game_piece();
 	this.p0724.name = "p0724";
-	this.p0724.setTransform(148.1,27.5);
+	this.p0724.setTransform(147.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0624 = new lib.game_piece("synched",0);
+	this.p0624 = new lib.game_piece();
 	this.p0624.name = "p0624";
-	this.p0624.setTransform(148.1,-0.5);
+	this.p0624.setTransform(147.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0524 = new lib.game_piece("synched",0);
+	this.p0524 = new lib.game_piece();
 	this.p0524.name = "p0524";
-	this.p0524.setTransform(148.1,-28.5);
+	this.p0524.setTransform(147.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0424 = new lib.game_piece("synched",0);
+	this.p0424 = new lib.game_piece();
 	this.p0424.name = "p0424";
-	this.p0424.setTransform(148.1,-56.5);
+	this.p0424.setTransform(147.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0324 = new lib.game_piece("synched",0);
+	this.p0324 = new lib.game_piece();
 	this.p0324.name = "p0324";
-	this.p0324.setTransform(148.1,-84.5);
+	this.p0324.setTransform(147.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0224 = new lib.game_piece("synched",0);
+	this.p0224 = new lib.game_piece();
 	this.p0224.name = "p0224";
-	this.p0224.setTransform(148.1,-112.5);
+	this.p0224.setTransform(147.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0124 = new lib.game_piece("synched",0);
+	this.p0124 = new lib.game_piece();
 	this.p0124.name = "p0124";
-	this.p0124.setTransform(148.1,-140.5);
+	this.p0124.setTransform(147.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1023 = new lib.game_piece("synched",0);
+	this.p1023 = new lib.game_piece();
 	this.p1023.name = "p1023";
-	this.p1023.setTransform(120.1,111.5);
+	this.p1023.setTransform(119.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0923 = new lib.game_piece("synched",0);
+	this.p0923 = new lib.game_piece();
 	this.p0923.name = "p0923";
-	this.p0923.setTransform(120.1,83.5);
+	this.p0923.setTransform(119.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0823 = new lib.game_piece("synched",0);
+	this.p0823 = new lib.game_piece();
 	this.p0823.name = "p0823";
-	this.p0823.setTransform(120.1,55.5);
+	this.p0823.setTransform(119.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0723 = new lib.game_piece("synched",0);
+	this.p0723 = new lib.game_piece();
 	this.p0723.name = "p0723";
-	this.p0723.setTransform(120.1,27.5);
+	this.p0723.setTransform(119.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0623 = new lib.game_piece("synched",0);
+	this.p0623 = new lib.game_piece();
 	this.p0623.name = "p0623";
-	this.p0623.setTransform(120.1,-0.5);
+	this.p0623.setTransform(119.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0523 = new lib.game_piece("synched",0);
+	this.p0523 = new lib.game_piece();
 	this.p0523.name = "p0523";
-	this.p0523.setTransform(120.1,-28.5);
+	this.p0523.setTransform(119.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0423 = new lib.game_piece("synched",0);
+	this.p0423 = new lib.game_piece();
 	this.p0423.name = "p0423";
-	this.p0423.setTransform(120.1,-56.5);
+	this.p0423.setTransform(119.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0323 = new lib.game_piece("synched",0);
+	this.p0323 = new lib.game_piece();
 	this.p0323.name = "p0323";
-	this.p0323.setTransform(120.1,-84.5);
+	this.p0323.setTransform(119.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0223 = new lib.game_piece("synched",0);
+	this.p0223 = new lib.game_piece();
 	this.p0223.name = "p0223";
-	this.p0223.setTransform(120.1,-112.5);
+	this.p0223.setTransform(119.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0123 = new lib.game_piece("synched",0);
+	this.p0123 = new lib.game_piece();
 	this.p0123.name = "p0123";
-	this.p0123.setTransform(120.1,-140.5);
+	this.p0123.setTransform(119.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1022 = new lib.game_piece("synched",0);
+	this.p1022 = new lib.game_piece();
 	this.p1022.name = "p1022";
-	this.p1022.setTransform(92.1,111.5);
+	this.p1022.setTransform(91.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0922 = new lib.game_piece("synched",0);
+	this.p0922 = new lib.game_piece();
 	this.p0922.name = "p0922";
-	this.p0922.setTransform(92.1,83.5);
+	this.p0922.setTransform(91.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0822 = new lib.game_piece("synched",0);
+	this.p0822 = new lib.game_piece();
 	this.p0822.name = "p0822";
-	this.p0822.setTransform(92.1,55.5);
+	this.p0822.setTransform(91.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0722 = new lib.game_piece("synched",0);
+	this.p0722 = new lib.game_piece();
 	this.p0722.name = "p0722";
-	this.p0722.setTransform(92.1,27.5);
+	this.p0722.setTransform(91.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0622 = new lib.game_piece("synched",0);
+	this.p0622 = new lib.game_piece();
 	this.p0622.name = "p0622";
-	this.p0622.setTransform(92.1,-0.5);
+	this.p0622.setTransform(91.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0522 = new lib.game_piece("synched",0);
+	this.p0522 = new lib.game_piece();
 	this.p0522.name = "p0522";
-	this.p0522.setTransform(92.1,-28.5);
+	this.p0522.setTransform(91.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0422 = new lib.game_piece("synched",0);
+	this.p0422 = new lib.game_piece();
 	this.p0422.name = "p0422";
-	this.p0422.setTransform(92.1,-56.5);
+	this.p0422.setTransform(91.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0322 = new lib.game_piece("synched",0);
+	this.p0322 = new lib.game_piece();
 	this.p0322.name = "p0322";
-	this.p0322.setTransform(92.1,-84.5);
+	this.p0322.setTransform(91.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0222 = new lib.game_piece("synched",0);
+	this.p0222 = new lib.game_piece();
 	this.p0222.name = "p0222";
-	this.p0222.setTransform(92.1,-112.5);
+	this.p0222.setTransform(91.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0122 = new lib.game_piece("synched",0);
+	this.p0122 = new lib.game_piece();
 	this.p0122.name = "p0122";
-	this.p0122.setTransform(92.1,-140.5);
+	this.p0122.setTransform(91.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1021 = new lib.game_piece("synched",0);
+	this.p1021 = new lib.game_piece();
 	this.p1021.name = "p1021";
-	this.p1021.setTransform(64.1,111.5);
+	this.p1021.setTransform(63.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0921 = new lib.game_piece("synched",0);
+	this.p0921 = new lib.game_piece();
 	this.p0921.name = "p0921";
-	this.p0921.setTransform(64.1,83.5);
+	this.p0921.setTransform(63.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0821 = new lib.game_piece("synched",0);
+	this.p0821 = new lib.game_piece();
 	this.p0821.name = "p0821";
-	this.p0821.setTransform(64.1,55.5);
+	this.p0821.setTransform(63.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0721 = new lib.game_piece("synched",0);
+	this.p0721 = new lib.game_piece();
 	this.p0721.name = "p0721";
-	this.p0721.setTransform(64.1,27.5);
+	this.p0721.setTransform(63.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0621 = new lib.game_piece("synched",0);
+	this.p0621 = new lib.game_piece();
 	this.p0621.name = "p0621";
-	this.p0621.setTransform(64.1,-0.5);
+	this.p0621.setTransform(63.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0521 = new lib.game_piece("synched",0);
+	this.p0521 = new lib.game_piece();
 	this.p0521.name = "p0521";
-	this.p0521.setTransform(64.1,-28.5);
+	this.p0521.setTransform(63.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0421 = new lib.game_piece("synched",0);
+	this.p0421 = new lib.game_piece();
 	this.p0421.name = "p0421";
-	this.p0421.setTransform(64.1,-56.5);
+	this.p0421.setTransform(63.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0321 = new lib.game_piece("synched",0);
+	this.p0321 = new lib.game_piece();
 	this.p0321.name = "p0321";
-	this.p0321.setTransform(64.1,-84.5);
+	this.p0321.setTransform(63.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0221 = new lib.game_piece("synched",0);
+	this.p0221 = new lib.game_piece();
 	this.p0221.name = "p0221";
-	this.p0221.setTransform(64.1,-112.5);
+	this.p0221.setTransform(63.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0121 = new lib.game_piece("synched",0);
+	this.p0121 = new lib.game_piece();
 	this.p0121.name = "p0121";
-	this.p0121.setTransform(64.1,-140.5);
+	this.p0121.setTransform(63.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1020 = new lib.game_piece("synched",0);
+	this.p1020 = new lib.game_piece();
 	this.p1020.name = "p1020";
-	this.p1020.setTransform(36.1,111.5);
+	this.p1020.setTransform(35.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0920 = new lib.game_piece("synched",0);
+	this.p0920 = new lib.game_piece();
 	this.p0920.name = "p0920";
-	this.p0920.setTransform(36.1,83.5);
+	this.p0920.setTransform(35.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0820 = new lib.game_piece("synched",0);
+	this.p0820 = new lib.game_piece();
 	this.p0820.name = "p0820";
-	this.p0820.setTransform(36.1,55.5);
+	this.p0820.setTransform(35.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0720 = new lib.game_piece("synched",0);
+	this.p0720 = new lib.game_piece();
 	this.p0720.name = "p0720";
-	this.p0720.setTransform(36.1,27.5);
+	this.p0720.setTransform(35.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0620 = new lib.game_piece("synched",0);
+	this.p0620 = new lib.game_piece();
 	this.p0620.name = "p0620";
-	this.p0620.setTransform(36.1,-0.5);
+	this.p0620.setTransform(35.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0520 = new lib.game_piece("synched",0);
+	this.p0520 = new lib.game_piece();
 	this.p0520.name = "p0520";
-	this.p0520.setTransform(36.1,-28.5);
+	this.p0520.setTransform(35.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0420 = new lib.game_piece("synched",0);
+	this.p0420 = new lib.game_piece();
 	this.p0420.name = "p0420";
-	this.p0420.setTransform(36.1,-56.5);
+	this.p0420.setTransform(35.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0320 = new lib.game_piece("synched",0);
+	this.p0320 = new lib.game_piece();
 	this.p0320.name = "p0320";
-	this.p0320.setTransform(36.1,-84.5);
+	this.p0320.setTransform(35.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0220 = new lib.game_piece("synched",0);
+	this.p0220 = new lib.game_piece();
 	this.p0220.name = "p0220";
-	this.p0220.setTransform(36.1,-112.5);
+	this.p0220.setTransform(35.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0120 = new lib.game_piece("synched",0);
+	this.p0120 = new lib.game_piece();
 	this.p0120.name = "p0120";
-	this.p0120.setTransform(36.1,-140.5);
+	this.p0120.setTransform(35.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1019 = new lib.game_piece("synched",0);
+	this.p1019 = new lib.game_piece();
 	this.p1019.name = "p1019";
-	this.p1019.setTransform(8.1,111.5);
+	this.p1019.setTransform(7.15,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0919 = new lib.game_piece("synched",0);
+	this.p0919 = new lib.game_piece();
 	this.p0919.name = "p0919";
-	this.p0919.setTransform(8.1,83.5);
+	this.p0919.setTransform(7.15,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0819 = new lib.game_piece("synched",0);
+	this.p0819 = new lib.game_piece();
 	this.p0819.name = "p0819";
-	this.p0819.setTransform(8.1,55.5);
+	this.p0819.setTransform(7.15,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0719 = new lib.game_piece("synched",0);
+	this.p0719 = new lib.game_piece();
 	this.p0719.name = "p0719";
-	this.p0719.setTransform(8.1,27.5);
+	this.p0719.setTransform(7.15,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0619 = new lib.game_piece("synched",0);
+	this.p0619 = new lib.game_piece();
 	this.p0619.name = "p0619";
-	this.p0619.setTransform(8.1,-0.5);
+	this.p0619.setTransform(7.15,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0519 = new lib.game_piece("synched",0);
+	this.p0519 = new lib.game_piece();
 	this.p0519.name = "p0519";
-	this.p0519.setTransform(8.1,-28.5);
+	this.p0519.setTransform(7.15,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0419 = new lib.game_piece("synched",0);
+	this.p0419 = new lib.game_piece();
 	this.p0419.name = "p0419";
-	this.p0419.setTransform(8.1,-56.5);
+	this.p0419.setTransform(7.15,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0319 = new lib.game_piece("synched",0);
+	this.p0319 = new lib.game_piece();
 	this.p0319.name = "p0319";
-	this.p0319.setTransform(8.1,-84.5);
+	this.p0319.setTransform(7.15,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0219 = new lib.game_piece("synched",0);
+	this.p0219 = new lib.game_piece();
 	this.p0219.name = "p0219";
-	this.p0219.setTransform(8.1,-112.5);
+	this.p0219.setTransform(7.15,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0119 = new lib.game_piece("synched",0);
+	this.p0119 = new lib.game_piece();
 	this.p0119.name = "p0119";
-	this.p0119.setTransform(8.1,-140.5);
+	this.p0119.setTransform(7.15,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1018 = new lib.game_piece("synched",0);
+	this.p1018 = new lib.game_piece();
 	this.p1018.name = "p1018";
-	this.p1018.setTransform(-19.9,111.5);
+	this.p1018.setTransform(-20.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0918 = new lib.game_piece("synched",0);
+	this.p0918 = new lib.game_piece();
 	this.p0918.name = "p0918";
-	this.p0918.setTransform(-19.9,83.5);
+	this.p0918.setTransform(-20.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0818 = new lib.game_piece("synched",0);
+	this.p0818 = new lib.game_piece();
 	this.p0818.name = "p0818";
-	this.p0818.setTransform(-19.9,55.5);
+	this.p0818.setTransform(-20.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0718 = new lib.game_piece("synched",0);
+	this.p0718 = new lib.game_piece();
 	this.p0718.name = "p0718";
-	this.p0718.setTransform(-19.9,27.5);
+	this.p0718.setTransform(-20.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0618 = new lib.game_piece("synched",0);
+	this.p0618 = new lib.game_piece();
 	this.p0618.name = "p0618";
-	this.p0618.setTransform(-19.9,-0.5);
+	this.p0618.setTransform(-20.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0518 = new lib.game_piece("synched",0);
+	this.p0518 = new lib.game_piece();
 	this.p0518.name = "p0518";
-	this.p0518.setTransform(-19.9,-28.5);
+	this.p0518.setTransform(-20.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0418 = new lib.game_piece("synched",0);
+	this.p0418 = new lib.game_piece();
 	this.p0418.name = "p0418";
-	this.p0418.setTransform(-19.9,-56.5);
+	this.p0418.setTransform(-20.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0318 = new lib.game_piece("synched",0);
+	this.p0318 = new lib.game_piece();
 	this.p0318.name = "p0318";
-	this.p0318.setTransform(-19.9,-84.5);
+	this.p0318.setTransform(-20.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0218 = new lib.game_piece("synched",0);
+	this.p0218 = new lib.game_piece();
 	this.p0218.name = "p0218";
-	this.p0218.setTransform(-19.9,-112.5);
+	this.p0218.setTransform(-20.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0118 = new lib.game_piece("synched",0);
+	this.p0118 = new lib.game_piece();
 	this.p0118.name = "p0118";
-	this.p0118.setTransform(-19.9,-140.5);
+	this.p0118.setTransform(-20.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1017 = new lib.game_piece("synched",0);
+	this.p1017 = new lib.game_piece();
 	this.p1017.name = "p1017";
-	this.p1017.setTransform(-47.9,111.5);
+	this.p1017.setTransform(-48.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0917 = new lib.game_piece("synched",0);
+	this.p0917 = new lib.game_piece();
 	this.p0917.name = "p0917";
-	this.p0917.setTransform(-47.9,83.5);
+	this.p0917.setTransform(-48.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0817 = new lib.game_piece("synched",0);
+	this.p0817 = new lib.game_piece();
 	this.p0817.name = "p0817";
-	this.p0817.setTransform(-47.9,55.5);
+	this.p0817.setTransform(-48.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0717 = new lib.game_piece("synched",0);
+	this.p0717 = new lib.game_piece();
 	this.p0717.name = "p0717";
-	this.p0717.setTransform(-47.9,27.5);
+	this.p0717.setTransform(-48.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0617 = new lib.game_piece("synched",0);
+	this.p0617 = new lib.game_piece();
 	this.p0617.name = "p0617";
-	this.p0617.setTransform(-47.9,-0.5);
+	this.p0617.setTransform(-48.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0517 = new lib.game_piece("synched",0);
+	this.p0517 = new lib.game_piece();
 	this.p0517.name = "p0517";
-	this.p0517.setTransform(-47.9,-28.5);
+	this.p0517.setTransform(-48.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0417 = new lib.game_piece("synched",0);
+	this.p0417 = new lib.game_piece();
 	this.p0417.name = "p0417";
-	this.p0417.setTransform(-47.9,-56.5);
+	this.p0417.setTransform(-48.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0317 = new lib.game_piece("synched",0);
+	this.p0317 = new lib.game_piece();
 	this.p0317.name = "p0317";
-	this.p0317.setTransform(-47.9,-84.5);
+	this.p0317.setTransform(-48.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0217 = new lib.game_piece("synched",0);
+	this.p0217 = new lib.game_piece();
 	this.p0217.name = "p0217";
-	this.p0217.setTransform(-47.9,-112.5);
+	this.p0217.setTransform(-48.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0117 = new lib.game_piece("synched",0);
+	this.p0117 = new lib.game_piece();
 	this.p0117.name = "p0117";
-	this.p0117.setTransform(-47.9,-140.5);
+	this.p0117.setTransform(-48.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1016 = new lib.game_piece("synched",0);
+	this.p1016 = new lib.game_piece();
 	this.p1016.name = "p1016";
-	this.p1016.setTransform(-75.9,111.5);
+	this.p1016.setTransform(-76.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0916 = new lib.game_piece("synched",0);
+	this.p0916 = new lib.game_piece();
 	this.p0916.name = "p0916";
-	this.p0916.setTransform(-75.9,83.5);
+	this.p0916.setTransform(-76.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0816 = new lib.game_piece("synched",0);
+	this.p0816 = new lib.game_piece();
 	this.p0816.name = "p0816";
-	this.p0816.setTransform(-75.9,55.5);
+	this.p0816.setTransform(-76.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0716 = new lib.game_piece("synched",0);
+	this.p0716 = new lib.game_piece();
 	this.p0716.name = "p0716";
-	this.p0716.setTransform(-75.9,27.5);
+	this.p0716.setTransform(-76.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0616 = new lib.game_piece("synched",0);
+	this.p0616 = new lib.game_piece();
 	this.p0616.name = "p0616";
-	this.p0616.setTransform(-75.9,-0.5);
+	this.p0616.setTransform(-76.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0516 = new lib.game_piece("synched",0);
+	this.p0516 = new lib.game_piece();
 	this.p0516.name = "p0516";
-	this.p0516.setTransform(-75.9,-28.5);
+	this.p0516.setTransform(-76.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0416 = new lib.game_piece("synched",0);
+	this.p0416 = new lib.game_piece();
 	this.p0416.name = "p0416";
-	this.p0416.setTransform(-75.9,-56.5);
+	this.p0416.setTransform(-76.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0316 = new lib.game_piece("synched",0);
+	this.p0316 = new lib.game_piece();
 	this.p0316.name = "p0316";
-	this.p0316.setTransform(-75.9,-84.5);
+	this.p0316.setTransform(-76.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0216 = new lib.game_piece("synched",0);
+	this.p0216 = new lib.game_piece();
 	this.p0216.name = "p0216";
-	this.p0216.setTransform(-75.9,-112.5);
+	this.p0216.setTransform(-76.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0116 = new lib.game_piece("synched",0);
+	this.p0116 = new lib.game_piece();
 	this.p0116.name = "p0116";
-	this.p0116.setTransform(-75.9,-140.5);
+	this.p0116.setTransform(-76.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1015 = new lib.game_piece("synched",0);
+	this.p1015 = new lib.game_piece();
 	this.p1015.name = "p1015";
-	this.p1015.setTransform(-103.9,111.5);
+	this.p1015.setTransform(-104.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0915 = new lib.game_piece("synched",0);
+	this.p0915 = new lib.game_piece();
 	this.p0915.name = "p0915";
-	this.p0915.setTransform(-103.9,83.5);
+	this.p0915.setTransform(-104.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0815 = new lib.game_piece("synched",0);
+	this.p0815 = new lib.game_piece();
 	this.p0815.name = "p0815";
-	this.p0815.setTransform(-103.9,55.5);
+	this.p0815.setTransform(-104.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0715 = new lib.game_piece("synched",0);
+	this.p0715 = new lib.game_piece();
 	this.p0715.name = "p0715";
-	this.p0715.setTransform(-103.9,27.5);
+	this.p0715.setTransform(-104.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0615 = new lib.game_piece("synched",0);
+	this.p0615 = new lib.game_piece();
 	this.p0615.name = "p0615";
-	this.p0615.setTransform(-103.9,-0.5);
+	this.p0615.setTransform(-104.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0515 = new lib.game_piece("synched",0);
+	this.p0515 = new lib.game_piece();
 	this.p0515.name = "p0515";
-	this.p0515.setTransform(-103.9,-28.5);
+	this.p0515.setTransform(-104.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0415 = new lib.game_piece("synched",0);
+	this.p0415 = new lib.game_piece();
 	this.p0415.name = "p0415";
-	this.p0415.setTransform(-103.9,-56.5);
+	this.p0415.setTransform(-104.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0315 = new lib.game_piece("synched",0);
+	this.p0315 = new lib.game_piece();
 	this.p0315.name = "p0315";
-	this.p0315.setTransform(-103.9,-84.5);
+	this.p0315.setTransform(-104.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0215 = new lib.game_piece("synched",0);
+	this.p0215 = new lib.game_piece();
 	this.p0215.name = "p0215";
-	this.p0215.setTransform(-103.9,-112.5);
+	this.p0215.setTransform(-104.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0115 = new lib.game_piece("synched",0);
+	this.p0115 = new lib.game_piece();
 	this.p0115.name = "p0115";
-	this.p0115.setTransform(-103.9,-140.5);
+	this.p0115.setTransform(-104.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1014 = new lib.game_piece("synched",0);
+	this.p1014 = new lib.game_piece();
 	this.p1014.name = "p1014";
-	this.p1014.setTransform(-131.9,111.5);
+	this.p1014.setTransform(-132.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0914 = new lib.game_piece("synched",0);
+	this.p0914 = new lib.game_piece();
 	this.p0914.name = "p0914";
-	this.p0914.setTransform(-131.9,83.5);
+	this.p0914.setTransform(-132.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0814 = new lib.game_piece("synched",0);
+	this.p0814 = new lib.game_piece();
 	this.p0814.name = "p0814";
-	this.p0814.setTransform(-131.9,55.5);
+	this.p0814.setTransform(-132.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0714 = new lib.game_piece("synched",0);
+	this.p0714 = new lib.game_piece();
 	this.p0714.name = "p0714";
-	this.p0714.setTransform(-131.9,27.5);
+	this.p0714.setTransform(-132.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0614 = new lib.game_piece("synched",0);
+	this.p0614 = new lib.game_piece();
 	this.p0614.name = "p0614";
-	this.p0614.setTransform(-131.9,-0.5);
+	this.p0614.setTransform(-132.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0514 = new lib.game_piece("synched",0);
+	this.p0514 = new lib.game_piece();
 	this.p0514.name = "p0514";
-	this.p0514.setTransform(-131.9,-28.5);
+	this.p0514.setTransform(-132.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0414 = new lib.game_piece("synched",0);
+	this.p0414 = new lib.game_piece();
 	this.p0414.name = "p0414";
-	this.p0414.setTransform(-131.9,-56.5);
+	this.p0414.setTransform(-132.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0314 = new lib.game_piece("synched",0);
+	this.p0314 = new lib.game_piece();
 	this.p0314.name = "p0314";
-	this.p0314.setTransform(-131.9,-84.5);
+	this.p0314.setTransform(-132.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0214 = new lib.game_piece("synched",0);
+	this.p0214 = new lib.game_piece();
 	this.p0214.name = "p0214";
-	this.p0214.setTransform(-131.9,-112.5);
+	this.p0214.setTransform(-132.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0114 = new lib.game_piece("synched",0);
+	this.p0114 = new lib.game_piece();
 	this.p0114.name = "p0114";
-	this.p0114.setTransform(-131.9,-140.5);
+	this.p0114.setTransform(-132.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1013 = new lib.game_piece("synched",0);
+	this.p1013 = new lib.game_piece();
 	this.p1013.name = "p1013";
-	this.p1013.setTransform(-159.9,111.5);
+	this.p1013.setTransform(-160.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0913 = new lib.game_piece("synched",0);
+	this.p0913 = new lib.game_piece();
 	this.p0913.name = "p0913";
-	this.p0913.setTransform(-159.9,83.5);
+	this.p0913.setTransform(-160.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0813 = new lib.game_piece("synched",0);
+	this.p0813 = new lib.game_piece();
 	this.p0813.name = "p0813";
-	this.p0813.setTransform(-159.9,55.5);
+	this.p0813.setTransform(-160.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0713 = new lib.game_piece("synched",0);
+	this.p0713 = new lib.game_piece();
 	this.p0713.name = "p0713";
-	this.p0713.setTransform(-159.9,27.5);
+	this.p0713.setTransform(-160.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0613 = new lib.game_piece("synched",0);
+	this.p0613 = new lib.game_piece();
 	this.p0613.name = "p0613";
-	this.p0613.setTransform(-159.9,-0.5);
+	this.p0613.setTransform(-160.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0513 = new lib.game_piece("synched",0);
+	this.p0513 = new lib.game_piece();
 	this.p0513.name = "p0513";
-	this.p0513.setTransform(-159.9,-28.5);
+	this.p0513.setTransform(-160.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0413 = new lib.game_piece("synched",0);
+	this.p0413 = new lib.game_piece();
 	this.p0413.name = "p0413";
-	this.p0413.setTransform(-159.9,-56.5);
+	this.p0413.setTransform(-160.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0313 = new lib.game_piece("synched",0);
+	this.p0313 = new lib.game_piece();
 	this.p0313.name = "p0313";
-	this.p0313.setTransform(-159.9,-84.5);
+	this.p0313.setTransform(-160.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0213 = new lib.game_piece("synched",0);
+	this.p0213 = new lib.game_piece();
 	this.p0213.name = "p0213";
-	this.p0213.setTransform(-159.9,-112.5);
+	this.p0213.setTransform(-160.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0113 = new lib.game_piece("synched",0);
+	this.p0113 = new lib.game_piece();
 	this.p0113.name = "p0113";
-	this.p0113.setTransform(-159.9,-140.5);
+	this.p0113.setTransform(-160.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1012 = new lib.game_piece("synched",0);
+	this.p1012 = new lib.game_piece();
 	this.p1012.name = "p1012";
-	this.p1012.setTransform(-187.9,111.5);
+	this.p1012.setTransform(-188.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0912 = new lib.game_piece("synched",0);
+	this.p0912 = new lib.game_piece();
 	this.p0912.name = "p0912";
-	this.p0912.setTransform(-187.9,83.5);
+	this.p0912.setTransform(-188.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0812 = new lib.game_piece("synched",0);
+	this.p0812 = new lib.game_piece();
 	this.p0812.name = "p0812";
-	this.p0812.setTransform(-187.9,55.5);
+	this.p0812.setTransform(-188.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0712 = new lib.game_piece("synched",0);
+	this.p0712 = new lib.game_piece();
 	this.p0712.name = "p0712";
-	this.p0712.setTransform(-187.9,27.5);
+	this.p0712.setTransform(-188.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0612 = new lib.game_piece("synched",0);
+	this.p0612 = new lib.game_piece();
 	this.p0612.name = "p0612";
-	this.p0612.setTransform(-187.9,-0.5);
+	this.p0612.setTransform(-188.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0512 = new lib.game_piece("synched",0);
+	this.p0512 = new lib.game_piece();
 	this.p0512.name = "p0512";
-	this.p0512.setTransform(-187.9,-28.5);
+	this.p0512.setTransform(-188.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0412 = new lib.game_piece("synched",0);
+	this.p0412 = new lib.game_piece();
 	this.p0412.name = "p0412";
-	this.p0412.setTransform(-187.9,-56.5);
+	this.p0412.setTransform(-188.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0312 = new lib.game_piece("synched",0);
+	this.p0312 = new lib.game_piece();
 	this.p0312.name = "p0312";
-	this.p0312.setTransform(-187.9,-84.5);
+	this.p0312.setTransform(-188.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0212 = new lib.game_piece("synched",0);
+	this.p0212 = new lib.game_piece();
 	this.p0212.name = "p0212";
-	this.p0212.setTransform(-187.9,-112.5);
+	this.p0212.setTransform(-188.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0112 = new lib.game_piece("synched",0);
+	this.p0112 = new lib.game_piece();
 	this.p0112.name = "p0112";
-	this.p0112.setTransform(-187.9,-140.5);
+	this.p0112.setTransform(-188.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1011 = new lib.game_piece("synched",0);
+	this.p1011 = new lib.game_piece();
 	this.p1011.name = "p1011";
-	this.p1011.setTransform(-215.9,111.5);
+	this.p1011.setTransform(-216.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0911 = new lib.game_piece("synched",0);
+	this.p0911 = new lib.game_piece();
 	this.p0911.name = "p0911";
-	this.p0911.setTransform(-215.9,83.5);
+	this.p0911.setTransform(-216.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0811 = new lib.game_piece("synched",0);
+	this.p0811 = new lib.game_piece();
 	this.p0811.name = "p0811";
-	this.p0811.setTransform(-215.9,55.5);
+	this.p0811.setTransform(-216.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0711 = new lib.game_piece("synched",0);
+	this.p0711 = new lib.game_piece();
 	this.p0711.name = "p0711";
-	this.p0711.setTransform(-215.9,27.5);
+	this.p0711.setTransform(-216.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0611 = new lib.game_piece("synched",0);
+	this.p0611 = new lib.game_piece();
 	this.p0611.name = "p0611";
-	this.p0611.setTransform(-215.9,-0.5);
+	this.p0611.setTransform(-216.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0511 = new lib.game_piece("synched",0);
+	this.p0511 = new lib.game_piece();
 	this.p0511.name = "p0511";
-	this.p0511.setTransform(-215.9,-28.5);
+	this.p0511.setTransform(-216.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0411 = new lib.game_piece("synched",0);
+	this.p0411 = new lib.game_piece();
 	this.p0411.name = "p0411";
-	this.p0411.setTransform(-215.9,-56.5);
+	this.p0411.setTransform(-216.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0311 = new lib.game_piece("synched",0);
+	this.p0311 = new lib.game_piece();
 	this.p0311.name = "p0311";
-	this.p0311.setTransform(-215.9,-84.5);
+	this.p0311.setTransform(-216.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0211 = new lib.game_piece("synched",0);
+	this.p0211 = new lib.game_piece();
 	this.p0211.name = "p0211";
-	this.p0211.setTransform(-215.9,-112.5);
+	this.p0211.setTransform(-216.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0111 = new lib.game_piece("synched",0);
+	this.p0111 = new lib.game_piece();
 	this.p0111.name = "p0111";
-	this.p0111.setTransform(-215.9,-140.5);
+	this.p0111.setTransform(-216.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1010 = new lib.game_piece("synched",0);
+	this.p1010 = new lib.game_piece();
 	this.p1010.name = "p1010";
-	this.p1010.setTransform(-243.9,111.5);
+	this.p1010.setTransform(-244.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0910 = new lib.game_piece("synched",0);
+	this.p0910 = new lib.game_piece();
 	this.p0910.name = "p0910";
-	this.p0910.setTransform(-243.9,83.5);
+	this.p0910.setTransform(-244.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0810 = new lib.game_piece("synched",0);
+	this.p0810 = new lib.game_piece();
 	this.p0810.name = "p0810";
-	this.p0810.setTransform(-243.9,55.5);
+	this.p0810.setTransform(-244.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0710 = new lib.game_piece("synched",0);
+	this.p0710 = new lib.game_piece();
 	this.p0710.name = "p0710";
-	this.p0710.setTransform(-243.9,27.5);
+	this.p0710.setTransform(-244.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0610 = new lib.game_piece("synched",0);
+	this.p0610 = new lib.game_piece();
 	this.p0610.name = "p0610";
-	this.p0610.setTransform(-243.9,-0.5);
+	this.p0610.setTransform(-244.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0510 = new lib.game_piece("synched",0);
+	this.p0510 = new lib.game_piece();
 	this.p0510.name = "p0510";
-	this.p0510.setTransform(-243.9,-28.5);
+	this.p0510.setTransform(-244.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0410 = new lib.game_piece("synched",0);
+	this.p0410 = new lib.game_piece();
 	this.p0410.name = "p0410";
-	this.p0410.setTransform(-243.9,-56.5);
+	this.p0410.setTransform(-244.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0310 = new lib.game_piece("synched",0);
+	this.p0310 = new lib.game_piece();
 	this.p0310.name = "p0310";
-	this.p0310.setTransform(-243.9,-84.5);
+	this.p0310.setTransform(-244.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0210 = new lib.game_piece("synched",0);
+	this.p0210 = new lib.game_piece();
 	this.p0210.name = "p0210";
-	this.p0210.setTransform(-243.9,-112.5);
+	this.p0210.setTransform(-244.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0110 = new lib.game_piece("synched",0);
+	this.p0110 = new lib.game_piece();
 	this.p0110.name = "p0110";
-	this.p0110.setTransform(-243.9,-140.5);
+	this.p0110.setTransform(-244.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1009 = new lib.game_piece("synched",0);
+	this.p1009 = new lib.game_piece();
 	this.p1009.name = "p1009";
-	this.p1009.setTransform(-271.9,111.5);
+	this.p1009.setTransform(-272.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0909 = new lib.game_piece("synched",0);
+	this.p0909 = new lib.game_piece();
 	this.p0909.name = "p0909";
-	this.p0909.setTransform(-271.9,83.5);
+	this.p0909.setTransform(-272.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0809 = new lib.game_piece("synched",0);
+	this.p0809 = new lib.game_piece();
 	this.p0809.name = "p0809";
-	this.p0809.setTransform(-271.9,55.5);
+	this.p0809.setTransform(-272.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0709 = new lib.game_piece("synched",0);
+	this.p0709 = new lib.game_piece();
 	this.p0709.name = "p0709";
-	this.p0709.setTransform(-271.9,27.5);
+	this.p0709.setTransform(-272.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0609 = new lib.game_piece("synched",0);
+	this.p0609 = new lib.game_piece();
 	this.p0609.name = "p0609";
-	this.p0609.setTransform(-271.9,-0.5);
+	this.p0609.setTransform(-272.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0509 = new lib.game_piece("synched",0);
+	this.p0509 = new lib.game_piece();
 	this.p0509.name = "p0509";
-	this.p0509.setTransform(-271.9,-28.5);
+	this.p0509.setTransform(-272.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0409 = new lib.game_piece("synched",0);
+	this.p0409 = new lib.game_piece();
 	this.p0409.name = "p0409";
-	this.p0409.setTransform(-271.9,-56.5);
+	this.p0409.setTransform(-272.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0309 = new lib.game_piece("synched",0);
+	this.p0309 = new lib.game_piece();
 	this.p0309.name = "p0309";
-	this.p0309.setTransform(-271.9,-84.5);
+	this.p0309.setTransform(-272.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0209 = new lib.game_piece("synched",0);
+	this.p0209 = new lib.game_piece();
 	this.p0209.name = "p0209";
-	this.p0209.setTransform(-271.9,-112.5);
+	this.p0209.setTransform(-272.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0109 = new lib.game_piece("synched",0);
+	this.p0109 = new lib.game_piece();
 	this.p0109.name = "p0109";
-	this.p0109.setTransform(-271.9,-140.5);
+	this.p0109.setTransform(-272.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1008 = new lib.game_piece("synched",0);
+	this.p1008 = new lib.game_piece();
 	this.p1008.name = "p1008";
-	this.p1008.setTransform(-299.9,111.5);
+	this.p1008.setTransform(-300.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0908 = new lib.game_piece("synched",0);
+	this.p0908 = new lib.game_piece();
 	this.p0908.name = "p0908";
-	this.p0908.setTransform(-299.9,83.5);
+	this.p0908.setTransform(-300.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0808 = new lib.game_piece("synched",0);
+	this.p0808 = new lib.game_piece();
 	this.p0808.name = "p0808";
-	this.p0808.setTransform(-299.9,55.5);
+	this.p0808.setTransform(-300.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0708 = new lib.game_piece("synched",0);
+	this.p0708 = new lib.game_piece();
 	this.p0708.name = "p0708";
-	this.p0708.setTransform(-299.9,27.5);
+	this.p0708.setTransform(-300.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0608 = new lib.game_piece("synched",0);
+	this.p0608 = new lib.game_piece();
 	this.p0608.name = "p0608";
-	this.p0608.setTransform(-299.9,-0.5);
+	this.p0608.setTransform(-300.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0508 = new lib.game_piece("synched",0);
+	this.p0508 = new lib.game_piece();
 	this.p0508.name = "p0508";
-	this.p0508.setTransform(-299.9,-28.5);
+	this.p0508.setTransform(-300.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0408 = new lib.game_piece("synched",0);
+	this.p0408 = new lib.game_piece();
 	this.p0408.name = "p0408";
-	this.p0408.setTransform(-299.9,-56.5);
+	this.p0408.setTransform(-300.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0308 = new lib.game_piece("synched",0);
+	this.p0308 = new lib.game_piece();
 	this.p0308.name = "p0308";
-	this.p0308.setTransform(-299.9,-84.5);
+	this.p0308.setTransform(-300.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0208 = new lib.game_piece("synched",0);
+	this.p0208 = new lib.game_piece();
 	this.p0208.name = "p0208";
-	this.p0208.setTransform(-299.9,-112.5);
+	this.p0208.setTransform(-300.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0108 = new lib.game_piece("synched",0);
+	this.p0108 = new lib.game_piece();
 	this.p0108.name = "p0108";
-	this.p0108.setTransform(-299.9,-140.5);
+	this.p0108.setTransform(-300.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1007 = new lib.game_piece("synched",0);
+	this.p1007 = new lib.game_piece();
 	this.p1007.name = "p1007";
-	this.p1007.setTransform(-327.9,111.5);
+	this.p1007.setTransform(-328.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0907 = new lib.game_piece("synched",0);
+	this.p0907 = new lib.game_piece();
 	this.p0907.name = "p0907";
-	this.p0907.setTransform(-327.9,83.5);
+	this.p0907.setTransform(-328.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0807 = new lib.game_piece("synched",0);
+	this.p0807 = new lib.game_piece();
 	this.p0807.name = "p0807";
-	this.p0807.setTransform(-327.9,55.5);
+	this.p0807.setTransform(-328.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0707 = new lib.game_piece("synched",0);
+	this.p0707 = new lib.game_piece();
 	this.p0707.name = "p0707";
-	this.p0707.setTransform(-327.9,27.5);
+	this.p0707.setTransform(-328.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0607 = new lib.game_piece("synched",0);
+	this.p0607 = new lib.game_piece();
 	this.p0607.name = "p0607";
-	this.p0607.setTransform(-327.9,-0.5);
+	this.p0607.setTransform(-328.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0507 = new lib.game_piece("synched",0);
+	this.p0507 = new lib.game_piece();
 	this.p0507.name = "p0507";
-	this.p0507.setTransform(-327.9,-28.5);
+	this.p0507.setTransform(-328.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0407 = new lib.game_piece("synched",0);
+	this.p0407 = new lib.game_piece();
 	this.p0407.name = "p0407";
-	this.p0407.setTransform(-327.9,-56.5);
+	this.p0407.setTransform(-328.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0307 = new lib.game_piece("synched",0);
+	this.p0307 = new lib.game_piece();
 	this.p0307.name = "p0307";
-	this.p0307.setTransform(-327.9,-84.5);
+	this.p0307.setTransform(-328.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0207 = new lib.game_piece("synched",0);
+	this.p0207 = new lib.game_piece();
 	this.p0207.name = "p0207";
-	this.p0207.setTransform(-327.9,-112.5);
+	this.p0207.setTransform(-328.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0107 = new lib.game_piece("synched",0);
+	this.p0107 = new lib.game_piece();
 	this.p0107.name = "p0107";
-	this.p0107.setTransform(-327.9,-140.5);
+	this.p0107.setTransform(-328.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1006 = new lib.game_piece("synched",0);
+	this.p1006 = new lib.game_piece();
 	this.p1006.name = "p1006";
-	this.p1006.setTransform(-355.9,111.5);
+	this.p1006.setTransform(-356.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0906 = new lib.game_piece("synched",0);
+	this.p0906 = new lib.game_piece();
 	this.p0906.name = "p0906";
-	this.p0906.setTransform(-355.9,83.5);
+	this.p0906.setTransform(-356.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0806 = new lib.game_piece("synched",0);
+	this.p0806 = new lib.game_piece();
 	this.p0806.name = "p0806";
-	this.p0806.setTransform(-355.9,55.5);
+	this.p0806.setTransform(-356.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0706 = new lib.game_piece("synched",0);
+	this.p0706 = new lib.game_piece();
 	this.p0706.name = "p0706";
-	this.p0706.setTransform(-355.9,27.5);
+	this.p0706.setTransform(-356.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0606 = new lib.game_piece("synched",0);
+	this.p0606 = new lib.game_piece();
 	this.p0606.name = "p0606";
-	this.p0606.setTransform(-355.9,-0.5);
+	this.p0606.setTransform(-356.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0506 = new lib.game_piece("synched",0);
+	this.p0506 = new lib.game_piece();
 	this.p0506.name = "p0506";
-	this.p0506.setTransform(-355.9,-28.5);
+	this.p0506.setTransform(-356.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0406 = new lib.game_piece("synched",0);
+	this.p0406 = new lib.game_piece();
 	this.p0406.name = "p0406";
-	this.p0406.setTransform(-355.9,-56.5);
+	this.p0406.setTransform(-356.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0306 = new lib.game_piece("synched",0);
+	this.p0306 = new lib.game_piece();
 	this.p0306.name = "p0306";
-	this.p0306.setTransform(-355.9,-84.5);
+	this.p0306.setTransform(-356.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0206 = new lib.game_piece("synched",0);
+	this.p0206 = new lib.game_piece();
 	this.p0206.name = "p0206";
-	this.p0206.setTransform(-355.9,-112.5);
+	this.p0206.setTransform(-356.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0106 = new lib.game_piece("synched",0);
+	this.p0106 = new lib.game_piece();
 	this.p0106.name = "p0106";
-	this.p0106.setTransform(-355.9,-140.5);
+	this.p0106.setTransform(-356.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1005 = new lib.game_piece("synched",0);
+	this.p1005 = new lib.game_piece();
 	this.p1005.name = "p1005";
-	this.p1005.setTransform(-383.9,111.5);
+	this.p1005.setTransform(-384.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0905 = new lib.game_piece("synched",0);
+	this.p0905 = new lib.game_piece();
 	this.p0905.name = "p0905";
-	this.p0905.setTransform(-383.9,83.5);
+	this.p0905.setTransform(-384.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0805 = new lib.game_piece("synched",0);
+	this.p0805 = new lib.game_piece();
 	this.p0805.name = "p0805";
-	this.p0805.setTransform(-383.9,55.5);
+	this.p0805.setTransform(-384.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0705 = new lib.game_piece("synched",0);
+	this.p0705 = new lib.game_piece();
 	this.p0705.name = "p0705";
-	this.p0705.setTransform(-383.9,27.5);
+	this.p0705.setTransform(-384.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0605 = new lib.game_piece("synched",0);
+	this.p0605 = new lib.game_piece();
 	this.p0605.name = "p0605";
-	this.p0605.setTransform(-383.9,-0.5);
+	this.p0605.setTransform(-384.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0505 = new lib.game_piece("synched",0);
+	this.p0505 = new lib.game_piece();
 	this.p0505.name = "p0505";
-	this.p0505.setTransform(-383.9,-28.5);
+	this.p0505.setTransform(-384.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0405 = new lib.game_piece("synched",0);
+	this.p0405 = new lib.game_piece();
 	this.p0405.name = "p0405";
-	this.p0405.setTransform(-383.9,-56.5);
+	this.p0405.setTransform(-384.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0305 = new lib.game_piece("synched",0);
+	this.p0305 = new lib.game_piece();
 	this.p0305.name = "p0305";
-	this.p0305.setTransform(-383.9,-84.5);
+	this.p0305.setTransform(-384.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0205 = new lib.game_piece("synched",0);
+	this.p0205 = new lib.game_piece();
 	this.p0205.name = "p0205";
-	this.p0205.setTransform(-383.9,-112.5);
+	this.p0205.setTransform(-384.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0105 = new lib.game_piece("synched",0);
+	this.p0105 = new lib.game_piece();
 	this.p0105.name = "p0105";
-	this.p0105.setTransform(-383.9,-140.5);
+	this.p0105.setTransform(-384.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1004 = new lib.game_piece("synched",0);
+	this.p1004 = new lib.game_piece();
 	this.p1004.name = "p1004";
-	this.p1004.setTransform(-411.9,111.5);
+	this.p1004.setTransform(-412.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0904 = new lib.game_piece("synched",0);
+	this.p0904 = new lib.game_piece();
 	this.p0904.name = "p0904";
-	this.p0904.setTransform(-411.9,83.5);
+	this.p0904.setTransform(-412.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0804 = new lib.game_piece("synched",0);
+	this.p0804 = new lib.game_piece();
 	this.p0804.name = "p0804";
-	this.p0804.setTransform(-411.9,55.5);
+	this.p0804.setTransform(-412.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0704 = new lib.game_piece("synched",0);
+	this.p0704 = new lib.game_piece();
 	this.p0704.name = "p0704";
-	this.p0704.setTransform(-411.9,27.5);
+	this.p0704.setTransform(-412.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0604 = new lib.game_piece("synched",0);
+	this.p0604 = new lib.game_piece();
 	this.p0604.name = "p0604";
-	this.p0604.setTransform(-411.9,-0.5);
+	this.p0604.setTransform(-412.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0504 = new lib.game_piece("synched",0);
+	this.p0504 = new lib.game_piece();
 	this.p0504.name = "p0504";
-	this.p0504.setTransform(-411.9,-28.5);
+	this.p0504.setTransform(-412.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0404 = new lib.game_piece("synched",0);
+	this.p0404 = new lib.game_piece();
 	this.p0404.name = "p0404";
-	this.p0404.setTransform(-411.9,-56.5);
+	this.p0404.setTransform(-412.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0304 = new lib.game_piece("synched",0);
+	this.p0304 = new lib.game_piece();
 	this.p0304.name = "p0304";
-	this.p0304.setTransform(-411.9,-84.5);
+	this.p0304.setTransform(-412.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0204 = new lib.game_piece("synched",0);
+	this.p0204 = new lib.game_piece();
 	this.p0204.name = "p0204";
-	this.p0204.setTransform(-411.9,-112.5);
+	this.p0204.setTransform(-412.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0104 = new lib.game_piece("synched",0);
+	this.p0104 = new lib.game_piece();
 	this.p0104.name = "p0104";
-	this.p0104.setTransform(-411.9,-140.5);
+	this.p0104.setTransform(-412.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.instance = new lib.game_piece("synched",0);
-	this.instance.setTransform(-411.9,111.5);
-
-	this.instance_1 = new lib.game_piece("synched",0);
-	this.instance_1.setTransform(-411.9,83.5);
-
-	this.instance_2 = new lib.game_piece("synched",0);
-	this.instance_2.setTransform(-411.9,55.5);
-
-	this.instance_3 = new lib.game_piece("synched",0);
-	this.instance_3.setTransform(-411.9,27.5);
-
-	this.instance_4 = new lib.game_piece("synched",0);
-	this.instance_4.setTransform(-411.9,-0.5);
-
-	this.instance_5 = new lib.game_piece("synched",0);
-	this.instance_5.setTransform(-411.9,-28.5);
-
-	this.instance_6 = new lib.game_piece("synched",0);
-	this.instance_6.setTransform(-411.9,-56.5);
-
-	this.instance_7 = new lib.game_piece("synched",0);
-	this.instance_7.setTransform(-411.9,-84.5);
-
-	this.instance_8 = new lib.game_piece("synched",0);
-	this.instance_8.setTransform(-411.9,-112.5);
-
-	this.instance_9 = new lib.game_piece("synched",0);
-	this.instance_9.setTransform(-411.9,-140.5);
-
-	this.p1003 = new lib.game_piece("synched",0);
+	this.p1003 = new lib.game_piece();
 	this.p1003.name = "p1003";
-	this.p1003.setTransform(-439.9,111.5);
+	this.p1003.setTransform(-440.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0903 = new lib.game_piece("synched",0);
+	this.p0903 = new lib.game_piece();
 	this.p0903.name = "p0903";
-	this.p0903.setTransform(-439.9,83.5);
+	this.p0903.setTransform(-440.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0803 = new lib.game_piece("synched",0);
+	this.p0803 = new lib.game_piece();
 	this.p0803.name = "p0803";
-	this.p0803.setTransform(-439.9,55.5);
+	this.p0803.setTransform(-440.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0703 = new lib.game_piece("synched",0);
+	this.p0703 = new lib.game_piece();
 	this.p0703.name = "p0703";
-	this.p0703.setTransform(-439.9,27.5);
+	this.p0703.setTransform(-440.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0603 = new lib.game_piece("synched",0);
+	this.p0603 = new lib.game_piece();
 	this.p0603.name = "p0603";
-	this.p0603.setTransform(-439.9,-0.5);
+	this.p0603.setTransform(-440.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0503 = new lib.game_piece("synched",0);
+	this.p0503 = new lib.game_piece();
 	this.p0503.name = "p0503";
-	this.p0503.setTransform(-439.9,-28.5);
+	this.p0503.setTransform(-440.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0403 = new lib.game_piece("synched",0);
+	this.p0403 = new lib.game_piece();
 	this.p0403.name = "p0403";
-	this.p0403.setTransform(-439.9,-56.5);
+	this.p0403.setTransform(-440.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0303 = new lib.game_piece("synched",0);
+	this.p0303 = new lib.game_piece();
 	this.p0303.name = "p0303";
-	this.p0303.setTransform(-439.9,-84.5);
+	this.p0303.setTransform(-440.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0203 = new lib.game_piece("synched",0);
+	this.p0203 = new lib.game_piece();
 	this.p0203.name = "p0203";
-	this.p0203.setTransform(-439.9,-112.5);
+	this.p0203.setTransform(-440.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0103 = new lib.game_piece("synched",0);
+	this.p0103 = new lib.game_piece();
 	this.p0103.name = "p0103";
-	this.p0103.setTransform(-439.9,-140.5);
+	this.p0103.setTransform(-440.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1002 = new lib.game_piece("synched",0);
+	this.p1002 = new lib.game_piece();
 	this.p1002.name = "p1002";
-	this.p1002.setTransform(-467.9,111.5);
+	this.p1002.setTransform(-468.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0902 = new lib.game_piece("synched",0);
+	this.p0902 = new lib.game_piece();
 	this.p0902.name = "p0902";
-	this.p0902.setTransform(-467.9,83.5);
+	this.p0902.setTransform(-468.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0802 = new lib.game_piece("synched",0);
+	this.p0802 = new lib.game_piece();
 	this.p0802.name = "p0802";
-	this.p0802.setTransform(-467.9,55.5);
+	this.p0802.setTransform(-468.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0702 = new lib.game_piece("synched",0);
+	this.p0702 = new lib.game_piece();
 	this.p0702.name = "p0702";
-	this.p0702.setTransform(-467.9,27.5);
+	this.p0702.setTransform(-468.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0602 = new lib.game_piece("synched",0);
+	this.p0602 = new lib.game_piece();
 	this.p0602.name = "p0602";
-	this.p0602.setTransform(-467.9,-0.5);
+	this.p0602.setTransform(-468.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0502 = new lib.game_piece("synched",0);
+	this.p0502 = new lib.game_piece();
 	this.p0502.name = "p0502";
-	this.p0502.setTransform(-467.9,-28.5);
+	this.p0502.setTransform(-468.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0402 = new lib.game_piece("synched",0);
+	this.p0402 = new lib.game_piece();
 	this.p0402.name = "p0402";
-	this.p0402.setTransform(-467.9,-56.5);
+	this.p0402.setTransform(-468.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0302 = new lib.game_piece("synched",0);
+	this.p0302 = new lib.game_piece();
 	this.p0302.name = "p0302";
-	this.p0302.setTransform(-467.9,-84.5);
+	this.p0302.setTransform(-468.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0202 = new lib.game_piece("synched",0);
+	this.p0202 = new lib.game_piece();
 	this.p0202.name = "p0202";
-	this.p0202.setTransform(-467.9,-112.5);
+	this.p0202.setTransform(-468.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0102 = new lib.game_piece("synched",0);
+	this.p0102 = new lib.game_piece();
 	this.p0102.name = "p0102";
-	this.p0102.setTransform(-467.9,-140.5);
+	this.p0102.setTransform(-468.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.p1001 = new lib.game_piece("synched",0);
+	this.p1001 = new lib.game_piece();
 	this.p1001.name = "p1001";
-	this.p1001.setTransform(-495.9,111.5);
+	this.p1001.setTransform(-496.85,110.5,1,1,0,0,0,0.5,0.5);
 
-	this.p0901 = new lib.game_piece("synched",0);
+	this.p0901 = new lib.game_piece();
 	this.p0901.name = "p0901";
-	this.p0901.setTransform(-495.9,83.5);
+	this.p0901.setTransform(-496.85,82.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0801 = new lib.game_piece("synched",0);
+	this.p0801 = new lib.game_piece();
 	this.p0801.name = "p0801";
-	this.p0801.setTransform(-495.9,55.5);
+	this.p0801.setTransform(-496.85,54.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0701 = new lib.game_piece("synched",0);
+	this.p0701 = new lib.game_piece();
 	this.p0701.name = "p0701";
-	this.p0701.setTransform(-495.9,27.5);
+	this.p0701.setTransform(-496.85,26.3,1,1,0,0,0,0.5,0.5);
 
-	this.p0601 = new lib.game_piece("synched",0);
+	this.p0601 = new lib.game_piece();
 	this.p0601.name = "p0601";
-	this.p0601.setTransform(-495.9,-0.5);
+	this.p0601.setTransform(-496.85,-1.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0501 = new lib.game_piece("synched",0);
+	this.p0501 = new lib.game_piece();
 	this.p0501.name = "p0501";
-	this.p0501.setTransform(-495.9,-28.5);
+	this.p0501.setTransform(-496.85,-29.7,1,1,0,0,0,0.5,0.5);
 
-	this.p0401 = new lib.game_piece("synched",0);
+	this.p0401 = new lib.game_piece();
 	this.p0401.name = "p0401";
-	this.p0401.setTransform(-495.9,-56.45);
+	this.p0401.setTransform(-496.85,-58.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0301 = new lib.game_piece("synched",0);
+	this.p0301 = new lib.game_piece();
 	this.p0301.name = "p0301";
-	this.p0301.setTransform(-495.9,-84.5);
+	this.p0301.setTransform(-496.85,-86.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0201 = new lib.game_piece("synched",0);
+	this.p0201 = new lib.game_piece();
 	this.p0201.name = "p0201";
-	this.p0201.setTransform(-495.9,-112.5);
+	this.p0201.setTransform(-496.85,-114.15,1,1,0,0,0,0.5,0.5);
 
-	this.p0101 = new lib.game_piece("synched",0);
+	this.p0101 = new lib.game_piece();
 	this.p0101.name = "p0101";
-	this.p0101.setTransform(-495.9,-140.5);
+	this.p0101.setTransform(-496.85,-142.15,1,1,0,0,0,0.5,0.5);
 
-	this.shape_4 = new cjs.Shape();
-	this.shape_4.graphics.f().s("#9D9D9D").ss(2,2,0,3).p("AkGAAIINAA");
-	this.shape_4.setTransform(383.625,-125.95);
-
-	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.shape_4},{t:this.p0101},{t:this.p0201},{t:this.p0301},{t:this.p0401},{t:this.p0501},{t:this.p0601},{t:this.p0701},{t:this.p0801},{t:this.p0901},{t:this.p1001},{t:this.p0102},{t:this.p0202},{t:this.p0302},{t:this.p0402},{t:this.p0502},{t:this.p0602},{t:this.p0702},{t:this.p0802},{t:this.p0902},{t:this.p1002},{t:this.p0103},{t:this.p0203},{t:this.p0303},{t:this.p0403},{t:this.p0503},{t:this.p0603},{t:this.p0703},{t:this.p0803},{t:this.p0903},{t:this.p1003},{t:this.instance_9},{t:this.instance_8},{t:this.instance_7},{t:this.instance_6},{t:this.instance_5},{t:this.instance_4},{t:this.instance_3},{t:this.instance_2},{t:this.instance_1},{t:this.instance},{t:this.p0104},{t:this.p0204},{t:this.p0304},{t:this.p0404},{t:this.p0504},{t:this.p0604},{t:this.p0704},{t:this.p0804},{t:this.p0904},{t:this.p1004},{t:this.p0105},{t:this.p0205},{t:this.p0305},{t:this.p0405},{t:this.p0505},{t:this.p0605},{t:this.p0705},{t:this.p0805},{t:this.p0905},{t:this.p1005},{t:this.p0106},{t:this.p0206},{t:this.p0306},{t:this.p0406},{t:this.p0506},{t:this.p0606},{t:this.p0706},{t:this.p0806},{t:this.p0906},{t:this.p1006},{t:this.p0107},{t:this.p0207},{t:this.p0307},{t:this.p0407},{t:this.p0507},{t:this.p0607},{t:this.p0707},{t:this.p0807},{t:this.p0907},{t:this.p1007},{t:this.p0108},{t:this.p0208},{t:this.p0308},{t:this.p0408},{t:this.p0508},{t:this.p0608},{t:this.p0708},{t:this.p0808},{t:this.p0908},{t:this.p1008},{t:this.p0109},{t:this.p0209},{t:this.p0309},{t:this.p0409},{t:this.p0509},{t:this.p0609},{t:this.p0709},{t:this.p0809},{t:this.p0909},{t:this.p1009},{t:this.p0110},{t:this.p0210},{t:this.p0310},{t:this.p0410},{t:this.p0510},{t:this.p0610},{t:this.p0710},{t:this.p0810},{t:this.p0910},{t:this.p1010},{t:this.p0111},{t:this.p0211},{t:this.p0311},{t:this.p0411},{t:this.p0511},{t:this.p0611},{t:this.p0711},{t:this.p0811},{t:this.p0911},{t:this.p1011},{t:this.p0112},{t:this.p0212},{t:this.p0312},{t:this.p0412},{t:this.p0512},{t:this.p0612},{t:this.p0712},{t:this.p0812},{t:this.p0912},{t:this.p1012},{t:this.p0113},{t:this.p0213},{t:this.p0313},{t:this.p0413},{t:this.p0513},{t:this.p0613},{t:this.p0713},{t:this.p0813},{t:this.p0913},{t:this.p1013},{t:this.p0114},{t:this.p0214},{t:this.p0314},{t:this.p0414},{t:this.p0514},{t:this.p0614},{t:this.p0714},{t:this.p0814},{t:this.p0914},{t:this.p1014},{t:this.p0115},{t:this.p0215},{t:this.p0315},{t:this.p0415},{t:this.p0515},{t:this.p0615},{t:this.p0715},{t:this.p0815},{t:this.p0915},{t:this.p1015},{t:this.p0116},{t:this.p0216},{t:this.p0316},{t:this.p0416},{t:this.p0516},{t:this.p0616},{t:this.p0716},{t:this.p0816},{t:this.p0916},{t:this.p1016},{t:this.p0117},{t:this.p0217},{t:this.p0317},{t:this.p0417},{t:this.p0517},{t:this.p0617},{t:this.p0717},{t:this.p0817},{t:this.p0917},{t:this.p1017},{t:this.p0118},{t:this.p0218},{t:this.p0318},{t:this.p0418},{t:this.p0518},{t:this.p0618},{t:this.p0718},{t:this.p0818},{t:this.p0918},{t:this.p1018},{t:this.p0119},{t:this.p0219},{t:this.p0319},{t:this.p0419},{t:this.p0519},{t:this.p0619},{t:this.p0719},{t:this.p0819},{t:this.p0919},{t:this.p1019},{t:this.p0120},{t:this.p0220},{t:this.p0320},{t:this.p0420},{t:this.p0520},{t:this.p0620},{t:this.p0720},{t:this.p0820},{t:this.p0920},{t:this.p1020},{t:this.p0121},{t:this.p0221},{t:this.p0321},{t:this.p0421},{t:this.p0521},{t:this.p0621},{t:this.p0721},{t:this.p0821},{t:this.p0921},{t:this.p1021},{t:this.p0122},{t:this.p0222},{t:this.p0322},{t:this.p0422},{t:this.p0522},{t:this.p0622},{t:this.p0722},{t:this.p0822},{t:this.p0922},{t:this.p1022},{t:this.p0123},{t:this.p0223},{t:this.p0323},{t:this.p0423},{t:this.p0523},{t:this.p0623},{t:this.p0723},{t:this.p0823},{t:this.p0923},{t:this.p1023},{t:this.p0124},{t:this.p0224},{t:this.p0324},{t:this.p0424},{t:this.p0524},{t:this.p0624},{t:this.p0724},{t:this.p0824},{t:this.p0924},{t:this.p1024},{t:this.p0125},{t:this.p0225},{t:this.p0325},{t:this.p0425},{t:this.p0525},{t:this.p0625},{t:this.p0725},{t:this.p0825},{t:this.p0925},{t:this.p1025},{t:this.p0126},{t:this.p0226},{t:this.p0326},{t:this.p0426},{t:this.p0526},{t:this.p0626},{t:this.p0726},{t:this.p0826},{t:this.p0926},{t:this.p1026},{t:this.p0127},{t:this.p0227},{t:this.p0327},{t:this.p0427},{t:this.p0527},{t:this.p0627},{t:this.p0727},{t:this.p0827},{t:this.p0927},{t:this.p1027},{t:this.p0128},{t:this.p0228},{t:this.p0328},{t:this.p0428},{t:this.p0528},{t:this.p0628},{t:this.p0728},{t:this.p0828},{t:this.p0928},{t:this.p1028},{t:this.p0129},{t:this.p0229},{t:this.p0329},{t:this.p0429},{t:this.p0529},{t:this.p0629},{t:this.p0729},{t:this.p0829},{t:this.p0929},{t:this.p1029},{t:this.p0130},{t:this.p0230},{t:this.p0330},{t:this.p0430},{t:this.p0530},{t:this.p0630},{t:this.p0730},{t:this.p0830},{t:this.p0930},{t:this.p1030}]}).wait(1));
-
-	// Background
-	this.shape_5 = new cjs.Shape();
-	this.shape_5.graphics.f("#9D9D9D").s().p("EhQFgYbMCgLAADMgAGAwzMigFAABg");
-	this.shape_5.setTransform(0.625,-1.65);
-
-	this.timeline.addTween(cjs.Tween.get(this.shape_5).wait(1));
+	this.timeline.addTween(cjs.Tween.get({}).to({state:[{t:this.p0101},{t:this.p0201},{t:this.p0301},{t:this.p0401},{t:this.p0501},{t:this.p0601},{t:this.p0701},{t:this.p0801},{t:this.p0901},{t:this.p1001},{t:this.p0102},{t:this.p0202},{t:this.p0302},{t:this.p0402},{t:this.p0502},{t:this.p0602},{t:this.p0702},{t:this.p0802},{t:this.p0902},{t:this.p1002},{t:this.p0103},{t:this.p0203},{t:this.p0303},{t:this.p0403},{t:this.p0503},{t:this.p0603},{t:this.p0703},{t:this.p0803},{t:this.p0903},{t:this.p1003},{t:this.p0104},{t:this.p0204},{t:this.p0304},{t:this.p0404},{t:this.p0504},{t:this.p0604},{t:this.p0704},{t:this.p0804},{t:this.p0904},{t:this.p1004},{t:this.p0105},{t:this.p0205},{t:this.p0305},{t:this.p0405},{t:this.p0505},{t:this.p0605},{t:this.p0705},{t:this.p0805},{t:this.p0905},{t:this.p1005},{t:this.p0106},{t:this.p0206},{t:this.p0306},{t:this.p0406},{t:this.p0506},{t:this.p0606},{t:this.p0706},{t:this.p0806},{t:this.p0906},{t:this.p1006},{t:this.p0107},{t:this.p0207},{t:this.p0307},{t:this.p0407},{t:this.p0507},{t:this.p0607},{t:this.p0707},{t:this.p0807},{t:this.p0907},{t:this.p1007},{t:this.p0108},{t:this.p0208},{t:this.p0308},{t:this.p0408},{t:this.p0508},{t:this.p0608},{t:this.p0708},{t:this.p0808},{t:this.p0908},{t:this.p1008},{t:this.p0109},{t:this.p0209},{t:this.p0309},{t:this.p0409},{t:this.p0509},{t:this.p0609},{t:this.p0709},{t:this.p0809},{t:this.p0909},{t:this.p1009},{t:this.p0110},{t:this.p0210},{t:this.p0310},{t:this.p0410},{t:this.p0510},{t:this.p0610},{t:this.p0710},{t:this.p0810},{t:this.p0910},{t:this.p1010},{t:this.p0111},{t:this.p0211},{t:this.p0311},{t:this.p0411},{t:this.p0511},{t:this.p0611},{t:this.p0711},{t:this.p0811},{t:this.p0911},{t:this.p1011},{t:this.p0112},{t:this.p0212},{t:this.p0312},{t:this.p0412},{t:this.p0512},{t:this.p0612},{t:this.p0712},{t:this.p0812},{t:this.p0912},{t:this.p1012},{t:this.p0113},{t:this.p0213},{t:this.p0313},{t:this.p0413},{t:this.p0513},{t:this.p0613},{t:this.p0713},{t:this.p0813},{t:this.p0913},{t:this.p1013},{t:this.p0114},{t:this.p0214},{t:this.p0314},{t:this.p0414},{t:this.p0514},{t:this.p0614},{t:this.p0714},{t:this.p0814},{t:this.p0914},{t:this.p1014},{t:this.p0115},{t:this.p0215},{t:this.p0315},{t:this.p0415},{t:this.p0515},{t:this.p0615},{t:this.p0715},{t:this.p0815},{t:this.p0915},{t:this.p1015},{t:this.p0116},{t:this.p0216},{t:this.p0316},{t:this.p0416},{t:this.p0516},{t:this.p0616},{t:this.p0716},{t:this.p0816},{t:this.p0916},{t:this.p1016},{t:this.p0117},{t:this.p0217},{t:this.p0317},{t:this.p0417},{t:this.p0517},{t:this.p0617},{t:this.p0717},{t:this.p0817},{t:this.p0917},{t:this.p1017},{t:this.p0118},{t:this.p0218},{t:this.p0318},{t:this.p0418},{t:this.p0518},{t:this.p0618},{t:this.p0718},{t:this.p0818},{t:this.p0918},{t:this.p1018},{t:this.p0119},{t:this.p0219},{t:this.p0319},{t:this.p0419},{t:this.p0519},{t:this.p0619},{t:this.p0719},{t:this.p0819},{t:this.p0919},{t:this.p1019},{t:this.p0120},{t:this.p0220},{t:this.p0320},{t:this.p0420},{t:this.p0520},{t:this.p0620},{t:this.p0720},{t:this.p0820},{t:this.p0920},{t:this.p1020},{t:this.p0121},{t:this.p0221},{t:this.p0321},{t:this.p0421},{t:this.p0521},{t:this.p0621},{t:this.p0721},{t:this.p0821},{t:this.p0921},{t:this.p1021},{t:this.p0122},{t:this.p0222},{t:this.p0322},{t:this.p0422},{t:this.p0522},{t:this.p0622},{t:this.p0722},{t:this.p0822},{t:this.p0922},{t:this.p1022},{t:this.p0123},{t:this.p0223},{t:this.p0323},{t:this.p0423},{t:this.p0523},{t:this.p0623},{t:this.p0723},{t:this.p0823},{t:this.p0923},{t:this.p1023},{t:this.p0124},{t:this.p0224},{t:this.p0324},{t:this.p0424},{t:this.p0524},{t:this.p0624},{t:this.p0724},{t:this.p0824},{t:this.p0924},{t:this.p1024},{t:this.p0125},{t:this.p0225},{t:this.p0325},{t:this.p0425},{t:this.p0525},{t:this.p0625},{t:this.p0725},{t:this.p0825},{t:this.p0925},{t:this.p1025},{t:this.p0126},{t:this.p0226},{t:this.p0326},{t:this.p0426},{t:this.p0526},{t:this.p0626},{t:this.p0726},{t:this.p0826},{t:this.p0926},{t:this.p1026},{t:this.p0127},{t:this.p0227},{t:this.p0327},{t:this.p0427},{t:this.p0527},{t:this.p0627},{t:this.p0727},{t:this.p0827},{t:this.p0927},{t:this.p1027},{t:this.p0128},{t:this.p0228},{t:this.p0328},{t:this.p0428},{t:this.p0528},{t:this.p0628},{t:this.p0728},{t:this.p0828},{t:this.p0928},{t:this.p1028},{t:this.p0129},{t:this.p0229},{t:this.p0329},{t:this.p0429},{t:this.p0529},{t:this.p0629},{t:this.p0729},{t:this.p0829},{t:this.p0929},{t:this.p1029},{t:this.p0130},{t:this.p0230},{t:this.p0330},{t:this.p0430},{t:this.p0530},{t:this.p0630},{t:this.p0730},{t:this.p0830},{t:this.p0930},{t:this.p1030}]}).wait(1));
 
 	this._renderFirstFrame();
 
-}).prototype = getMCSymbolPrototype(lib.mineboard_mc, new cjs.Rectangle(-511.9,-187.8,1025.1,342.5), null);
+}).prototype = getMCSymbolPrototype(lib.mineboard_mc, new cjs.Rectangle(-511.8,-187.8,1024.7,342.20000000000005), null);
 
 
 (lib.Animation = function(mode,startPosition,loop,reversed) {
@@ -6296,7 +6324,7 @@ if (reversed == null) { reversed = false; }
 	var props = new Object();
 	props.mode = mode;
 	props.startPosition = startPosition;
-	props.labels = {exitBank:1,elevatorDown:140,"explosive":315,"plunge":316,"explosive":427,pumpOn:428,spring:560,caveIn:623,"explosive":661,"plunge":680,depositGold:791};
+	props.labels = {exitBank:1,elevatorDown:140,"explosive":315,"plunge":316,"explosive":427,pumpOn:428,spring:560,"caveIn":623,"explosive":661,"plunge":680,depositGold:791};
 	props.loop = loop;
 	props.reversed = reversed;
 	cjs.MovieClip.apply(this,[props]);
@@ -6916,10 +6944,11 @@ if (reversed == null) { reversed = false; }
 	cjs.MovieClip.apply(this,[props]);
 
 	// Mine
-	this.instance = new lib.mineboard_mc();
-	this.instance.setTransform(511.95,413.5);
+	this.gameBoard_mc = new lib.mineboard_mc();
+	this.gameBoard_mc.name = "gameBoard_mc";
+	this.gameBoard_mc.setTransform(511.95,413.5);
 
-	this.timeline.addTween(cjs.Tween.get(this.instance).wait(1));
+	this.timeline.addTween(cjs.Tween.get(this.gameBoard_mc).wait(1));
 
 	// Animation
 	this.animation_mc = new lib.Animation();

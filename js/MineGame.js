@@ -1,28 +1,21 @@
-/* global root */
+/* global root, Piece */
 /* eslint no-unused-vars: 0 */
 
 // global variables
-var buttonFirst = true;
-var anim;
+var board = [];
+var anim, gb, game;
 
 // JavaScript Document
 class MineGame {
 	constructor() {
+		game = this;
 		anim = root.animation_mc;
+		gb = root.gameBoard_mc;
 		this.eventHandlers();
-	}
-	
-	firstClick() {
-		if(buttonFirst === true) {
-			buttonFirst = false;
-			return true;
-		} else {
-			buttonFirst = true;
-			return false;
-		}
 	}
 
 	eventHandlers() {
+		$('#btnStart').on('click', function() { game.buildBoard(); });
 		$('#btnExit').on('click', function() { 
 			anim.gotoAndPlay('exitBank'); 
 		});
@@ -54,6 +47,39 @@ class MineGame {
 		$('#btnSpring').on('click', function() { 
 			anim.gotoAndPlay('spring'); 
 		});
+	}
+	
+	buildBoard() {
+		board = [];
+		var pieceType = [ 
+			'rock', 'rock', 'rock', 'rock', 'rock', 'rock', 'rock', 'rock', 'rock', 'rock', 
+			'gold', 'gold', 
+			'hard',  
+			'water',
+			'caveIn'
+		];
+		
+		for(var row=1; row<11; row++) {
+			for(var col=1; col<31; col++) {
+				var rnd = game.random(15);
+				var piece = new Piece(row, col, pieceType[rnd], this);
+				var pid = piece.getID();
+
+				board.push(piece);
+				if(pieceType[rnd] == 'rock') { gb.getChildByName(pid).gotoAndStop('rock'); }
+				else { gb.getChildByName(pid).gotoAndStop('interest'); }
+			}
+		}
+	}
+
+	random(seed) {
+		var rnd = Math.floor(Math.random() * seed) + 1;
+		return parseInt(rnd);
+	}
+	
+	padValue(value) {
+		var pVal = '00' + String(value);
+		return pVal.slice(-2);
 	}
 
 }

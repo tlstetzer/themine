@@ -12,6 +12,7 @@
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js"></script>
 	<script src="js/MineGame.js"></script> 
+	<script src="js/Piece.js"></script> 
 
 	<script>
 		var root, mineGame;
@@ -47,7 +48,7 @@
 			</div>
 			
 			<div class="col-2 d-grid gap-3" style="padding-top: 5px;">
-				<button id="btnStart" class="btn btn-outline-primary">Start Game</button>
+				<button id="btnStart" class="btn btn-outline-primary">New Game</button>
 				<div class="input-group">
 					<div class="input-group-text">Bank:</div>
 					<input id="bank" type="text" class="form-control whiteInput" value="$100,000" disabled>
@@ -58,20 +59,16 @@
 				</div>
 				<h4>Select Tool</h4>
 				<button id="btnPickaxe" type="button" class="btn btn-outline-primary btnWidth">
-					<img src="images/Pickaxe.png" alt="Pickaxe" width="32" height="32">
-					&nbsp;&nbsp;&nbsp;&nbsp;Pickaxe
+					<img src="images/Pickaxe.png" alt="Pickaxe" width="32" height="32"> Pickaxe (free)
 				</button>
 				<button id="btnJackhammer" type="button" class="btn btn-outline-primary btnWidth">
-					<img src="images/Jackhammer.png" alt="Jackhammer" width="32" height="32"> 
-					&nbsp;&nbsp;&nbsp;&nbsp;Jackhammer
+					<img src="images/Jackhammer.png" alt="Jackhammer" width="32" height="32"> Jackhammer ($200)
 				</button>
 				<button id="btnDynamite" type="button" class="btn btn-outline-primary btnWidth">
-					<img src="images/Dynamite.png" alt="Dynamite" width="32" height="32"> 
-					&nbsp;&nbsp;&nbsp;&nbsp;Dynamite
+					<img src="images/Dynamite.png" alt="Dynamite" width="32" height="32"> Dynamite ($500)
 				</button>
 				<button id="btnPump" type="button" class="btn btn-outline-primary btnWidth">
-					<img src="images/pump.png" alt="Pump" width="32" height="32"> 
-					&nbsp;&nbsp;&nbsp;&nbsp;Pump
+					<img src="images/pump.png" alt="Pump" width="32" height="32"> Pump ($300)
 				</button>
 				<h4>Select Direction</h4>
 				<button id="btnLeft" class="btn btn-outline-primary btnKey"><i class="bi bi-arrow-left"></i></button>
