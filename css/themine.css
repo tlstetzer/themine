@@ -10,10 +10,14 @@
 	height: 100%;
 }
 .btnWidth {
-	width: 150px;
+	width: 200px;
+	text-align: justify;
 }
 
-.iframeStyle {
-	width: 100%;
-	height: 768px;
+.whiteInput {
+	background-color: #FFFFFF !important;
+}
+
+.btnKey {
+	font-size: 1.5rem; 
 }
