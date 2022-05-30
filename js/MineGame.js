@@ -47,6 +47,21 @@ class MineGame {
 		$('#btnSpring').on('click', function() { 
 			anim.gotoAndPlay('spring'); 
 		});
+		gb.btnLevel_01.on('click', function() { game.elevatorDown('level1'); });
+		gb.btnLevel_02.on('click', function() { game.elevatorDown('level2'); });
+		gb.btnLevel_03.on('click', function() { game.elevatorDown('level3'); });
+		gb.btnLevel_04.on('click', function() { game.elevatorDown('level4'); });
+		gb.btnLevel_05.on('click', function() { game.elevatorDown('level5'); });
+		gb.btnLevel_06.on('click', function() { game.elevatorDown('level6'); });
+		gb.btnLevel_07.on('click', function() { game.elevatorDown('level7'); });
+		gb.btnLevel_08.on('click', function() { game.elevatorDown('level8'); });
+		gb.btnLevel_09.on('click', function() { game.elevatorDown('level9'); });
+		gb.btnLevel_10.on('click', function() { game.elevatorDown('level10'); });
+	}
+	
+	elevatorDown(level) {
+		gb.gotoAndPlay(level); 
+		anim.gotoAndPlay('elevatorDown');
 	}
 	
 	buildBoard() {
@@ -70,6 +85,7 @@ class MineGame {
 				else { gb.getChildByName(pid).gotoAndStop('interest'); }
 			}
 		}
+		anim.gotoAndPlay('exitBank'); 
 	}
 
 	random(seed) {
