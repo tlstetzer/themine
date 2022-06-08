@@ -1,18 +1,19 @@
-/* global root, symbolLib, Piece, Board, createjs */
+/* global createjs, exportRoot, symbolLib, game, Piece, Board */
 /* eslint no-unused-vars: 0 */
 
 // global variables
 
-var anim, gb, game, board, miner;
+var anim, gBoard, gPad, gPieces, board, miner;
 
 // JavaScript Document
 class MineGame {
 	constructor() {
-		game = this;
-		miner = { bank: 1000, gold: 0, piece: 'p0000', dir: 'left', x: 0, y: 0 };
-		anim = root.animation_mc;
-		gb = root.gameBoard_mc;
-		board = new Board(gb, symbolLib);
+		miner = { bank: 1000, gold: 600, piece: 'p0000', tool: 'none', dir: 'left', x: 0, y: 0 };
+		anim = exportRoot.animation_mc;
+		gBoard = exportRoot.mineBoard_mc;
+		gPieces = exportRoot.mineBoard_mc.gamePieces_mc;
+		gPad = exportRoot.gamepad_mc;
+		board = new Board();
 		
 		this.eventHandlers();
 	}
@@ -50,7 +51,7 @@ class MineGame {
 	
 	moveLeft() {
 		var piece = board.find(p => p.getID() == miner.piece);
-		if(piece.getCol() == 1) { gb.info_text.text = 'Cannot move that direction!'; }
+		if(piece.getCol() == 1) { gBoard.info_text.text = 'Cannot move that direction!'; }
 		else {
 			var nCol = piece.getCol() - 1;
 			var nID = 'p' + game.padValue(piece.getRow()) + game.padValue(nCol);
@@ -61,14 +62,14 @@ class MineGame {
 			miner.piece = nID;
 			nPiece.setIsDug(true);
 			miner.x -= 28;
-			gb.getChildByName(nID).gotoAndStop('dug');
-			createjs.Tween.get(gb.gameMiner_mc).to({x: miner.x}, 1000);
+			gBoard.getChildByName(nID).gotoAndStop('dug');
+			createjs.Tween.get(gBoard.gameMiner_mc).to({x: miner.x}, 1000);
 		}
 	}
 	
 	moveRight() {
 		var piece = board.find(p => p.getID() == miner.piece);
-		if(piece.getCol() == 30) { gb.info_text.text = 'Go to bank!'; }
+		if(piece.getCol() == 30) { gBoard.info_text.text = 'Go to bank!'; }
 		else {
 			var nCol = piece.getCol() + 1;
 			var nID = 'p' + game.padValue(piece.getRow()) + game.padValue(nCol);
@@ -79,14 +80,14 @@ class MineGame {
 			miner.piece = nID;
 			nPiece.setIsDug(true);
 			miner.x += 28;
-			gb.getChildByName(nID).gotoAndStop('dug');
-			createjs.Tween.get(gb.gameMiner_mc).to({x: miner.x}, 1000);
+			gBoard.getChildByName(nID).gotoAndStop('dug');
+			createjs.Tween.get(gBoard.gameMiner_mc).to({x: miner.x}, 1000);
 		}
 	}
 	
 	moveUp() {
 		var piece = board.find(p => p.getID() == miner.piece);
-		if(piece.getRow() == 10) { gb.info_text.text = 'Cannot move that direction!'; }
+		if(piece.getRow() == 10) { gBoard.info_text.text = 'Cannot move that direction!'; }
 		else {
 			var nRow = piece.getRow() - 1;
 			var nID = 'p' + game.padValue(nRow) + game.padValue(piece.getCol());
@@ -97,14 +98,14 @@ class MineGame {
 			miner.piece = nID;
 			nPiece.setIsDug(true);
 			miner.y -= 28;
-			gb.getChildByName(nID).gotoAndStop('dug');
-			createjs.Tween.get(gb.gameMiner_mc).to({y: miner.y}, 1000);
+			gBoard.getChildByName(nID).gotoAndStop('dug');
+			createjs.Tween.get(gBoard.gameMiner_mc).to({y: miner.y}, 1000);
 		}
 	}
 	
 	moveDown() {
 		var piece = board.find(p => p.getID() == miner.piece);
-		if(piece.getRow() == 10) { gb.info_text.text = 'Cannot move that direction!'; }
+		if(piece.getRow() == 10) { gBoard.info_text.text = 'Cannot move that direction!'; }
 		else {
 			var nRow = piece.getRow() + 1;
 			var nID = 'p' + game.padValue(nRow) + game.padValue(piece.getCol());
@@ -115,19 +116,19 @@ class MineGame {
 			miner.piece = nID;
 			nPiece.setIsDug(true);
 			miner.y += 28;
-			gb.getChildByName(nID).gotoAndStop('dug');
-			createjs.Tween.get(gb.gameMiner_mc).to({y: miner.y}, 1000);
+			gBoard.getChildByName(nID).gotoAndStop('dug');
+			createjs.Tween.get(gBoard.gameMiner_mc).to({y: miner.y}, 1000);
 		}
 	}
 	
 	elevatorDown(level) {
-		gb.gotoAndPlay(level); 
+		gBoard.gotoAndPlay(level); 
 		anim.gotoAndPlay('elevatorDown');
 	}
 	
 	buildBoard() {
 		board = [];
-		gb.info_text.text = 'Please wait while mine is scanned!';
+		gBoard.info_text.text = 'Please wait while mine is scanned!';
 		
 		for(var row=1; row<11; row++) {
 			for(var col=1; col<32; col++) {
@@ -135,7 +136,7 @@ class MineGame {
 				var pid = piece.getID();
 
 				board.push(piece);
-				if(col < 31) { gb.getChildByName(pid).gotoAndStop('rock'); }
+				if(col < 31) { gBoard.getChildByName(pid).gotoAndStop('rock'); }
 			}
 		}
 		game.placeGold(150); 
@@ -159,13 +160,13 @@ class MineGame {
 			var piece = board.find(p => p.getID() == pid);
 			if(piece.getType() == 'rock') {
 				piece.setType('interest');
-				gb.getChildByName(pid).gotoAndStop('interest');
+				gBoard.getChildByName(pid).gotoAndStop('interest');
 				seed--;
 			}
 			game.placeGold(seed);
 		} else {
-			var info = gb.info_text;
-			gb.info_text.text = 'Select your Tunnel!';
+			var info = gBoard.info_text;
+			gBoard.info_text.text = 'Select your Tunnel!';
 			anim.gotoAndPlay('exitBank');
 		}
 	}
