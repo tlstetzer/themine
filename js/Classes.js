@@ -22,6 +22,7 @@ class Miner {
 		this.piece = 'p0000'; 
 		this.tool = 'none';
 		this.pos = 'bank';
+		this.elevDir = '';
 		this.elevLevel = 0;
 		
 		this.bank = { X: 1350, Y: 170, S: -1 };
