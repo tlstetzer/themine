@@ -15,7 +15,7 @@ function exitBank(callback='') {
 	miner.setPosition(aMiner, 'elevTown');
 	miner.pos = 'elevTown';
 	enableButtons();
-
+/*
 	miner.setPosition(aMiner, 'bank');
 	aMiner.gotoAndPlay('walk');
 	anim.town_mc.gotoAndPlay('door');
@@ -33,17 +33,16 @@ function exitBank(callback='') {
 			});
 		});
 	});
-
+*/
 }
 
 function exitTown() {
 	createjs.Tween.get(anim.elev_town_mc).to({y: 120}, 1000).on('complete', function() { 
-		positionSymbol(bElev, 446, -150);
-		positionSymbol(bMiner, 448, -167);
+		positionSymbol(bElev, 446, -188);
+		positionSymbol(bMiner, 448, -165);
 		miner.pos = 'elev';
 		miner.elevLevel = -1;
 		stopButton = false;
-		btnClicked = false;
 		elevLevel('down');
 	});
 	createjs.Tween.get(aMiner).to({y: 390}, 1000).on('complete', function() { 
@@ -103,40 +102,37 @@ function exitTunnel(dir) {
 		miner.pos = 'elev';
 		stopButton = false;
 		enableButtons();
-		btnClicked = true;
 		elevLevel(dir);
 	});
 	createjs.Tween.get(aMiner).to({y: minerY }, 1000);
 }
 
 function elevLevel(dir) {
-	if(btnClicked == true && miner.elevDir != dir) { 
-		// changed direction
-		btnClicked = false;
-		miner.elevDir = dir;
-		elevLevel(dir);
-	} else if(dir == 'up' && miner.elevLevel < 0) { 
-		// top of shaft
-		miner.elevDir = ''; 
-		btnClicked = false;
-		arriveTown(); 
-	} else if(stopButton == true || miner.elevLevel == 18 && dir != 'up') { 
-		// bottom of shaft or stop clicked
-		miner.elevDir = ''; 
-		btnClicked = false;
-		arriveTunnel(dir); 
+	if(stopButton == true) {
+		// stop clicked
+		miner.elevDir = '';
+		arriveTunnel(dir);
+	} else if(dir == 'down' && miner.elevLevel == 18) {
+		// at the bottom
+		miner.elevDir = '';
+		arriveTunnel(dir);
+	} else if(dir == 'up' && miner.elevLevel < 0) {
+		// at the top
+		miner.elevDir = '';
+		arriveTown(dir);
 	} else {
-		var elevY = bElev.y;
-		var minerY = bMiner.y;
-		miner.elevDir = dir;
-		if(dir == 'down') { elevY = bElev.y + 27; minerY = bElev.y + 27; miner.elevLevel++; }
-		if(dir == 'up') { elevY = bElev.y - 27;minerY = bElev.y - 27; miner.elevLevel--; }
+		// move elevator
+		if(dir == 'down') { miner.elevLevel++; }
+		if(dir == 'up')   { miner.elevLevel--; }
+		var level = miner.elevLevel;
+		var elevY = miner.elevY[level];
 
 		createjs.Tween.get(bElev).to({y: elevY}, 1000).on('complete', function() { 
-			elevLevel(dir);
-			gBoard.info_text.text = 'Level ' + miner.elevLevel;
+//			if(miner.elevLevel != 6) { elevLevel(dir); }
+			if(cButton == dir) { elevLevel(dir); }
+			gBoard.info_text.text = 'Level ' + miner.elevLevel + ' (' + bElev.y +')';
 		});
-		createjs.Tween.get(bMiner).to({y: minerY }, 1000);
+		createjs.Tween.get(bMiner).to({y: elevY }, 1000);
 	}
 }
 

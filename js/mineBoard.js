@@ -71,5 +71,5 @@ function saltMine(loop) {
 				exitBank(enableButtons);
 			}, 1000);
 		}
-//	}, 1);
+//	}, 10);
 }

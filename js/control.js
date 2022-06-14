@@ -1,6 +1,6 @@
 /* eslint no-unused-vars: 0 no-undef: 0*/
 
-var miner, board, gPad, gBoard, stopButton, btnClicked				// Global Variables
+var miner, board, gPad, gBoard, stopButton, cButton					// Global Variables
 var lUp, lRight, lDown, lLeft, lStop, lPick, lPump, lJack, lDyn;	// Listeners
 
 function gameInit() {
@@ -11,8 +11,8 @@ function gameInit() {
 	animationInit();
 	boardInit();
 	
-//	exportRoot.gotoAndStop('game');
-//	startGame();
+	exportRoot.gotoAndStop('game');
+	startGame();
 }
 
 function buttonDown() {
@@ -33,10 +33,10 @@ function startGame() {
 }
 
 function buttonClick(e, btn) {
-	btnClicked = true;
 	if(miner.pos.startsWith('elev')) {
 		// inside elevator
 		stopButton = false;
+		cButton = btn;
 		if(miner.pos == 'elevTown' && btn == 'down') { exitTown(''); } 
 		if(miner.pos == 'elevTown' && btn != 'down') { gBoard.info_text.text = 'Cannot move in that direction!'; } 
 		

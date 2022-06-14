@@ -25,6 +25,7 @@ class Miner {
 		this.elevDir = '';
 		this.elevLevel = 0;
 		
+		this.elevY = [-150, -130, -101, -72, -43, -14, 15, 44, 73, 102, 131, 160, 189, 218, 247, 276, 305, 334, 363]
 		this.bank = { X: 1350, Y: 170, S: -1 };
 		this.elevTown = { X: 1800, Y: 183, S: 1 };
 	}
