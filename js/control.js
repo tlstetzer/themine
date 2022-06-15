@@ -68,10 +68,13 @@ function disableButtons() {
 	gPad.btnPump.off('click', lPump);
 	gPad.btnJackhammer.off('click', lJack);
 	gPad.btnDynamite.off('click', lDyn);
+	$(document).off('keypress');
 }
 
 function enableButtons() {
 	btnClicked = false;
+	
+	//button events
 	lUp = gPad.btnUp.on('click', buttonClick, null, false, 'up');
 	lRight = gPad.btnRight.on('click', buttonClick, null, false, 'right');
 	lDown = gPad.btnDown.on('click', buttonClick, null, false, 'down');
@@ -81,6 +84,20 @@ function enableButtons() {
 	lPump = gPad.btnPump.on('click', setSelected, null, false, 'pump');
 	lJack = gPad.btnJackhammer.on('click', setSelected, null, false, 'jackhammer');
 	lDyn = gPad.btnDynamite.on('click', setSelected, null, false, 'dynamite');
+	
+	// keyboard events
+	$(document).on('keydown', function(e) {
+		var key = e.which;
+		if(key == 38) { buttonClick(e, 'up'); }
+		if(key == 39) { buttonClick(e, 'right'); }
+		if(key == 40) { buttonClick(e, 'down'); }
+		if(key == 37) { buttonClick(e, 'left'); }
+		if(key == 32) { stopButton = true; }
+		if(key == 80) { setSelected(e, 'pickaxe'); }
+		if(key == 87) { setSelected(e, 'pump'); }
+		if(key == 74) { setSelected(e, 'jackhammer'); }
+		if(key == 68) { setSelected(e, 'dynamite'); }
+	});
 }
 
 function setSelected(e, btn) {
