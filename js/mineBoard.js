@@ -33,6 +33,13 @@ function drawBoard() {
 				piece.symbol.gotoAndStop('shaft'); 
 				piece.type = 'shaft'; 
 			}
+			
+			// set edges
+			piece.edge = 'none';
+			if(row == 1) { piece.edge = 'top'; }
+			if(row == 18) { piece.edge = 'bottom'; }
+			if(col == 1) { piece.edge = 'left'; }
+			if(col == 32) { piece.edge = 'elev'; }
 
 			// add to board
 			piece.symbol.parent = gPieces;
@@ -68,8 +75,27 @@ function saltMine(loop) {
 		else {
 			gBoard.info_text.text = 'Begin Mining!'; 
 			setTimeout(function() {
-				exitBank(enableButtons);
+				exitBank();
 			}, 1000);
 		}
 //	}, 10);
+}
+	
+function getNextPiece(dir) {
+	var cPiece = aBoard.find(p => p.ID == miner.piece);
+	var nCol = miner.piece.col;
+	var nRow = miner.piece.row;
+
+	if(dir == 'left') { nCol--; }
+	if(dir == 'right') { nCol++; }
+	if(dir == 'up') { nRow--; }
+	if(dir == 'down') { nRow++; }
+
+	var nPiece = aBoard.find(p => p.row == nRow && p.col == nCol);
+	return nPiece;
+}
+
+function getByLevel(level) {
+	var piece = aBoard.find(p => p.row == level && p.col == 32);
+	return piece.ID;
 }
