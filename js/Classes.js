@@ -66,6 +66,18 @@ class Miner {
 		// facing 1=left, -1=right
 		sym.scaleX = this[loc].S;
 	}
+	
+	setBoardPosition(sym, x, y, dir) {
+		// facing 1=left, -1=right
+		if(dir !='' && dir == 'left') { sym.scaleX = 0.1985; }
+		if(dir !='' && dir == 'right') { sym.scaleX = -0.1985; }
+		
+		var offset = 0;
+		if(sym.scaleX < 0) { offset = 15; }
+		sym.x = x + offset;
+		sym.y = y;
+		
+	}
 }
 
 class Elev{

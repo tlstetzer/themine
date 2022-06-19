@@ -54,24 +54,44 @@ function makeMove(e, btn) {
 }
 
 function moveInMine(btn) {
-	var piece = miner.piece;
+	var piece = getPiece(miner.piece);
 	var newPiece;
 	
 	if(btn == 'left') {
-		if(piece.left == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
-		newPiece = nextPiece(piece.left);
+		if(piece.idLeft == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else {
+			newPiece = getPiece(piece.idLeft);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, 'left');
+		}
 	}
 	
 	if(btn == 'right') {
-		
+		if(piece.idRight == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else if(piece.idRight == 'p99999') { gBoard.info_text.text = 'At elevator!'; }
+		else {
+			newPiece = getPiece(piece.idRight);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, 'right');
+		}
 	}
 	
 	if(btn == 'up') {
-		
+		if(piece.idUp == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else {
+			newPiece = getPiece(piece.idUp);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, '');
+		}
 	}
 	
 	if(btn == 'down') {
-		
+		if(piece.idDown == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else {
+			newPiece = getPiece(piece.idDown);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, '');
+		}
 	}
 /*
 	if(btn == piece.edge) { gBoard.info_text.text = 'Cannot move in that direction!'; }
