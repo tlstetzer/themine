@@ -8,7 +8,6 @@ function gameInit() {
 	gBoard = exportRoot.mineBoard_mc;
 	
 	eventHandlers();
-	boardInit();
 	
 	startGame();	// debugging
 }
@@ -26,6 +25,8 @@ function startGame() {
 	miner = new Miner();
 	elev = new Elev();
 	animationInit();
+	boardInit();
+	setSelected('', '');
 	gBoard.info_text.text = 'Please wait while mine is scanned for gold!';
 	exportRoot.gotoAndStop('game');
 	drawBoard();
@@ -62,14 +63,31 @@ function makeMove(e, btn) {
 
 function moveInMine(btn) {
 	var piece = miner.piece;
+	var newPiece;
 	
+	if(btn == 'left') {
+		if(piece.left == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		newPiece = nextPiece(piece.left);
+	}
 	
+	if(btn == 'right') {
+		
+	}
+	
+	if(btn == 'up') {
+		
+	}
+	
+	if(btn == 'down') {
+		
+	}
+/*
 	if(btn == piece.edge) { gBoard.info_text.text = 'Cannot move in that direction!'; }
 	else if(btn == 'right' && piece.edge == 'elev') {
 		if(piece.row == miner.elevLevel) { enterShaft(); }
 		else { gBoard.info_text.text = 'Cannot move in that direction!'; }
 	}
-	
+*/
 	// if piece is not an action
 	// else what is the action
 }

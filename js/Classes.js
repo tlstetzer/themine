@@ -1,17 +1,20 @@
 /* eslint no-unused-vars: 0 */
 
 class Piece {
-	constructor(id, row, col, x, y, type) {
+	constructor(id, row, col, x, y, mx, my, type) {
 		this.ID = id;
 		this.row = row;
 		this.col = col;
 		this.x = x;
 		this.y = y;
-		this.minerX = 0;
-		this.minerY = 0;
+		this.minerX = mx;
+		this.minerY = my;
+		this.idLeft = '';
+		this.idRight = '';
+		this.idUp = '';
+		this.idDown = '';
 		this.type = type;
 		this.isDug = false;
-		this.edge = 'none';
 		this.symbol;
 	}
 }
@@ -45,8 +48,14 @@ class Miner {
 		this.tunnelIn = { X: 938, Y: 170, S: 1 };
 		
 		// elevator shaft
-		this.elevY = [-150, -130, -101, -72, -43, -14, 15, 44, 73, 102, 131, 160, 189, 218, 247, 276, 305, 334, 363]
+		this.boardLeft = 0.1985;
+		this.boardRight = -0.1985;
 		this.elevAboveShaft = { X: 438, Y: -188, S: 0.1985 };
+		this.elevY = [-150, -130, -101, -72, -43, -14, 15, 44, 73, 102, 131, 160, 189, 218, 247, 276, 305, 334, 363];
+		this.shaftPiece = [
+			'0', 'p33041', 'p33081', 'p33121', 'p33161', 'p33201', 'p33241', 'p33281', 'p33321', 'p33361',
+			'p33401', 'p33441', 'p33481', 'p33521', 'p33561', 'p33601', 'p33641', 'p33681', 'p33721'
+		];
 	}
 	
 	setPosition(sym, loc) {

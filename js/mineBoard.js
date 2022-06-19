@@ -18,10 +18,13 @@ function drawBoard() {
 
 	// Rows
 	for(var row=1; row<19; row++) {
+		var mx = -490;
+		var my = miner.elevY[row];
+		
 		// columns
 		for(var col=1; col<34; col++) {
 			var id = 'p' + sp;
-			var piece = new Piece(id, row, col, x, y, 'start');
+			var piece = new Piece(id, row, col, x, y, mx, my, 'start');
 			piece.symbol = new symbolLib.piece();
 
 			if(col < 29) { piece.symbol.gotoAndStop('start'); } 
@@ -34,12 +37,62 @@ function drawBoard() {
 				piece.type = 'shaft'; 
 			}
 			
-			// set edges
-			piece.edge = 'none';
-			if(row == 1) { piece.edge = 'top'; }
-			if(row == 18) { piece.edge = 'bottom'; }
-			if(col == 1) { piece.edge = 'left'; }
-			if(col == 32) { piece.edge = 'elev'; }
+			// set surrounding
+			if(row == 1 && col == 1) { 
+				// top left
+				piece.idLeft = 'p00000';
+				piece.idRight = 'p' + (sp - 1);
+				piece.idUp = 'p00000';
+				piece.idDown = 'p' + (sp + 40);
+			} else if(row == 1 && col == 31) { 
+				// top right
+				piece.idLeft = 'p' + (sp + 1);
+				piece.idRight = 'p99999';
+				piece.idUp = 'p00000';
+				piece.idDown = 'p' + (sp + 40); 
+			} else if(row == 18 && col == 1) {
+				// bottom left
+				piece.idLeft = 'p00000';
+				piece.idRight = 'p' + (sp - 1);
+				piece.idUp = 'p' + (sp - 40);
+				piece.idDown = 'p00000'; 
+			} else if(row == 18 && col == 31) {
+				// bottom right
+				piece.idLeft = 'p' + (sp + 1);
+				piece.idRight = 'p99999';
+				piece.idUp = 'p' + (sp - 40);
+				piece.idDown = 'p00000'; 
+			} else if(row == 1) {
+				// top row
+				piece.idLeft = 'p' + (sp + 1);
+				piece.idRight = 'p' + (sp - 1);
+				piece.idUp = 'p00000';
+				piece.idDown = 'p' + (sp + 40); 
+			} else if(row == 18) {
+				// bottom row
+				piece.idLeft = 'p' + (sp + 1);
+				piece.idRight = 'p' + (sp - 1);
+				piece.idUp = 'p' + (sp - 40);
+				piece.idDown = 'p00000'; 
+			} else if(col == 1) {
+				// left column
+				piece.idLeft = 'p00000';
+				piece.idRight = 'p' + (sp - 1);
+				piece.idUp = 'p' + (sp - 40);
+				piece.idDown = 'p' + (sp + 40); 
+			} else if(col == 31) {
+				// right column
+				piece.idLeft = 'p' + (sp + 1);
+				piece.idRight = 'p99999';
+				piece.idUp = 'p' + (sp - 40);
+				piece.idDown = 'p' + (sp + 40); 
+			} else {
+				// middle of board
+				piece.idLeft = 'p' + (sp + 1);
+				piece.idRight = 'p' + (sp - 1);
+				piece.idUp = 'p' + (sp - 40);
+				piece.idDown = 'p' + (sp + 40); 
+			}
 
 			// add to board
 			piece.symbol.parent = gPieces;
@@ -50,6 +103,7 @@ function drawBoard() {
 
 			// increment column
 			x += 29;
+			mx += 29;
 			sp++;
 		}
 
@@ -81,18 +135,15 @@ function saltMine(loop) {
 //	}, 10);
 }
 	
-function getNextPiece(dir) {
-	var cPiece = aBoard.find(p => p.ID == miner.piece);
-	var nCol = miner.piece.col;
-	var nRow = miner.piece.row;
-
-	if(dir == 'left') { nCol--; }
-	if(dir == 'right') { nCol++; }
-	if(dir == 'up') { nRow--; }
-	if(dir == 'down') { nRow++; }
-
-	var nPiece = aBoard.find(p => p.row == nRow && p.col == nCol);
-	return nPiece;
+function nextPiece(id) {
+	var piece = aBoard.find((p) => p.ID == id);
+	
+	if(piece.type == 'dug') { moveMiner(piece, 'dug'); }
+	else if(piece.type == 'start') { moveMiner(piece, 'tool'); }
+	else {
+		// action
+		moveMiner(piece, 'tool');
+	}
 }
 
 function getByLevel(level) {

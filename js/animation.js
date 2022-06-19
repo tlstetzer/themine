@@ -144,14 +144,17 @@ function elevLevel(dir) {
 	if(stopButton == true) {
 		// stop clicked
 		miner.elevDir = '';
+		miner.piece = miner.shaftPiece[elev.elevLevel];
 		arriveTunnel(dir);
 	} else if(dir == 'down' && elev.elevLevel == 18) {
 		// at the bottom
 		miner.elevDir = '';
+		miner.piece = miner.shaftPiece[elev.elevLevel];
 		arriveTunnel(dir);
 	} else if(dir == 'up' && elev.elevLevel < 0) {
 		// at the top
 		miner.elevDir = '';
+		miner.piece = miner.shaftPiece[elev.elevLevel];
 		arriveTown(dir);
 	} else {
 		// next level
@@ -167,8 +170,8 @@ function elevLevel(dir) {
 
 		// move elevator
 		createjs.Tween.get(boardElev).to({y: elevY}, 1000).on('complete', function() { 
-			if(cButton == dir) { elevLevel(dir); } // keep moving in the same direction otherwise stop the loop for this direction
-			gBoard.info_text.text = 'Level ' + elev.elevLevel + ' (' + elevatorY + ', ' + minerY +')'; 	// debugging
+			// if the clicked button matches the current direction start the next loop
+			if(cButton == dir) { elevLevel(dir); } 
 		});
 		
 		// move miner
@@ -193,14 +196,22 @@ function exitElevator() {
 			miner.piece = getByLevel(elev.elevLevel);
 			enableButtons('all');
 			setSelected('', 'pickaxe');
-			
-			// check board piece
+			moveInMine('left');
 		});
 	});
 }
 
-function moveMiner(nPiece) {
-	miner.piece = nPiece.ID;
+function moveMiner(piece, tool) {
+	miner.piece = piece.ID;
+	
+	if(tool == '') {
+		boardMiner.x = piece.mx;
+		boardMiner.y = piece.my;
+	} else {
+		// animate using tool
+		boardMiner.x = piece.mx;
+		boardMiner.y = piece.my;
+	}
 }
 
 function setTool(btn) {
