@@ -12,14 +12,6 @@ function gameInit() {
 	startGame();	// debugging
 }
 
-function buttonDown() {
-	exitTown();
-}
-
-function eventHandlers() {
-	exportRoot.intro_mc.btnStart.on('click', function() { startGame(); });
-}
-
 function startGame() {
 	disableButtons('all');
 	miner = new Miner();
@@ -94,7 +86,26 @@ function moveInMine(btn) {
 
 function disableButtons(type) {
 	btnClicked = false;
-
+	
+	// buttons
+	if(type == 'all' || type == 'tools') {
+		gPad.btnPickaxe_d.visible = true;
+		gPad.btnPump_d.visible = true;
+		gPad.btnJackhammer_d.visible = true;
+		gPad.btnDynamite_d.visible = true;
+		toolsEnabled == false;
+	}
+	
+	// gamepad
+	if(type == 'all' || type == 'buttons') {
+		gPad.btnUp_d.visible = true;
+		gPad.btnRight_d.visible = true;
+		gPad.btnDown_d.visible = true;
+		gPad.btnLeft_d.visible = true;
+		gPad.btnStop_d.visible = true;
+		$(document).off('keypress');
+	}
+/*
 	if(type == 'all' || type == 'tools') {
 		gPad.btnPickaxe.off('click', lPick);
 		gPad.btnPump.off('click', lPump);
@@ -111,11 +122,32 @@ function disableButtons(type) {
 		gPad.btnStop.off('click', lStop);
 		$(document).off('keypress');
 	}
+*/
 }
 
 function enableButtons(type) {
 	btnClicked = false;
 	
+	// buttons
+	if(type == 'all' || type == 'tools') {
+		gPad.btnPickaxe_d.visible = false;
+		gPad.btnPump_d.visible = false;
+		gPad.btnJackhammer_d.visible = false;
+		gPad.btnDynamite_d.visible = false;
+		toolsEnabled == false;
+	}
+	
+	// gamepad
+	if(type == 'all' || type == 'buttons') {
+		gPad.btnUp_d.visible = false;
+		gPad.btnRight_d.visible = false;
+		gPad.btnDown_d.visible = false;
+		gPad.btnLeft_d.visible = false;
+		gPad.btnStop_d.visible = false;
+		$(document).off('keypress');
+	}
+	
+/*
 	if(type == 'all' || type == 'tools') {
 		lPick = gPad.btnPickaxe.on('click', setSelected, null, false, 'pickaxe');
 		lPump = gPad.btnPump.on('click', setSelected, null, false, 'pump');
@@ -131,7 +163,7 @@ function enableButtons(type) {
 		lLeft = gPad.btnLeft.on('click', makeMove, null, false, 'left');
 		lStop = gPad.btnStop.on('click', function() { stopButton = true; });
 	}
-	
+
 	// keyboard events
 	$(document).on('keydown', function(e) {
 		var key = e.which;
@@ -149,6 +181,7 @@ function enableButtons(type) {
 			gBoard.info_text.text = 'A tool cannot be selected at this time!';
 		}
 	});
+*/
 }
 
 function setSelected(e, btn) {
@@ -162,4 +195,41 @@ function setSelected(e, btn) {
 	if(btn == 'pump') { gPad.selectedPump.visible = true; }
 	if(btn == 'jackhammer') { gPad.selectedJackhammer.visible = true; }
 	if(btn == 'dynamite') { gPad.selectedDynamite.visible = true; }
+}
+
+function eventHandlers() {
+	// start button
+	exportRoot.intro_mc.btnStart.on('click', function() { startGame(); });
+	
+	// tool buttons
+	lPick = gPad.btnPickaxe.on('click', setSelected, null, false, 'pickaxe');
+	lPump = gPad.btnPump.on('click', setSelected, null, false, 'pump');
+	lJack = gPad.btnJackhammer.on('click', setSelected, null, false, 'jackhammer');
+	lDyn = gPad.btnDynamite.on('click', setSelected, null, false, 'dynamite');
+	toolsEnabled == true;
+
+	// gamepad buttons
+	lUp = gPad.btnUp.on('click', makeMove, null, false, 'up');
+	lRight = gPad.btnRight.on('click', makeMove, null, false, 'right');
+	lDown = gPad.btnDown.on('click', makeMove, null, false, 'down');
+	lLeft = gPad.btnLeft.on('click', makeMove, null, false, 'left');
+	lStop = gPad.btnStop.on('click', function() { stopButton = true; });
+
+	// keyboard events
+	$(document).on('keydown', function(e) {
+		var key = e.which;
+		if(key == 38) { makeMove(e, 'up'); }
+		if(key == 39) { makeMove(e, 'right'); }
+		if(key == 40) { makeMove(e, 'down'); }
+		if(key == 37) { makeMove(e, 'left'); }
+		if(key == 32) { stopButton = true; }
+		
+		if(key == 80 && toolsEnabled == true) { setSelected(e, 'pickaxe'); }
+		if(key == 87 && toolsEnabled == true) { setSelected(e, 'pump'); }
+		if(key == 74 && toolsEnabled == true) { setSelected(e, 'jackhammer'); }
+		if(key == 68 && toolsEnabled == true) { setSelected(e, 'dynamite'); }
+		if([80, 87, 74, 68].indexOf(key) > 0 && toolsEnabled == false) {
+			gBoard.info_text.text = 'A tool cannot be selected at this time!';
+		}
+	});
 }
