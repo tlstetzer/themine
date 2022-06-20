@@ -119,7 +119,7 @@ function drawBoard() {
 }
 
 function saltMine(loop) {
-//	setTimeout(function() {
+	setTimeout(function() {
 		var pn = CRT + 200 + random(28) + (40 * random(18));
 		var pid = 'p' + pn;
 		var piece = aBoard.find(p => p.ID == pid);
@@ -128,12 +128,10 @@ function saltMine(loop) {
 		if(loop > 0) { saltMine(loop - 1); }
 		else {
 			gBoard.info_text.text = 'Begin Mining!'; 
-//			setTimeout(function() {
-//				exitBank();
-				exitElevator();		// debugging
-//			}, 1000);
+			exitBank();
+//			exitElevator();		// debugging
 		}
-//	}, 10);
+	}, 10);
 }
 
 function getPiece(id) {
