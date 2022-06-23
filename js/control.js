@@ -1,13 +1,14 @@
 /* eslint no-unused-vars: 0 no-undef: 0*/
 
-var miner, elev, board, gPad, gBoard, stopButton, cButton, toolsEnabled			// Global Variables
-var lUp, lRight, lDown, lLeft, lStop, lPick, lPump, lJack, lDyn;				// Listeners
+// Global Variables
+var miner, elev, board, gPad, gBoard, stopButton, cButton, toolsEnabled			
 
 function gameInit() {
 	gPad = exportRoot.gamepad_mc;
 	gBoard = exportRoot.mineBoard_mc;
 	
 	eventHandlers();
+	soundInit();
 	
 //	startGame();	// debugging
 }
@@ -159,18 +160,18 @@ function eventHandlers() {
 	exportRoot.intro_mc.btnStart.on('click', function() { startGame(); });
 	
 	// tool buttons
-	lPick = gPad.btnPickaxe.on('click', setSelected, null, false, 'pickaxe');
-	lPump = gPad.btnPump.on('click', setSelected, null, false, 'pump');
-	lJack = gPad.btnJackhammer.on('click', setSelected, null, false, 'jackhammer');
-	lDyn = gPad.btnDynamite.on('click', setSelected, null, false, 'dynamite');
+	gPad.btnPickaxe.on('click', function() { setSelected('pickaxe'); });
+	gPad.btnPump.on('click', function() { setSelected('pump'); });
+	gPad.btnJackhammer.on('click', function() { setSelected('jackhammer'); });
+	gPad.btnDynamite.on('click', function() { setSelected('dynamite'); });
 	toolsEnabled == true;
 
 	// gamepad buttons
-	lUp = gPad.btnUp.on('click', makeMove, null, false, 'up');
-	lRight = gPad.btnRight.on('click', makeMove, null, false, 'right');
-	lDown = gPad.btnDown.on('click', makeMove, null, false, 'down');
-	lLeft = gPad.btnLeft.on('click', makeMove, null, false, 'left');
-	lStop = gPad.btnStop.on('click', function() { stopButton = true; });
+	gPad.btnUp.on('click', function() { makeMove('up'); });
+	gPad.btnRight.on('click', function() { makeMove('right'); });
+	gPad.btnDown.on('click', function() { makeMove('down'); });
+	gPad.btnLeft.on('click', function() { makeMove('left'); });
+	gPad.btnStop.on('click', function() { stopButton = true; });
 
 	// keyboard events
 	$(document).on('keydown', function(e) {
