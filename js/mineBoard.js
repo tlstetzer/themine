@@ -115,6 +115,7 @@ function drawBoard() {
 	}
 
 	// salt the mine
+	soundEffect('radar', -1, 0.5);
 	saltMine(250);
 }
 
@@ -128,10 +129,11 @@ function saltMine(loop) {
 		if(loop > 0) { saltMine(loop - 1); }
 		else {
 			gBoard.info_text.text = 'Begin Mining!'; 
+			stopEffect('radar');
 			exitBank();
 //			exitElevator();		// debugging
 		}
-	}, 10);
+	}, 20);
 }
 
 function getPiece(id) {

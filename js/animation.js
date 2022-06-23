@@ -23,7 +23,7 @@ function animationInit() {
 
 /* exit bank and enter elevator */
 function exitBank() {
-
+/*
 	animMiner.gotoAndPlay('walk');
 	anim.town_mc.gotoAndPlay('door');
 	
@@ -44,12 +44,12 @@ function exitBank() {
 			});
 		});
 	});
-/*
+*/
 	// debugging
 	miner.setPosition(animMiner, 'townIn'); 	
 	animMiner.gotoAndStop('stand');
 	enableButtons('buttons');
-*/
+
 }
 
 /* lower elevator from town and start elevator in shaft */
