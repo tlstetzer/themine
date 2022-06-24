@@ -33,21 +33,21 @@ function makeMove(e, btn) {
 	if(miner.pos == 'townIn') {
 		if(btn == 'down') { exitTown(); }
 		else if(btn == 'left') { enterBank(); }
-		else { showMessage('You cannot move in that direction!', 'error');  }
+		else { gBoard.info_text.text = 'You cannot move in that direction!'; }
 	}
 
 	// in the elevator at tunnel level
 	if(miner.pos == 'tunnelIn') {
 		if(btn == 'up' || btn == 'down') { exitTunnel(btn); }
 		else if(btn == 'left') { exitElevator(); }
-		else { showMessage('You cannot move in that direction!', 'error');  }
+		else { gBoard.info_text.text = 'You cannot move in that direction!'; }
 	}
 
 	// in the elevator shaft
 	if(miner.pos == 'elev') {
 		if(btn == 'up' || btn == 'down') { elevLevel(btn); }
-		else if(btn == 'left') { showMessage('You must stop the elevator before you can exit!', 'error'); }
-		else { showMessage('You cannot move in that direction!', 'error');  }
+		else if(btn == 'left') { gBoard.info_text.text = 'You must stop the elevator before you can exit!'; }
+		else { gBoard.info_text.text = 'You cannot move in that direction!'; }
 	}
 	
 	// inside the mine
@@ -56,16 +56,44 @@ function makeMove(e, btn) {
 
 function moveInMine(btn) {
 	var piece = getPiece(miner.piece);
-	var newID = '';
+	var newPiece;
 	
-	if(btn == 'left') { newID = piece.idLeft; }
-	if(btn == 'right') { newID = piece.idRight; }
-	if(btn == 'up') { newID = piece.idUp; }
-	if(btn == 'down') { newID = piece.idDown; }
-	var newPiece = getPiece(newID);
+	if(btn == 'left') {
+		if(piece.idLeft == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else {
+			newPiece = getPiece(piece.idLeft);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, 'left');
+		}
+	}
 	
-	if(piece.idLeft == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
-	else if(moveAllowed(newPiece) == true) { checkAction(newPiece, btn); }
+	if(btn == 'right') {
+		if(piece.idRight == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else if(piece.idRight == 'p99999') { gBoard.info_text.text = 'At elevator!'; }
+		else {
+			newPiece = getPiece(piece.idRight);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, 'right');
+		}
+	}
+	
+	if(btn == 'up') {
+		if(piece.idUp == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else {
+			newPiece = getPiece(piece.idUp);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, '');
+		}
+	}
+	
+	if(btn == 'down') {
+		if(piece.idDown == 'p00000') { gBoard.info_text.text = 'You cannot move in that direction!'; }
+		else {
+			newPiece = getPiece(piece.idDown);
+			miner.piece = newPiece.ID;
+			miner.setBoardPosition(boardMiner, newPiece.minerX, newPiece.minerY, '');
+		}
+	}
 }
 
 function disableButtons(type) {
@@ -121,13 +149,10 @@ function setSelected(e, btn) {
 	gPad.selectedDynamite.visible = false;
 	setTool(btn);
 	
-	if(btn == 'pickaxe') { gPad.selectedPickaxe.visible = true; miner.tool = 'pickaxe'; }
-	if(btn == 'jackhammer') { gPad.selectedJackhammer.visible = true; miner.tool = 'jackhammer'; }
-	if(btn == 'dynamite') { gPad.selectedDynamite.visible = true; miner.tool = 'dynamite'; }
-	if(btn == 'pump') { 
-		if(waterNearby() == true) { gPad.selectedPump.visible = true; miner.tool = 'pump'; }
-		else { gBoard.info_text.text = 'There is no water nearby to pump!'; }
-	}
+	if(btn == 'pickaxe') { gPad.selectedPickaxe.visible = true; }
+	if(btn == 'pump') { gPad.selectedPump.visible = true; }
+	if(btn == 'jackhammer') { gPad.selectedJackhammer.visible = true; }
+	if(btn == 'dynamite') { gPad.selectedDynamite.visible = true; }
 }
 
 function eventHandlers() {
