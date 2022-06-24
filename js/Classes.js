@@ -14,7 +14,6 @@ class Piece {
 		this.idUp = '';
 		this.idDown = '';
 		this.type = type;
-		this.isDug = false;
 		this.symbol;
 	}
 }

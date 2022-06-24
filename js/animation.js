@@ -91,7 +91,7 @@ function arriveTunnel(dir) {
 	disableButtons('all'); 
 	var elevY = elev.inTunnel.Y;
 	var minerY = miner.tunnelIn.Y;
-	
+/*	
 	// move miner into tunnel elevator
 	if(dir == 'down') { miner.setPosition(animMiner, 'tunnelAbove'); } 
 	else { miner.setPosition(animMiner, 'tunnelBelow'); }
@@ -107,15 +107,14 @@ function arriveTunnel(dir) {
 	createjs.Tween.get(animMiner).to({y: minerY}, 1000).on('complete', function() {
 		miner.setPosition(animMiner, 'tunnelIn');
 	});
-/*
+*/	
 	// debugging
 	enableButtons('buttons');
 	stopButton = false;
 	elev.setPosition(townElev, 'inTunnel');
 	miner.setPosition(animMiner, 'tunnelIn');
-*/	
-}
 
+}
 
 /* raise or lower elevator out of tunnel */
 function exitTunnel(dir) {
@@ -193,6 +192,7 @@ function elevLevel(dir) {
 
 /* exit elevator in tunnel */
 function exitElevator() {
+/*	
 	disableButtons('all');
 
 	tunnelElev.gotoAndPlay('openDoor');
@@ -209,7 +209,7 @@ function exitElevator() {
 			moveInMine('left');
 		});
 	});
-/*	
+*/
 	// debugging
 	boardElev.y = elev.elevY[1];
 	boardMiner.y = elev.elevY[1];
@@ -217,7 +217,7 @@ function exitElevator() {
 	miner.piece = getByLevel(1);
 	enableButtons('all');
 	setSelected('', 'pickaxe');
-*/
+
 }
 
 function moveMiner(piece, tool) {

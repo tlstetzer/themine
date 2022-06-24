@@ -3,7 +3,9 @@
 function soundInit() {
 	var audioPath = 'audio/';
 	var sounds = [
+		{ id: 'begin', src: 'begin.mp3' },
 		{ id: 'cavein', src: 'cavein.mp3' },
+		{ id: 'error', src: 'error.mp3' },
 		{ id: 'explosion', src: 'explosion.mp3' },
 		{ id: 'jackhammer', src: 'jackhammer.mp3' },
 		{ id: 'radar', src: 'Windows Information Bar.wav' },
@@ -21,4 +23,9 @@ function soundEffect(id, loop, vol) {
 
 function stopEffect(id) {
 	createjs.Sound.stop();
+}
+
+function showMessage(msg, id) {
+	if(id != '') { soundEffect(id, 0, .5); }
+	gBoard.info_text.text = msg;
 }
