@@ -9,8 +9,6 @@ function gameInit() {
 	
 	eventHandlers();
 	soundInit();
-	
-//	startGame();	// debugging
 }
 
 function startGame() {
@@ -25,7 +23,7 @@ function startGame() {
 	drawBoard();
 }
 
-function makeMove(e, btn) {
+function makeMove(btn) {
 	stopButton = false;
 	cButton = btn;
 
@@ -65,7 +63,14 @@ function moveInMine(btn) {
 	var newPiece = getPiece(newID);
 	
 	if(piece.idLeft == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
-	else if(moveAllowed(newPiece) == true) { checkAction(newPiece, btn); }
+	else if(moveAllowed(newPiece) == true) { 
+		if(newPiece.type == 'dug') { movePiece(newPiece, btn); }
+		else if(newPiece.type == 'action') { checkAction(newPiece, btn); }
+		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
+		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
+		else if(miner.tool == 'dynamite') { playDynamite(newPiece, btn); }
+		else { playPickaxe(newPiece, btn); }
+	}
 }
 
 function disableButtons(type) {
@@ -126,7 +131,7 @@ function setSelected(e, btn) {
 	if(btn == 'dynamite') { gPad.selectedDynamite.visible = true; miner.tool = 'dynamite'; }
 	if(btn == 'pump') { 
 		if(waterNearby() == true) { gPad.selectedPump.visible = true; miner.tool = 'pump'; }
-		else { gBoard.info_text.text = 'There is no water nearby to pump!'; }
+		else { showMessage('There is no water nearby to pump!', 'error'); }
 	}
 }
 
@@ -162,7 +167,7 @@ function eventHandlers() {
 		if(key == 74 && toolsEnabled == true) { setSelected(e, 'jackhammer'); }
 		if(key == 68 && toolsEnabled == true) { setSelected(e, 'dynamite'); }
 		if([80, 87, 74, 68].indexOf(key) > 0 && toolsEnabled == false) {
-			gBoard.info_text.text = 'A tool cannot be selected at this time!';
+			showMessage('A tool cannot be selected at this time!', 'error');
 		}
 	});
 }

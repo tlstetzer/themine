@@ -8,6 +8,7 @@ function soundInit() {
 		{ id: 'error', src: 'error.mp3' },
 		{ id: 'explosion', src: 'explosion.mp3' },
 		{ id: 'jackhammer', src: 'jackhammer.mp3' },
+		{ id: 'pickaxe', src: 'pickaxe.wav' },
 		{ id: 'radar', src: 'Windows Information Bar.wav' },
 		{ id: 'water', src: 'water.mp3' }
 	];
@@ -25,7 +26,7 @@ function stopEffect(id) {
 	createjs.Sound.stop();
 }
 
-function showMessage(msg, id) {
-	if(id != '') { soundEffect(id, 0, .5); }
+function showMessage(msg, id, vol=.5) {
+	if(id != '') { soundEffect(id, 0, vol); }
 	gBoard.info_text.text = msg;
 }

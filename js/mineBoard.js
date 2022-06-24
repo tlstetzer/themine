@@ -129,11 +129,12 @@ function saltMine(loop) {
 		if(loop > 0) { saltMine(loop - 1); }
 		else {
 			stopEffect('radar');
-			setTimeout(function() { showMessage('Begin Mining!', 'begin'); }, 5);
-			exitBank();
-//			exitElevator();		// debugging
+			setTimeout(function() { showMessage('Begin Mining!', 'begin', .1); }, 5);
+//			exitBank();
+			exitElevator();		// debugging
 		}
-	}, 20);
+//	}, 20);
+	}, 1);
 }
 
 function getPiece(id) {
@@ -143,6 +144,15 @@ function getPiece(id) {
 function getByLevel(level) {
 	var piece = aBoard.find(p => p.row == level && p.col == 33);
 	return piece.ID;
+}
+
+function movePiece(piece, btn) {
+	gBoard.info_text.text = '';
+	var facing = '';
+	if(btn == 'left' || button == 'right') { facing = btn; }
+	
+	miner.setBoardPosition(boardMiner, piece.minerX, piece.minerY, facing);
+	miner.piece = piece.ID;
 }
 
 function moveAllowed(piece) {
@@ -161,8 +171,21 @@ function moveAllowed(piece) {
 	}
 }
 
-function checkAction(newPiece, btn) {
-	
+function checkAction(piece, btn) {
+	var rnd = random(15) - 1;
+	if(rnd == 3) {
+		// spring
+	} else if(rnd == 4) {
+		// footing
+	} else if(rnd == 6 || rnd ==7) {
+		// cave in
+	} else if(rnd == 8 || rnd ==9) {
+		// gold
+	} else if(rnd > 9) {
+		// rock
+	} else {
+		// sandstone
+	}
 }
 
 function waterNearby() {

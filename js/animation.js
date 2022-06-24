@@ -220,19 +220,6 @@ function exitElevator() {
 
 }
 
-function moveMiner(piece, tool) {
-	miner.piece = piece.ID;
-	
-	if(tool == '') {
-		boardMiner.x = piece.mx;
-		boardMiner.y = piece.my;
-	} else {
-		// animate using tool
-		boardMiner.x = piece.mx;
-		boardMiner.y = piece.my;
-	}
-}
-
 function setTool(btn) {
 	// reset background
 	var x = animMiner.x;
@@ -260,4 +247,16 @@ function setTool(btn) {
 		miner.pos = 'dynamitePos';
 		miner.tool = 'dynamite'; 
 	}
+}
+
+function playPickaxe(piece, btn) {
+	disableButtons('all');
+	animMiner.gotoAndPlay('raisePickaxe');
+	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 800);
+	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 1400);
+	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 1900);
+	setTimeout(function() { 
+		enableButtons('all');
+		movePiece(piece, btn);
+	}, 2500);
 }
