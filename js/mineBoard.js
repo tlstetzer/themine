@@ -128,8 +128,8 @@ function saltMine(loop) {
 		piece.type = 'action';
 		if(loop > 0) { saltMine(loop - 1); }
 		else {
-			gBoard.info_text.text = 'Begin Mining!'; 
 			stopEffect('radar');
+			setTimeout(function() { showMessage('Begin Mining!', 'begin'); }, 5);
 			exitBank();
 //			exitElevator();		// debugging
 		}
@@ -143,4 +143,39 @@ function getPiece(id) {
 function getByLevel(level) {
 	var piece = aBoard.find(p => p.row == level && p.col == 33);
 	return piece.ID;
+}
+
+function moveAllowed(piece) {
+	// elevator shaft
+	if(piece.type == 'shaft' && miner.level != piece.row) {
+		showMessage('The elevator is not on this level!', 'error');
+		return false;
+	} else if (piece.type == 'water' && miner.tool != 'pump') {
+		showMessage('You must pump out the water before you can move in that direction!', 'error');
+		return false;
+	} else if (piece.type == 'rock' && (miner.tool != 'jackhammer' || miner.tool != 'dynamite')) {
+		showMessage('Solid Rock, you can only use the Jackhammer or Dynamite!', 'error');
+		return false;
+	} else { 
+		return true; 
+	}
+}
+
+function checkAction(newPiece, btn) {
+	
+}
+
+function waterNearby() {
+	var piece = getPiece(miner.piece);
+	var pieceLeft = getPiece(piece.idLeft);
+	var pieceRight = getPiece(piece.idRight);
+	var pieceUp = getPiece(piece.idDown);
+	var pieceDown = getPiece(piece.idUp);
+	
+	if(piece.type == 'water') { return true; }
+	else if(pieceLeft.type == 'water') { return true; }
+	else if(pieceRight.type == 'water') { return true; }
+	else if(pieceUp.type == 'water') { return true; }
+	else if(pieceDown.type == 'water') { return true; }
+	else { return foundWater; }
 }
