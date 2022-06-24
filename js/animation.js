@@ -257,6 +257,20 @@ function playPickaxe(piece, btn) {
 	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 1900);
 	setTimeout(function() { 
 		enableButtons('all');
+		miner.bank = miner.bank - 5;
 		movePiece(piece, btn);
 	}, 2500);
+}
+
+function playJackhammer(piece, btn) {
+	disableButtons('all');
+	animMiner.gotoAndPlay('drill');
+	soundEffect('jackhammer', 0, .2);
+	setTimeout(function() { stopEffect(); }, 1500);
+	
+	setTimeout(function() { 
+		enableButtons('all');
+		miner.bank = miner.bank - 35;
+		movePiece(piece, btn);
+	}, 2000);
 }

@@ -128,7 +128,7 @@ function saltMine(loop) {
 		piece.type = 'action';
 		if(loop > 0) { saltMine(loop - 1); }
 		else {
-			stopEffect('radar');
+			stopEffect();
 			setTimeout(function() { showMessage('Begin Mining!', 'begin', .1); }, 5);
 //			exitBank();
 			exitElevator();		// debugging

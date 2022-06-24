@@ -9,6 +9,7 @@ function soundInit() {
 		{ id: 'explosion', src: 'explosion.mp3' },
 		{ id: 'jackhammer', src: 'jackhammer.mp3' },
 		{ id: 'pickaxe', src: 'pickaxe.wav' },
+		{ id: 'pump', src: 'pump.mp3' },
 		{ id: 'radar', src: 'Windows Information Bar.wav' },
 		{ id: 'water', src: 'water.mp3' }
 	];
@@ -22,7 +23,7 @@ function soundEffect(id, loop, vol) {
 	createjs.Sound.play(id, props);
 }
 
-function stopEffect(id) {
+function stopEffect() {
 	createjs.Sound.stop();
 }
 
