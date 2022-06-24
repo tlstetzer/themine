@@ -27,29 +27,25 @@ function makeMove(btn) {
 	stopButton = false;
 	cButton = btn;
 
-	// in the elevator at town level
 	if(miner.pos == 'townIn') {
+		// in the elevator at town level
 		if(btn == 'down') { exitTown(); }
 		else if(btn == 'left') { enterBank(); }
 		else { showMessage('You cannot move in that direction!', 'error');  }
-	}
-
-	// in the elevator at tunnel level
-	if(miner.pos == 'tunnelIn') {
+	} else if(miner.pos == 'tunnelIn') {
+		// in the elevator at tunnel level
 		if(btn == 'up' || btn == 'down') { exitTunnel(btn); }
 		else if(btn == 'left') { exitElevator(); }
 		else { showMessage('You cannot move in that direction!', 'error');  }
-	}
-
-	// in the elevator shaft
-	if(miner.pos == 'elev') {
+	} else if(miner.pos == 'elev') {
+		// in the elevator shaft
 		if(btn == 'up' || btn == 'down') { elevLevel(btn); }
 		else if(btn == 'left') { showMessage('You must stop the elevator before you can exit!', 'error'); }
 		else { showMessage('You cannot move in that direction!', 'error');  }
+	} else { 
+		// inside the mine
+		moveInMine(btn); 
 	}
-	
-	// inside the mine
-	if(miner.pos == 'tunnelEnd') { moveInMine(btn); }
 }
 
 function moveInMine(btn) {
@@ -74,8 +70,8 @@ function moveInMine(btn) {
 */
 	// debugging
 //	playPickaxe(newPiece, btn);
-	playJackhammer(newPiece, btn);
-//	playPump(newPiece, btn);
+//	playJackhammer(newPiece, btn);
+	playPump(newPiece, btn);
 //	playDynamite(newPiece, btn);
 }
 
@@ -125,7 +121,7 @@ function enableButtons(type) {
 	}
 }
 
-function setSelected(e, btn) {
+function setSelected(btn) {
 	gPad.selectedPickaxe.visible = false;
 	gPad.selectedPump.visible = false;
 	gPad.selectedJackhammer.visible = false;

@@ -255,6 +255,8 @@ function playPickaxe(piece, btn) {
 	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 800);
 	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 1400);
 	setTimeout(function() { soundEffect('pickaxe', 0, .2); }, 1900);
+	
+	// move piece
 	setTimeout(function() { 
 		enableButtons('all');
 		miner.bank = miner.bank - 5;
@@ -268,9 +270,49 @@ function playJackhammer(piece, btn) {
 	soundEffect('jackhammer', 0, .2);
 	setTimeout(function() { stopEffect(); }, 1500);
 	
+	// move piece
 	setTimeout(function() { 
 		enableButtons('all');
 		miner.bank = miner.bank - 35;
 		movePiece(piece, btn);
 	}, 2000);
+}
+
+function playPump(piece, btn) {
+	disableButtons('all');
+	
+	animMiner.gotoAndPlay('turnOn');
+	createjs.Tween.get(anim).wait(1100).call(function() {
+		animMiner.gotoAndStop('stand');
+		soundEffect('pump', 0, .2);
+		animMiner.gotoAndPlay('pumpRunning');
+		
+		// lower water
+		createjs.Tween.get(anim.water_mc).wait(500).to({y: 300}, 3000).on('complete', function() {
+			animMiner.gotoAndPlay('turnOn');
+			createjs.Tween.get(anim).wait(600).call(function() { 
+				stopEffect(); 
+				animMiner.gotoAndPlay('fadeOut');
+			});
+		});
+	});
+
+	// walk to end
+	createjs.Tween.get(animMiner).wait(6500).call(function() {
+		// walk to end
+		animMiner.gotoAndPlay('walk');
+		createjs.Tween.get(animMiner).to({x: miner.tunnelEnd.X, y: miner.tunnelEnd.Y}, 3000).on('complete', function() {
+			animMiner.gotoAndStop('stand');
+			miner.setPosition(animMiner, 'tunnelEnd');
+			enableButtons('all');
+			setSelected('pickaxe');
+		});
+	});
+	
+	// move piece
+	setTimeout(function() { 
+		enableButtons('all');
+		miner.bank = miner.bank - 25;
+		movePiece(piece, btn);
+	}, 2500);
 }

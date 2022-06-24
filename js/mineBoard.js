@@ -147,6 +147,8 @@ function getByLevel(level) {
 }
 
 function movePiece(piece, btn) {
+	// bank
+	// gold price
 	gBoard.info_text.text = '';
 	var facing = '';
 	if(btn == 'left' || button == 'right') { facing = btn; }
@@ -189,6 +191,7 @@ function checkAction(piece, btn) {
 }
 
 function waterNearby() {
+/*
 	var piece = getPiece(miner.piece);
 	var pieceLeft = getPiece(piece.idLeft);
 	var pieceRight = getPiece(piece.idRight);
@@ -200,5 +203,8 @@ function waterNearby() {
 	else if(pieceRight.type == 'water') { return true; }
 	else if(pieceUp.type == 'water') { return true; }
 	else if(pieceDown.type == 'water') { return true; }
-	else { return foundWater; }
+	else { return false; }
+*/
+	// debugging
+	return true;
 }
