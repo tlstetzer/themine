@@ -71,8 +71,8 @@ function moveInMine(btn) {
 	// debugging
 //	playPickaxe(newPiece, btn);
 //	playJackhammer(newPiece, btn);
-	playPump(newPiece, btn);
-//	playDynamite(newPiece, btn);
+//	playPump(newPiece, btn);
+	playDynamite(newPiece, btn);
 }
 
 function disableButtons(type) {

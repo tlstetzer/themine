@@ -299,20 +299,42 @@ function playPump(piece, btn) {
 
 	// walk to end
 	createjs.Tween.get(animMiner).wait(6500).call(function() {
-		// walk to end
 		animMiner.gotoAndPlay('walk');
 		createjs.Tween.get(animMiner).to({x: miner.tunnelEnd.X, y: miner.tunnelEnd.Y}, 3000).on('complete', function() {
 			animMiner.gotoAndStop('stand');
 			miner.setPosition(animMiner, 'tunnelEnd');
-			enableButtons('all');
 			setSelected('pickaxe');
+	
+			// move piece
+			setTimeout(function() { 
+				enableButtons('all');
+				miner.bank = miner.bank - 25;
+				movePiece(piece, btn);
+			}, 1000);
 		});
 	});
+}
+
+function playDynamite(piece, btn) {
+	disableButtons('all');
+	anim.gotoAndPlay('plunge');
+	soundEffect('explosion', 0, .2);
+	setTimeout(function() { stopEffect(); }, 2200);
+
+	// walk to end
+	createjs.Tween.get(animMiner).wait(3000).call(function() {
+		animMiner.gotoAndPlay('walk');
+		createjs.Tween.get(animMiner).to({x: miner.tunnelEnd.X, y: miner.tunnelEnd.Y}, 3000).on('complete', function() {
+			animMiner.gotoAndStop('stand');
+			miner.setPosition(animMiner, 'tunnelEnd');
+			setSelected('pickaxe');
 	
-	// move piece
-	setTimeout(function() { 
-		enableButtons('all');
-		miner.bank = miner.bank - 25;
-		movePiece(piece, btn);
-	}, 2500);
+			// move piece
+			setTimeout(function() { 
+				enableButtons('all');
+				miner.bank = miner.bank - 80;
+				movePiece(piece, btn);
+			}, 1000);
+		});
+	});
 }
