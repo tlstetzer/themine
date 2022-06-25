@@ -3,10 +3,12 @@
 function soundInit() {
 	var audioPath = 'audio/';
 	var sounds = [
+		{ id: 'bankDeposit', src: 'bankDeposit.mp3' },
 		{ id: 'begin', src: 'begin.mp3' },
 		{ id: 'cavein', src: 'cavein.mp3' },
 		{ id: 'error', src: 'error.mp3' },
 		{ id: 'explosion', src: 'explosion.mp3' },
+		{ id: 'gold', src: 'yeehaw.mp3' },
 		{ id: 'jackhammer', src: 'jackhammer.mp3' },
 		{ id: 'pickaxe', src: 'pickaxe.wav' },
 		{ id: 'pump', src: 'pump.mp3' },

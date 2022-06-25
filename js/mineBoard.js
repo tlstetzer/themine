@@ -175,7 +175,7 @@ function checkAction(piece, btn) {
 	var rnd = random(15) - 1;
 	
 	// debugging
-	rnd = 10;
+	rnd = 8;
 	
 	if(rnd == 3) {
 		// spring
@@ -185,6 +185,11 @@ function checkAction(piece, btn) {
 		// cave in
 	} else if(rnd == 8 || rnd ==9) {
 		// gold
+		var oz = random(3);
+		miner.goldOz += oz;
+		showMessage('Found gold nugget - ' + oz + ' oz!', 'gold', vol=.5);
+		piece.setType('gold');
+		movePiece(piece, btn);
 	} else if(rnd > 9) {
 		// rock
 		piece.setType('rock');

@@ -61,7 +61,7 @@ function moveInMine(btn) {
 
 	if(piece.ID == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
-		if(newPiece.type == 'dug' || newPiece.type == 'shaft') { movePiece(newPiece, btn); }
+		if(['dug', 'gold', 'shaft'].includes(newPiece.type)) { movePiece(newPiece, btn); }
 		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
 		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
 		else if(miner.tool == 'dynamite') { playDynamite(newPiece, btn); }
