@@ -358,3 +358,27 @@ function playDynamite(piece, btn) {
 		});
 	});
 }
+
+function fallDownHole(piece, btn) {
+	setTool('');
+
+	disableButtons('all');
+	anim.gotoAndPlay('hole');
+	showMessage("Watch out - unstable footing!", 'fall', vol=.5);
+	
+	// falling out of tunnel
+	createjs.Tween.get(animMiner).wait(3000).call(function() {
+		animMiner.gotoAndStop('stand');
+		miner.setPosition(animMiner, 'tunnelEnd');
+
+		// move piece
+		setTimeout(function() { 
+			enableButtons('all');
+			var newPiece = getPiece(piece.idDown); 
+			piece.setType('hole');
+			newPiece.setType('dug');
+			movePiece(newPiece, btn);
+		}, 1000);
+	});
+
+}

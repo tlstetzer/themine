@@ -175,12 +175,13 @@ function checkAction(piece, btn) {
 	var rnd = random(15) - 1;
 	
 	// debugging
-	rnd = 8;
+	rnd = 4;
 	
 	if(rnd == 3) {
 		// spring
-	} else if(rnd == 4) {
+	} else if(rnd == 4 && piece.idDown != 'p00000') {
 		// footing
+		fallDownHole(piece, btn);
 	} else if(rnd == 6 || rnd ==7) {
 		// cave in
 	} else if(rnd == 8 || rnd ==9) {

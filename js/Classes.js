@@ -51,7 +51,7 @@ class Miner {
 		this.tunnelBelow = { X: 938, Y: 430, S: 1 };
 		this.tunnelOut = { X: 0, Y: 0, S: -1 };
 		this.tunnelIn = { X: 938, Y: 170, S: 1 };
-		
+
 		// elevator shaft
 		this.boardLeft = 0.1985;
 		this.boardRight = -0.1985;
