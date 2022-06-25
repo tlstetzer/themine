@@ -57,22 +57,21 @@ function moveInMine(btn) {
 	if(btn == 'up') { newID = piece.idUp; }
 	if(btn == 'down') { newID = piece.idDown; }
 	var newPiece = getPiece(newID);
-/*
-	if(piece.idLeft == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
+
+	if(piece.ID == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
 		if(newPiece.type == 'dug') { movePiece(newPiece, btn); }
-		else if(newPiece.type == 'action') { checkAction(newPiece, btn); }
 		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
 		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
 		else if(miner.tool == 'dynamite') { playDynamite(newPiece, btn); }
 		else { playPickaxe(newPiece, btn); }
 	}
-*/
+
 	// debugging
 //	playPickaxe(newPiece, btn);
 //	playJackhammer(newPiece, btn);
 //	playPump(newPiece, btn);
-	playDynamite(newPiece, btn);
+//	playDynamite(newPiece, btn);
 }
 
 function disableButtons(type) {

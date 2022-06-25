@@ -205,7 +205,7 @@ function exitElevator() {
 			miner.setPosition(animMiner, 'tunnelEnd');
 			miner.piece = getByLevel(elev.elevLevel);
 			enableButtons('all');
-			setSelected('', 'pickaxe');
+			setSelected('pickaxe');
 			moveInMine('left');
 		});
 	});
@@ -216,7 +216,7 @@ function exitElevator() {
 	miner.setPosition(animMiner, 'tunnelEnd');
 	miner.piece = getByLevel(1);
 	enableButtons('all');
-	setSelected('', 'pickaxe');
+	setSelected('pickaxe');
 
 }
 
@@ -229,6 +229,7 @@ function setTool(btn) {
 	animMiner.x = x;
 	animMiner.y = y;
 	animMiner.scaleX = s;
+	miner.oldTool = miner.tool;
 	
 	if(btn == 'pickaxe') { 
 		animMiner.gotoAndStop('pickaxe'); 
@@ -259,8 +260,13 @@ function playPickaxe(piece, btn) {
 	// move piece
 	setTimeout(function() { 
 		enableButtons('all');
+		animMiner.gotoAndStop('pickaxe');
 		miner.bank = miner.bank - 5;
-		movePiece(piece, btn);
+		if(piece.type == 'action') { checkAction(piece, btn) ; }
+		else {
+			piece.setType('dug');
+			movePiece(piece, btn);
+		}
 	}, 2500);
 }
 
@@ -273,8 +279,13 @@ function playJackhammer(piece, btn) {
 	// move piece
 	setTimeout(function() { 
 		enableButtons('all');
+		animMiner.gotoAndStop('jackhammer');
 		miner.bank = miner.bank - 35;
-		movePiece(piece, btn);
+		if(piece.type == 'action') { checkAction(piece, btn) ; }
+		else {
+			piece.setType('dug');
+			movePiece(piece, btn);
+		}
 	}, 2000);
 }
 
@@ -309,7 +320,11 @@ function playPump(piece, btn) {
 			setTimeout(function() { 
 				enableButtons('all');
 				miner.bank = miner.bank - 25;
-				movePiece(piece, btn);
+				if(piece.type == 'action') { checkAction(piece, btn) ; }
+				else {
+					piece.setType('dug');
+					movePiece(piece, btn);
+				}
 			}, 1000);
 		});
 	});
@@ -333,7 +348,11 @@ function playDynamite(piece, btn) {
 			setTimeout(function() { 
 				enableButtons('all');
 				miner.bank = miner.bank - 80;
-				movePiece(piece, btn);
+				if(piece.type == 'action') { checkAction(piece, btn) ; }
+				else {
+					piece.setType('dug');
+					movePiece(piece, btn);
+				}
 			}, 1000);
 		});
 	});

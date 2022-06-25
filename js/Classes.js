@@ -16,6 +16,11 @@ class Piece {
 		this.type = type;
 		this.symbol;
 	}
+	
+	setType(type) {
+		this.symbol.gotoAndStop(type); 
+		this.type = type;
+	}
 }
 
 class Miner {
@@ -26,6 +31,7 @@ class Miner {
 		
 		this.piece = 'p0000'; 
 		this.tool = 'none';
+		this.oldTool = 'none';
 		this.pos = 'bank';
 		
 		// locations
