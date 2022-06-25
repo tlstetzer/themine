@@ -147,18 +147,17 @@ function getByLevel(level) {
 }
 
 function movePiece(piece, btn) {
-	// bank
-	// gold price
 	var facing = '';
 	if(btn == 'left' || btn == 'right') { facing = btn; }
 	
 	miner.setBoardPosition(boardMiner, piece.minerX, piece.minerY, facing);
 	miner.piece = piece.ID;
+	goldPrice();
 }
 
 function moveAllowed(piece) {
 	// elevator shaft
-	if(piece.type == 'shaft' && miner.level != piece.row) {
+	if(piece.type == 'shaft' && boardElev.elevLevel != piece.row) {
 		showMessage('The elevator is not on this level!', 'error');
 		return false;
 	} else if (piece.type == 'water' && miner.tool != 'pump') {

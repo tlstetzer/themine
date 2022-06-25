@@ -211,6 +211,7 @@ function exitElevator() {
 	});
 */
 	// debugging
+	boardElev.elevLevel = 1;
 	boardElev.y = elev.elevY[1];
 	boardMiner.y = elev.elevY[1];
 	miner.setPosition(animMiner, 'tunnelEnd');

@@ -1,7 +1,8 @@
 /* eslint no-unused-vars: 0 no-undef: 0*/
 
 // Global Variables
-var miner, elev, board, gPad, gBoard, stopButton, cButton, toolsEnabled			
+var miner, elev, board, gPad, gBoard, stopButton, cButton, toolsEnabled;
+const cFormat = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD', minimumFractionDigits: 0 });
 
 function gameInit() {
 	gPad = exportRoot.gamepad_mc;
@@ -60,7 +61,7 @@ function moveInMine(btn) {
 
 	if(piece.ID == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
-		if(newPiece.type == 'dug') { movePiece(newPiece, btn); }
+		if(newPiece.type == 'dug' || newPiece.type == 'shaft') { movePiece(newPiece, btn); }
 		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
 		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
 		else if(miner.tool == 'dynamite') { playDynamite(newPiece, btn); }
@@ -171,4 +172,26 @@ function eventHandlers() {
 			showMessage('A tool cannot be selected at this time!', 'error');
 		}
 	});
+}
+
+function goldPrice() {
+	// check if game is over
+	if(miner.bank <= 0) { gameLost(); }
+	if(miner.bank >= 10000) { gameWon(); }
+	
+	// set gold price
+	var gp = miner.goldPrice;
+	var chg = random(40) - 20;
+	if(gp > 1000) chg = -Math.abs(chg);
+	if(gp < 200) chg = Math.abs(chg);
+	miner.goldPrice += chg;
+	
+	// update signs
+	var priceSign = cFormat.format(miner.goldPrice.toFixed()) + ' oz'; 
+	var goldSign = miner.goldOz + ' oz';
+	var bankSign = cFormat.format(miner.bankTotal.toFixed()); 
+	
+	gPad.txtPrice.text = priceSign.padStart(9, ' ');
+	gPad.txtGold.text = goldSign.padStart(6, ' ');
+	gPad.txtBank.text = bankSign.padStart(10, ' ');
 }
