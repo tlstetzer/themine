@@ -175,7 +175,7 @@ function checkAction(piece, btn) {
 	var rnd = random(15) - 1;
 	
 	// debugging
-	rnd = 4;
+	rnd = 7;
 	
 	if(rnd == 3) {
 		// spring
@@ -184,6 +184,7 @@ function checkAction(piece, btn) {
 		fallDownHole(piece, btn);
 	} else if(rnd == 6 || rnd ==7) {
 		// cave in
+		playCaveIn(piece, btn);
 	} else if(rnd == 8 || rnd ==9) {
 		// gold
 		var oz = random(3);

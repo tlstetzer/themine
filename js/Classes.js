@@ -49,7 +49,7 @@ class Miner {
 		// elevator tunnel
 		this.tunnelAbove = { X: 938, Y: -115, S: 1 };
 		this.tunnelBelow = { X: 938, Y: 430, S: 1 };
-		this.tunnelOut = { X: 0, Y: 0, S: -1 };
+		this.tunnelOut = { X: 828, Y: 170, S: -1 };
 		this.tunnelIn = { X: 938, Y: 170, S: 1 };
 
 		// elevator shaft

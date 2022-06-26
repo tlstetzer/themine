@@ -59,7 +59,7 @@ function moveInMine(btn) {
 	if(btn == 'down') { newID = piece.idDown; }
 	var newPiece = getPiece(newID);
 
-	if(piece.ID == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
+	if(piece.ID == 'p00000' || newPiece.type == 'cavein') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
 		if(['dug', 'gold', 'shaft'].includes(newPiece.type)) { movePiece(newPiece, btn); }
 		else if(newPiece.type == 'hole') { fallDownHole(newPiece, btn); }

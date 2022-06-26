@@ -361,7 +361,6 @@ function playDynamite(piece, btn) {
 
 function fallDownHole(piece, btn) {
 	setTool('');
-
 	disableButtons('all');
 	anim.gotoAndPlay('hole');
 	showMessage("Watch out - unstable footing!", 'fall', vol=.5);
@@ -380,5 +379,60 @@ function fallDownHole(piece, btn) {
 			movePiece(newPiece, btn);
 		}, 1000);
 	});
+}
 
+function playCaveIn(piece, btn) {
+	var lostGold = false;
+	if(random(4) == 3 && miner.goldOz > 0) { lostGold = true; }
+	if(lostGold == true) { showMessage("Cave In - lost all of your gold!", 'cavein', vol=.5); }
+	else { showMessage("Watch out - cave in!", 'cavein', vol=.5); }
+	
+	setTool('');
+	disableButtons('all');
+	anim.gotoAndPlay('caveIn');
+
+	createjs.Tween.get(animMiner).wait(2200).call(function() {
+		stopEffect();
+		animMiner.gotoAndPlay('walk');
+
+		// walk to end
+		createjs.Tween.get(animMiner).to({x: miner.tunnelEnd.X, y: miner.tunnelEnd.Y}, 3000).on('complete', function() {
+			animMiner.gotoAndStop('stand');
+			miner.setPosition(animMiner, 'tunnelEnd');
+			enableButtons('all');
+
+			setTimeout(function() { 
+				// cave in other pieces
+				var aPieces = [];
+				for(var r=-1; r<2; r++) {
+					var row = random(3) + 40 * r;
+					for(var c=-2; c<3; c++) {
+						var id = piece.ID.slice(-5);
+						var newID = id - c + row;
+						aPieces.push('p' + newID);
+					}
+				}
+				
+				caveInPiece(aPieces, 14);
+
+				// move piece
+				var newPiece = getPiece(piece.idRight);
+				piece.setType('cavein');
+				newPiece.setType('dug');
+				movePiece(newPiece, btn);
+			}, 1000);
+		});
+	});
+}
+
+function caveInPiece(aPieces, loop) {
+	setTimeout(function() {
+		var pID = aPieces[loop];
+		var cPiece = getPiece(aPieces[loop]);
+		if(['action', 'dug', 'water'].includes(cPiece.type)) {
+			soundEffect('radar', 0, 0.5);
+			cPiece.setType('start');
+		}
+		if(loop > 0) { caveInPiece(aPieces, loop - 1); }
+	}, 200);
 }
