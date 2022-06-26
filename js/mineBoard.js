@@ -175,10 +175,11 @@ function checkAction(piece, btn) {
 	var rnd = random(15) - 1;
 	
 	// debugging
-	rnd = 7;
+//	rnd = 3;
 	
 	if(rnd == 3) {
 		// spring
+		playSpring(piece, btn);
 	} else if(rnd == 4 && piece.idDown != 'p00000') {
 		// footing
 		fallDownHole(piece, btn);
@@ -210,7 +211,6 @@ function checkAction(piece, btn) {
 }
 
 function waterNearby() {
-/*
 	var piece = getPiece(miner.piece);
 	var pieceLeft = getPiece(piece.idLeft);
 	var pieceRight = getPiece(piece.idRight);
@@ -223,7 +223,7 @@ function waterNearby() {
 	else if(pieceUp.type == 'water') { return true; }
 	else if(pieceDown.type == 'water') { return true; }
 	else { return false; }
-*/
+
 	// debugging
-	return true;
+//	return true;
 }

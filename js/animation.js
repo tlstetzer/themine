@@ -262,7 +262,9 @@ function playPickaxe(piece, btn) {
 	setTimeout(function() { 
 		enableButtons('all');
 		animMiner.gotoAndStop('pickaxe');
-		miner.bank = miner.bank - 5;
+		miner.bankTotal -= 5;
+		goldPrice();
+		
 		if(piece.type == 'action') { checkAction(piece, btn) ; }
 		else {
 			piece.setType('dug');
@@ -281,7 +283,9 @@ function playJackhammer(piece, btn) {
 	setTimeout(function() { 
 		enableButtons('all');
 		animMiner.gotoAndStop('jackhammer');
-		miner.bank = miner.bank - 35;
+		miner.bankTotal -= 35;
+		goldPrice();
+		
 		if(piece.type == 'action') { checkAction(piece, btn) ; }
 		else {
 			piece.setType('dug');
@@ -305,6 +309,7 @@ function playPump(piece, btn) {
 			createjs.Tween.get(anim).wait(600).call(function() { 
 				stopEffect(); 
 				animMiner.gotoAndPlay('fadeOut');
+				if(piece.type == 'water') { piece.setType('dug'); }
 			});
 		});
 	});
@@ -320,8 +325,10 @@ function playPump(piece, btn) {
 			// move piece
 			setTimeout(function() { 
 				enableButtons('all');
-				miner.bank = miner.bank - 25;
-				if(piece.type == 'action') { checkAction(piece, btn) ; }
+				miner.bankTotal -= 25;
+				goldPrice();
+		
+				if(piece.type == 'action') { checkAction(piece, btn); }
 				else {
 					piece.setType('dug');
 					movePiece(piece, btn);
@@ -348,7 +355,9 @@ function playDynamite(piece, btn) {
 			// move piece
 			setTimeout(function() { 
 				enableButtons('all');
-				miner.bank = miner.bank - 80;
+				miner.bankTotal -= 80;
+				goldPrice();
+		
 				if(piece.type == 'action') { checkAction(piece, btn) ; }
 				else {
 					piece.setType('dug');
@@ -369,6 +378,7 @@ function fallDownHole(piece, btn) {
 	createjs.Tween.get(animMiner).wait(3000).call(function() {
 		animMiner.gotoAndStop('stand');
 		miner.setPosition(animMiner, 'tunnelEnd');
+		setSelected('pickaxe');
 
 		// move piece
 		setTimeout(function() { 
@@ -377,6 +387,7 @@ function fallDownHole(piece, btn) {
 			piece.setType('hole');
 			newPiece.setType('dug');
 			movePiece(newPiece, btn);
+			goldPrice();
 		}, 1000);
 	});
 }
@@ -384,7 +395,10 @@ function fallDownHole(piece, btn) {
 function playCaveIn(piece, btn) {
 	var lostGold = false;
 	if(random(4) == 3 && miner.goldOz > 0) { lostGold = true; }
-	if(lostGold == true) { showMessage("Cave In - lost all of your gold!", 'cavein', vol=.5); }
+	if(lostGold == true) { 
+		showMessage("Cave In - lost all of your gold!", 'cavein', vol=.5); 
+		miner.goldOz = 0;
+	}
 	else { showMessage("Watch out - cave in!", 'cavein', vol=.5); }
 	
 	setTool('');
@@ -399,6 +413,7 @@ function playCaveIn(piece, btn) {
 		createjs.Tween.get(animMiner).to({x: miner.tunnelEnd.X, y: miner.tunnelEnd.Y}, 3000).on('complete', function() {
 			animMiner.gotoAndStop('stand');
 			miner.setPosition(animMiner, 'tunnelEnd');
+			setSelected('pickaxe');
 			enableButtons('all');
 
 			setTimeout(function() { 
@@ -420,19 +435,68 @@ function playCaveIn(piece, btn) {
 				piece.setType('cavein');
 				newPiece.setType('dug');
 				movePiece(newPiece, btn);
+				miner.bankTotal -= parseInt(random(50) * miner.bankTotal / 100);
+				goldPrice();
 			}, 1000);
 		});
 	});
 }
 
+function playSpring(piece, btn) {
+	setTool('');
+	disableButtons('all');
+	anim.gotoAndPlay('spring');
+	showMessage("Underground Spring - mine is flooding!", 'water', vol=.5);
+	
+	createjs.Tween.get(animMiner).wait(3000).call(function() {
+		animMiner.gotoAndStop('stand');
+		stopEffect();
+		
+		setTimeout(function() {
+			// flood mine
+			var aPieces = [];
+			var flooded = 0;
+			var idNo = 'p' + piece.ID.slice(-5);
+			piece.setType('water');
+			movePiece(piece, btn);
+			
+			aBoard.forEach(function(bp) {
+				if(bp.ID > idNo && bp.type == 'dug' && flooded < 41) {
+					aPieces.push(bp.ID);
+					flooded++;
+				}
+			});
+			
+			if(aPieces.length > 0) {
+				floodPieces(aPieces, 0, piece, btn);
+			} else {
+				setTimeout(function() { playPump(piece, btn); }, 1000);
+			}
+			
+			miner.bankTotal -= 75;
+		}, 1000);
+	});
+}
+
 function caveInPiece(aPieces, loop) {
 	setTimeout(function() {
-		var pID = aPieces[loop];
 		var cPiece = getPiece(aPieces[loop]);
 		if(['action', 'dug', 'water'].includes(cPiece.type)) {
 			soundEffect('radar', 0, 0.5);
 			cPiece.setType('start');
 		}
 		if(loop > 0) { caveInPiece(aPieces, loop - 1); }
+	}, 200);
+}
+
+function floodPieces(aPieces, loop, piece, btn) {
+	setTimeout(function() {
+		var wPiece = getPiece(aPieces[loop]);
+		soundEffect('radar', 0, 0.5);
+		wPiece.setType('water');
+		if(loop < aPieces.length - 1) { floodPieces(aPieces, loop + 1, piece, btn); }
+		else { 
+			setTimeout(function() { playPump(piece, btn); }, 1000);
+		}
 	}, 200);
 }
