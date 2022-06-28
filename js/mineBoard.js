@@ -129,12 +129,11 @@ function saltMine(loop) {
 		if(loop > 0) { saltMine(loop - 1); }
 		else {
 			stopEffect();
-			setTimeout(function() { showMessage('Begin Mining!', 'begin', .1); }, 5);
-//			exitBank();
-			exitElevator();		// debugging
+			exitBank();
+//			exitElevator();		// debugging
 		}
-//	}, 20);
-	}, 1);
+	}, 5);
+//	}, 1);
 }
 
 function getPiece(id) {
@@ -157,7 +156,7 @@ function movePiece(piece, btn) {
 
 function moveAllowed(piece) {
 	// elevator shaft
-	if(piece.type == 'shaft' && boardElev.elevLevel != piece.row) {
+	if(piece.type == 'shaft' && elev.elevLevel != piece.row) {
 		showMessage('The elevator is not on this level!', 'error');
 		return false;
 	} else if (piece.type == 'water' && miner.tool != 'pump') {

@@ -23,6 +23,7 @@ function animationInit() {
 
 /* exit bank and enter elevator */
 function exitBank() {
+/*
 	animMiner.gotoAndPlay('walk');
 	anim.town_mc.gotoAndPlay('door');
 	
@@ -35,60 +36,20 @@ function exitBank() {
 			animMiner.gotoAndPlay('walk');
 			
 			// enter elevator
-			createjs.Tween.get(animMiner).to({x: miner.townIn.X-50, y: miner.townIn.Y}, 500).on('complete', function() {
+			createjs.Tween.get(animMiner).to({x: miner.townIn.X, y: miner.townIn.Y}, 500).on('complete', function() {
 				animMiner.gotoAndStop('stand');
 				miner.setPosition(animMiner, 'townIn');
 				townElev.gotoAndPlay('closeDoor');
 				enableButtons('buttons');
-				
-				if(miner.bankTotal == 1000 && miner.goldPrice == 600) {
-					showMessage('Begin Mining!', 'begin', .1); 
-				}
 			});
 		});
 	});
-/*
+*/
 	// debugging
 	miner.setPosition(animMiner, 'townIn'); 	
 	animMiner.gotoAndStop('stand');
 	enableButtons('buttons');
-*/
-}
 
-/* exit elevator and enter bank */
-function enterBank() {
-	disableButtons('all');
-
-	townElev.gotoAndPlay('openDoor');
-	createjs.Tween.get(animMiner).wait(500).call(function() {
-		// walk to end
-		animMiner.gotoAndPlay('walk');
-		townElev.gotoAndPlay('closeDoor');
-		
-		// open bank door
-		createjs.Tween.get(animMiner).wait(1000).call(function() {
-			anim.town_mc.gotoAndPlay('door');
-		});
-		
-		// walk to bank
-		createjs.Tween.get(animMiner).to({x: miner.bank.X+50, y: miner.bank.Y}, 2000).on('complete', function() {
-			animMiner.gotoAndStop('stand');
-			miner.setPosition(animMiner, 'bank');
-			soundEffect('bankDeposit', 0, .5);
-			
-			// exit bank
-			setTimeout(function() { 
-				stopEffect(); 
-				exitBank();
-				
-				// update bank
-				var gold = miner.goldOz * miner.goldPrice;
-				miner.bankTotal += gold;
-				miner.goldOz = 0;
-				goldPrice();
-			}, 2500);
-		});
-	});
 }
 
 /* lower elevator from town and start elevator in shaft */
@@ -130,7 +91,7 @@ function arriveTunnel(dir) {
 	disableButtons('all'); 
 	var elevY = elev.inTunnel.Y;
 	var minerY = miner.tunnelIn.Y;
-
+/*	
 	// move miner into tunnel elevator
 	if(dir == 'down') { miner.setPosition(animMiner, 'tunnelAbove'); } 
 	else { miner.setPosition(animMiner, 'tunnelBelow'); }
@@ -146,13 +107,13 @@ function arriveTunnel(dir) {
 	createjs.Tween.get(animMiner).to({y: minerY}, 1000).on('complete', function() {
 		miner.setPosition(animMiner, 'tunnelIn');
 	});
-/*	
+*/	
 	// debugging
 	enableButtons('buttons');
 	stopButton = false;
 	elev.setPosition(townElev, 'inTunnel');
 	miner.setPosition(animMiner, 'tunnelIn');
-*/	
+
 }
 
 /* raise or lower elevator out of tunnel */
@@ -205,15 +166,15 @@ function elevLevel(dir) {
 		arriveTown(dir);
 	} else {
 		// next level
-//		var eStartY = boardElev.y;			// debugging
-//		var mStartY = boardMiner.y;			// debugging
+		var eStartY = boardElev.y;			// debugging
+		var mStartY = boardMiner.y;			// debugging
 		if(dir == 'down') { elev.elevLevel++; }
 		if(dir == 'up')   { elev.elevLevel--; }
 		var level = elev.elevLevel;
 		var elevY = elev.elevY[level];
 		
-//		var elevatorY = boardElev.y;		// debugging
-//		var minerY = boardMiner.y;			// debugging
+		var elevatorY = boardElev.y;		// debugging
+		var minerY = boardMiner.y;			// debugging
 
 		// move elevator
 		createjs.Tween.get(boardElev).to({y: elevY}, 1000).on('complete', function() { 
@@ -222,13 +183,16 @@ function elevLevel(dir) {
 		});
 		
 		// move miner
-		createjs.Tween.get(boardMiner).to({y: elevY }, 1000);
+		createjs.Tween.get(boardMiner).to({y: elevY }, 1000).on('complete', function() { 
+			var nmY = boardMiner.y; 	// debugging
+			var d = 'debugging';
+		});
 	}
 }
 
 /* exit elevator in tunnel */
 function exitElevator() {
-
+/*	
 	disableButtons('all');
 
 	tunnelElev.gotoAndPlay('openDoor');
@@ -245,7 +209,7 @@ function exitElevator() {
 			moveInMine('left');
 		});
 	});
-/*	
+*/
 	// debugging
 	boardElev.elevLevel = 1;
 	boardElev.y = elev.elevY[1];
@@ -254,7 +218,7 @@ function exitElevator() {
 	miner.piece = getByLevel(1);
 	enableButtons('all');
 	setSelected('pickaxe');
-*/
+
 }
 
 function setTool(btn) {
@@ -298,7 +262,7 @@ function playPickaxe(piece, btn) {
 	setTimeout(function() { 
 		enableButtons('all');
 		animMiner.gotoAndStop('pickaxe');
-		miner.bankTotal -= 5;
+		miner.bank -= 5;
 		goldPrice();
 		
 		if(piece.type == 'action') { checkAction(piece, btn) ; }
@@ -318,8 +282,8 @@ function playJackhammer(piece, btn) {
 	// move piece
 	setTimeout(function() { 
 		enableButtons('all');
-		setSelected('pickaxe');
-		miner.bankTotal -= 35;
+		animMiner.gotoAndStop('jackhammer');
+		miner.bank -= 35;
 		goldPrice();
 		
 		if(piece.type == 'action') { checkAction(piece, btn) ; }
@@ -345,7 +309,6 @@ function playPump(piece, btn) {
 			createjs.Tween.get(anim).wait(600).call(function() { 
 				stopEffect(); 
 				animMiner.gotoAndPlay('fadeOut');
-				if(piece.type == 'water') { piece.setType('dug'); }
 			});
 		});
 	});
@@ -361,10 +324,10 @@ function playPump(piece, btn) {
 			// move piece
 			setTimeout(function() { 
 				enableButtons('all');
-				miner.bankTotal -= 25;
+				miner.bank -= 25;
 				goldPrice();
 		
-				if(piece.type == 'action') { checkAction(piece, btn); }
+				if(piece.type == 'action') { checkAction(piece, btn) ; }
 				else {
 					piece.setType('dug');
 					movePiece(piece, btn);
@@ -377,8 +340,8 @@ function playPump(piece, btn) {
 function playDynamite(piece, btn) {
 	disableButtons('all');
 	anim.gotoAndPlay('plunge');
-	showMessage('Stand clear - dangerous explosion!', 'explosion', vol=.5)
-	setTimeout(function() { stopEffect(); }, 2200); 
+	soundEffect('explosion', 0, .2);
+	setTimeout(function() { stopEffect(); }, 2200);
 
 	// walk to end
 	createjs.Tween.get(animMiner).wait(3000).call(function() {
@@ -391,7 +354,7 @@ function playDynamite(piece, btn) {
 			// move piece
 			setTimeout(function() { 
 				enableButtons('all');
-				miner.bankTotal -= 80;
+				miner.bank -= 80;
 				goldPrice();
 		
 				if(piece.type == 'action') { checkAction(piece, btn) ; }
@@ -471,7 +434,7 @@ function playCaveIn(piece, btn) {
 				piece.setType('cavein');
 				newPiece.setType('dug');
 				movePiece(newPiece, btn);
-				miner.bankTotal -= parseInt(random(50) * miner.bankTotal / 100);
+				miner.bank -= parseInt(random(50) * miner.bank / 100);
 				goldPrice();
 			}, 1000);
 		});
@@ -497,7 +460,7 @@ function playSpring(piece, btn) {
 			movePiece(piece, btn);
 			
 			aBoard.forEach(function(bp) {
-				if(bp.ID > idNo && ['dug', 'gold'].includes(bp.type) && flooded < 41) {
+				if(bp.ID > idNo && bp.type == 'dug' && flooded < 41) {
 					aPieces.push(bp.ID);
 					flooded++;
 				}
@@ -509,7 +472,8 @@ function playSpring(piece, btn) {
 				setTimeout(function() { playPump(piece, btn); }, 1000);
 			}
 			
-			miner.bankTotal -= 75;
+			miner.bank -= 75;
+			goldPrice();
 		}, 1000);
 	});
 }
@@ -530,7 +494,7 @@ function floodPieces(aPieces, loop, piece, btn) {
 		var wPiece = getPiece(aPieces[loop]);
 		soundEffect('radar', 0, 0.5);
 		wPiece.setType('water');
-		if(loop < aPieces.length - 1) { floodPieces(aPieces, loop + 1, piece, btn); }
+		if(loop < aPieces.length) { floodPieces(aPieces, loop + 1, piece, btn); }
 		else { 
 			setTimeout(function() { playPump(piece, btn); }, 1000);
 		}

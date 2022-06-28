@@ -18,20 +18,24 @@ function startGame() {
 	elev = new Elev();
 	animationInit();
 	boardInit();
-	setSelected('', '');
+	setSelected('');
 	gBoard.info_text.text = 'Please wait while mine is scanned for gold!';
 	exportRoot.gotoAndStop('game');
 	drawBoard();
 }
 
 function makeMove(btn) {
+	gBoard.info_text.text = '';
 	stopButton = false;
 	cButton = btn;
 
 	if(miner.pos == 'townIn') {
 		// in the elevator at town level
 		if(btn == 'down') { exitTown(); }
-		else if(btn == 'left') { enterBank(); }
+		else if(btn == 'left') { 
+			if(miner.goldOz > 0) { enterBank(); }
+			else { showMessage("You don't have any gold to deposit!", 'error'); }
+		}
 		else { showMessage('You cannot move in that direction!', 'error');  }
 	} else if(miner.pos == 'tunnelIn') {
 		// in the elevator at tunnel level
@@ -61,7 +65,10 @@ function moveInMine(btn) {
 
 	if(piece.ID == 'p00000' || newPiece.type == 'cavein') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
-		if(['dug', 'gold', 'shaft'].includes(newPiece.type)) { movePiece(newPiece, btn); }
+		if(['dug', 'gold', 'shaft'].includes(newPiece.type)) { 
+			gBoard.info_text.text = '';
+			movePiece(newPiece, btn); 
+		}
 		else if(newPiece.type == 'hole') { fallDownHole(newPiece, btn); }
 		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
 		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
