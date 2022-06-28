@@ -42,7 +42,7 @@ function exitBank() {
 				enableButtons('buttons');
 				
 				if(miner.bankTotal == 1000 && miner.goldPrice == 600) {
-					showMessage('Begin Mining!', 'begin', .1); 
+					setTimeout(function() { showMessage('Begin Mining!', 'begin', .1); }, 500);
 				}
 			});
 		});
@@ -255,6 +255,28 @@ function exitElevator() {
 	enableButtons('all');
 	setSelected('pickaxe');
 */
+}
+
+function enterTunnelElevator(piece, btn) {
+	disableButtons('all');
+	animMiner.scaleX = -1;
+	animMiner.gotoAndPlay('walk');
+	createjs.Tween.get(animMiner).to({x: miner.tunnelOut.X, y: miner.tunnelOut.Y}, 3000).on('complete', function() {
+		animMiner.gotoAndStop('stand');
+		tunnelElev.gotoAndPlay('openDoor');
+		
+		// enter elevator
+		createjs.Tween.get(animMiner).wait(500).call(function() {
+			animMiner.gotoAndPlay('walk');
+			createjs.Tween.get(animMiner).to({x: miner.tunnelIn.X-50, y: miner.tunnelIn.Y}, 500).on('complete', function() {
+				animMiner.gotoAndStop('stand');
+				miner.setPosition(animMiner, 'tunnelIn');
+				tunnelElev.gotoAndPlay('closeDoor');
+				enableButtons('buttons');
+				movePiece(piece, btn);
+			});
+		});
+	});
 }
 
 function setTool(btn) {

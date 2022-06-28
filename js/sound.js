@@ -2,6 +2,8 @@
 
 function soundInit() {
 	var audioPath = 'audio/';
+	// elevator sound
+	// door sound
 	var sounds = [
 		{ id: 'bankDeposit', src: 'bankDeposit.mp3' },
 		{ id: 'begin', src: 'begin.mp3' },

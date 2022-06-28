@@ -65,10 +65,8 @@ function moveInMine(btn) {
 
 	if(piece.ID == 'p00000' || newPiece.type == 'cavein') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
-		if(['dug', 'gold', 'shaft'].includes(newPiece.type)) { 
-			gBoard.info_text.text = '';
-			movePiece(newPiece, btn); 
-		}
+		if(['dug', 'gold'].includes(newPiece.type)) { movePiece(newPiece, btn); }
+		else if(newPiece.type == 'shaft') { enterTunnelElevator(newPiece, btn); }
 		else if(newPiece.type == 'hole') { fallDownHole(newPiece, btn); }
 		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
 		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
