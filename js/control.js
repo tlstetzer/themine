@@ -176,8 +176,8 @@ function eventHandlers() {
 
 function goldPrice() {
 	// check if game is over
-	if(miner.bank <= 0) { gameLost(); }
-	if(miner.bank >= 10000) { gameWon(); }
+	if(miner.bankTotal <= 0) { gameLost(); }
+	if(miner.bankTotal >= 10000) { gameWon(); }
 	
 	// set gold price
 	var gp = miner.goldPrice;

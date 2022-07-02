@@ -549,3 +549,13 @@ function floodPieces(aPieces, loop, piece, btn) {
 		}
 	}, 200);
 }
+
+function gameWon() {
+	soundEffect('gold', 0, 0.5);
+	exportRoot.gotoAndStop('won');
+}
+
+function gameLost() {
+	soundEffect('error', 0, 0.5);
+	exportRoot.gotoAndStop('lost');
+}
