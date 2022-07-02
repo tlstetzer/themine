@@ -130,7 +130,6 @@ function saltMine(loop) {
 		else {
 			stopEffect();
 			exitBank();
-//			exitElevator();		// debugging
 		}
 	}, 5);
 //	}, 1);
@@ -172,10 +171,7 @@ function moveAllowed(piece) {
 
 function checkAction(piece, btn) {
 	var rnd = random(15) - 1;
-	
-	// debugging
-//	rnd = 3;
-	
+
 	if(rnd == 3) {
 		// spring
 		playSpring(piece, btn);
@@ -222,7 +218,4 @@ function waterNearby() {
 	else if(pieceUp.type == 'water') { return true; }
 	else if(pieceDown.type == 'water') { return true; }
 	else { return false; }
-
-	// debugging
-//	return true;
 }

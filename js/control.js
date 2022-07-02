@@ -73,12 +73,6 @@ function moveInMine(btn) {
 		else if(miner.tool == 'dynamite') { playDynamite(newPiece, btn); }
 		else { playPickaxe(newPiece, btn); }
 	}
-
-	// debugging
-//	playPickaxe(newPiece, btn);
-//	playJackhammer(newPiece, btn);
-//	playPump(newPiece, btn);
-//	playDynamite(newPiece, btn);
 }
 
 function disableButtons(type) {

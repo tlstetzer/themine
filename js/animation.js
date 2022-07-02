@@ -47,12 +47,6 @@ function exitBank() {
 			});
 		});
 	});
-/*
-	// debugging
-	miner.setPosition(animMiner, 'townIn'); 	
-	animMiner.gotoAndStop('stand');
-	enableButtons('buttons');
-*/
 }
 
 /* exit elevator and enter bank */
@@ -66,7 +60,7 @@ function enterBank() {
 		townElev.gotoAndPlay('closeDoor');
 		
 		// open bank door
-		createjs.Tween.get(animMiner).wait(1000).call(function() {
+		createjs.Tween.get(animMiner).wait(1200).call(function() {
 			anim.town_mc.gotoAndPlay('door');
 		});
 		
@@ -111,7 +105,7 @@ function exitTown() {
 function arriveTown() {
 	disableButtons('all');
 	miner.setPosition(animMiner, 'townBelow');  // move miner into town elevator
-	
+
 	// raise elevator
 	createjs.Tween.get(townElev).to({y: elev.inTown.Y}, 1000).on('complete', function() { 
 		elev.elevLevel = 0;
@@ -120,7 +114,7 @@ function arriveTown() {
 	});
 	
 	// raise miner
-	createjs.Tween.get(animMiner).to({y: miner.inTown.Y}, 1000).on('complete', function() {
+	createjs.Tween.get(animMiner).to({y: miner.townIn.Y}, 1000).on('complete', function() {
 		miner.setPosition(animMiner, 'townIn');
 	});
 }
@@ -132,12 +126,17 @@ function arriveTunnel(dir) {
 	var minerY = miner.tunnelIn.Y;
 
 	// move miner into tunnel elevator
-	if(dir == 'down') { miner.setPosition(animMiner, 'tunnelAbove'); } 
-	else { miner.setPosition(animMiner, 'tunnelBelow'); }
+	if(dir == 'down') { 
+		miner.setPosition(animMiner, 'tunnelAbove'); 
+		elev.setPosition(tunnelElev, 'aboveTunnel');
+	} else { 
+		miner.setPosition(animMiner, 'tunnelBelow'); 
+		elev.setPosition(tunnelElev, 'belowTunnel');
+	}
 
 	// move elevator
 	createjs.Tween.get(tunnelElev).to({y: elevY}, 1000).on('complete', function() { 
-		elev.setPosition(townElev, 'inTunnel');
+		elev.setPosition(tunnelElev, 'inTunnel');
 		stopButton = false;
 		enableButtons('buttons');
 	});
@@ -146,35 +145,35 @@ function arriveTunnel(dir) {
 	createjs.Tween.get(animMiner).to({y: minerY}, 1000).on('complete', function() {
 		miner.setPosition(animMiner, 'tunnelIn');
 	});
-/*	
+	
 	// debugging
 	enableButtons('buttons');
 	stopButton = false;
-	elev.setPosition(townElev, 'inTunnel');
+	elev.setPosition(tunnelElev, 'inTunnel');
 	miner.setPosition(animMiner, 'tunnelIn');
-*/	
+
 }
 
 /* raise or lower elevator out of tunnel */
 function exitTunnel(dir) {
 	disableButtons('all');
 	var elevY, minerY, elevP, minerP;
-	
-	if(dir == 'up') { 
-		elevY = elev.aboveTunnel.Y; 
-		minerY = miner.tunnelAbove.Y; 
-		elevP = 'aboveTunnel';
-		minerP = 'tunnelAbove';
-	} else { 
+
+	if(dir == 'down') { 
 		elevY = elev.belowTunnel.Y; 
 		minerY = miner.tunnelBelow.Y; 
 		elevP = 'belowTunnel';
 		minerP = 'tunnelBelow';
+	} else { 
+		elevY = elev.aboveTunnel.Y; 
+		minerY = miner.tunnelAbove.Y; 
+		elevP = 'aboveTunnel';
+		minerP = 'tunnelAbove';
 	}
-	
+
 	// move elevator
 	createjs.Tween.get(tunnelElev).to({y: elevY}, 1000).on('complete', function() { 
-		elev.setPosition(townElev, elevP);
+		elev.setPosition(tunnelElev, elevP);
 		stopButton = false;
 		enableButtons('buttons');
 		elevLevel(dir);
@@ -188,6 +187,7 @@ function exitTunnel(dir) {
 
 /* move elevator in shaft */
 function elevLevel(dir) {
+	
 	if(stopButton == true) {
 		// stop clicked
 		miner.elevDir = '';
@@ -198,22 +198,17 @@ function elevLevel(dir) {
 		miner.elevDir = '';
 		miner.piece = miner.shaftPiece[elev.elevLevel];
 		arriveTunnel(dir);
-	} else if(dir == 'up' && elev.elevLevel < 0) {
+	} else if(dir == 'up' && elev.elevLevel == 0) {
 		// at the top
 		miner.elevDir = '';
 		miner.piece = miner.shaftPiece[elev.elevLevel];
 		arriveTown(dir);
 	} else {
 		// next level
-//		var eStartY = boardElev.y;			// debugging
-//		var mStartY = boardMiner.y;			// debugging
 		if(dir == 'down') { elev.elevLevel++; }
 		if(dir == 'up')   { elev.elevLevel--; }
 		var level = elev.elevLevel;
-		var elevY = elev.elevY[level];
-		
-//		var elevatorY = boardElev.y;		// debugging
-//		var minerY = boardMiner.y;			// debugging
+		var elevY = elev.elevY[elev.elevLevel];
 
 		// move elevator
 		createjs.Tween.get(boardElev).to({y: elevY}, 1000).on('complete', function() { 
@@ -245,16 +240,6 @@ function exitElevator() {
 			moveInMine('left');
 		});
 	});
-/*	
-	// debugging
-	boardElev.elevLevel = 1;
-	boardElev.y = elev.elevY[1];
-	boardMiner.y = elev.elevY[1];
-	miner.setPosition(animMiner, 'tunnelEnd');
-	miner.piece = getByLevel(1);
-	enableButtons('all');
-	setSelected('pickaxe');
-*/
 }
 
 function enterTunnelElevator(piece, btn) {

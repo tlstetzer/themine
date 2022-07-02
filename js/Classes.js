@@ -42,7 +42,7 @@ class Miner {
 		this.dynamitePos = { X: 0, Y: 0, S: 1 };
 		
 		// elevator town
-		this.townBelow = { X: 1760, Y: 390, S: 1 };
+		this.townBelow = { X: 1800, Y: 390, S: 1 };
 		this.townOut = { X: 1660, Y: 180, S: -1 };
 		this.townIn = { X: 1800, Y: 183, S: 1 };
 		
@@ -93,7 +93,7 @@ class Elev{
 		this.elevLevel = 0;
 		
 		// elevator town
-		this.belowTown = { X: 1781, Y: 120 };
+		this.belowTown = { X: 1781, Y: 130 };
 		this.inTown = { X: 1781, Y: -103 };
 		
 		// elevator tunnel
@@ -102,7 +102,7 @@ class Elev{
 		this.inTunnel = { X: 918, Y: -120 };
 		
 		// elevator shaft
-		this.elevY = [-150, -130, -101, -72, -43, -14, 15, 44, 73, 102, 131, 160, 189, 218, 247, 276, 305, 334, 363]
+		this.elevY = [-159, -130, -101, -72, -43, -14, 15, 44, 73, 102, 131, 160, 189, 218, 247, 276, 305, 334, 363]
 		this.aboveShaft = { X: 446, Y: -188 };
 	}
 	
