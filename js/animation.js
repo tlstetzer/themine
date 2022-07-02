@@ -88,6 +88,7 @@ function enterBank() {
 /* lower elevator from town and start elevator in shaft */
 function exitTown() {
 	// lower elevator
+	soundEffect('elevator', -1, .5);
 	createjs.Tween.get(townElev).to({y: elev.belowTown.Y}, 1000).on('complete', function() { 
 		elev.setPosition(townElev, 'belowTown');
 		elev.elevLevel = -1;
@@ -109,7 +110,9 @@ function arriveTown() {
 	// raise elevator
 	createjs.Tween.get(townElev).to({y: elev.inTown.Y}, 1000).on('complete', function() { 
 		elev.elevLevel = 0;
+		stopEffect();
 		stopButton = false;
+		soundEffect('ding', 0, .5);
 		enableButtons('buttons');
 	});
 	
@@ -137,7 +140,9 @@ function arriveTunnel(dir) {
 	// move elevator
 	createjs.Tween.get(tunnelElev).to({y: elevY}, 1000).on('complete', function() { 
 		elev.setPosition(tunnelElev, 'inTunnel');
+		stopEffect();
 		stopButton = false;
+		soundEffect('ding', 0, .5);
 		enableButtons('buttons');
 	});
 	
@@ -158,6 +163,7 @@ function arriveTunnel(dir) {
 function exitTunnel(dir) {
 	disableButtons('all');
 	var elevY, minerY, elevP, minerP;
+	soundEffect('elevator', -1, .5); 
 
 	if(dir == 'down') { 
 		elevY = elev.belowTunnel.Y; 
@@ -187,7 +193,6 @@ function exitTunnel(dir) {
 
 /* move elevator in shaft */
 function elevLevel(dir) {
-	
 	if(stopButton == true) {
 		// stop clicked
 		miner.elevDir = '';
@@ -209,6 +214,7 @@ function elevLevel(dir) {
 		if(dir == 'up')   { elev.elevLevel--; }
 		var level = elev.elevLevel;
 		var elevY = elev.elevY[elev.elevLevel];
+		if(level %2 == 0) { soundEffect('ping', 0, .5); }
 
 		// move elevator
 		createjs.Tween.get(boardElev).to({y: elevY}, 1000).on('complete', function() { 

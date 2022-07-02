@@ -91,6 +91,7 @@ class Elev{
 		this.pos = 'inTown';
 		this.elevDir = '';
 		this.elevLevel = 0;
+		this.soundPlaying = false;
 		
 		// elevator town
 		this.belowTown = { X: 1781, Y: 130 };

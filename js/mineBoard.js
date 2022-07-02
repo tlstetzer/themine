@@ -161,6 +161,9 @@ function moveAllowed(piece) {
 	} else if (piece.type == 'water' && miner.tool != 'pump') {
 		showMessage('You must pump out the water before you can move in that direction!', 'error');
 		return false;
+	} else if (piece.type != 'water' && miner.tool == 'pump') {
+		showMessage("There's no water in that direction!", 'error');
+		return false;
 	} else if (piece.type == 'rock' && miner.tool != 'jackhammer' && miner.tool != 'dynamite') {
 		showMessage('Solid rock, you can only use the Jackhammer or Dynamite!', 'error');
 		return false;
