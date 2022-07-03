@@ -89,7 +89,7 @@ function enterBank() {
 function exitTown() {
 	// lower elevator
 	soundEffect('elevator', -1, .5);
-	createjs.Tween.get(townElev).to({y: elev.belowTown.Y}, 1000).on('complete', function() { 
+	createjs.Tween.get(townElev).wait(1000).to({y: elev.belowTown.Y}, 1000).on('complete', function() { 
 		elev.setPosition(townElev, 'belowTown');
 		elev.elevLevel = -1;
 		stopButton = false;
@@ -97,7 +97,7 @@ function exitTown() {
 	});
 	
 	// lower miner
-	createjs.Tween.get(animMiner).to({y: 390}, 1000).on('complete', function() { 
+	createjs.Tween.get(animMiner).wait(1000).to({y: 390}, 1000).on('complete', function() { 
 		miner.setPosition(animMiner, 'townBelow');
 	});
 }
@@ -178,7 +178,7 @@ function exitTunnel(dir) {
 	}
 
 	// move elevator
-	createjs.Tween.get(tunnelElev).to({y: elevY}, 1000).on('complete', function() { 
+	createjs.Tween.get(tunnelElev).wait(1000).to({y: elevY}, 1000).on('complete', function() { 
 		elev.setPosition(tunnelElev, elevP);
 		stopButton = false;
 		enableButtons('buttons');
@@ -186,7 +186,7 @@ function exitTunnel(dir) {
 	});
 	
 	// move miner
-	createjs.Tween.get(animMiner).to({y: minerY }, 1000).on('complete', function() {
+	createjs.Tween.get(animMiner).wait(1000).to({y: minerY }, 1000).on('complete', function() {
 		miner.setPosition(animMiner, minerP);
 	});
 }

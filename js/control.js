@@ -140,6 +140,8 @@ function setSelected(btn) {
 function eventHandlers() {
 	// start button
 	exportRoot.intro_mc.btnStart.on('click', function() { startGame(); });
+	exportRoot.won_mc.btnStart.on('click', function() { startGame(); });
+	exportRoot.lost_mc.btnStart.on('click', function() { startGame(); });
 	
 	// tool buttons
 	gPad.btnPickaxe.on('click', function() { setSelected('pickaxe'); });
@@ -158,16 +160,16 @@ function eventHandlers() {
 	// keyboard events
 	$(document).on('keydown', function(e) {
 		var key = e.which;
-		if(key == 38) { makeMove(e, 'up'); }
-		if(key == 39) { makeMove(e, 'right'); }
-		if(key == 40) { makeMove(e, 'down'); }
-		if(key == 37) { makeMove(e, 'left'); }
+		if(key == 38) { makeMove('up'); }
+		if(key == 39) { makeMove('right'); }
+		if(key == 40) { makeMove('down'); }
+		if(key == 37) { makeMove('left'); }
 		if(key == 32) { stopButton = true; }
 		
-		if(key == 80 && toolsEnabled == true) { setSelected(e, 'pickaxe'); }
-		if(key == 87 && toolsEnabled == true) { setSelected(e, 'pump'); }
-		if(key == 74 && toolsEnabled == true) { setSelected(e, 'jackhammer'); }
-		if(key == 68 && toolsEnabled == true) { setSelected(e, 'dynamite'); }
+		if(key == 80 && toolsEnabled == true) { setSelected('pickaxe'); }
+		if(key == 87 && toolsEnabled == true) { setSelected('pump'); }
+		if(key == 74 && toolsEnabled == true) { setSelected('jackhammer'); }
+		if(key == 68 && toolsEnabled == true) { setSelected('dynamite'); }
 		if([80, 87, 74, 68].indexOf(key) > 0 && toolsEnabled == false) {
 			showMessage('A tool cannot be selected at this time!', 'error');
 		}

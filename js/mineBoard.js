@@ -131,7 +131,7 @@ function saltMine(loop) {
 			stopEffect();
 			exitBank();
 		}
-	}, 5);
+	}, 10);
 //	}, 1);
 }
 
@@ -181,7 +181,7 @@ function checkAction(piece, btn) {
 	} else if(rnd == 4 && piece.idDown != 'p00000') {
 		// footing
 		fallDownHole(piece, btn);
-	} else if(rnd == 6 || rnd ==7) {
+	} else if(rnd == 6) {
 		// cave in
 		playCaveIn(piece, btn);
 	} else if(rnd == 8 || rnd ==9) {
@@ -191,7 +191,7 @@ function checkAction(piece, btn) {
 		showMessage('Found gold nugget - ' + oz + ' oz!', 'gold', vol=.5);
 		piece.setType('gold');
 		movePiece(piece, btn);
-	} else if(rnd > 9) {
+	} else if(rnd > 10) {
 		// rock
 		piece.setType('rock');
 		if(miner.tool == 'jackhammer' || miner.oldTool == 'dynamite') { 
