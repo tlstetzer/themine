@@ -63,14 +63,14 @@ function moveInMine(btn) {
 	if(btn == 'down') { newID = piece.idDown; }
 	var newPiece = getPiece(newID);
 
-	if(piece.ID == 'p00000' || newPiece.type == 'cavein') { showMessage('You cannot move in that direction!', 'error'); }
+	if(piece.ID == 'p00000') { showMessage('You cannot move in that direction!', 'error'); }
 	else if(moveAllowed(newPiece) == true) { 
 		if(['dug', 'gold'].includes(newPiece.type)) { movePiece(newPiece, btn); }
 		else if(newPiece.type == 'shaft') { enterTunnelElevator(newPiece, btn); }
 		else if(newPiece.type == 'hole') { fallDownHole(newPiece, btn); }
 		else if(newPiece.type == 'water') { playPump(newPiece, btn); }
 		else if(miner.tool == 'jackhammer') { playJackhammer(newPiece, btn); }
-		else if(miner.tool == 'dynamite') { playDynamite(newPiece, btn); }
+		else if(miner.tool == 'dynamite' || newPiece.type == 'cavein') { playDynamite(newPiece, btn); }
 		else { playPickaxe(newPiece, btn); }
 	}
 }
@@ -84,7 +84,7 @@ function disableButtons(type) {
 		gPad.btnPump_d.visible = true;
 		gPad.btnJackhammer_d.visible = true;
 		gPad.btnDynamite_d.visible = true;
-		toolsEnabled == false;
+		toolsEnabled = false;
 	}
 	
 	// gamepad
@@ -107,7 +107,7 @@ function enableButtons(type) {
 		gPad.btnPump_d.visible = false;
 		gPad.btnJackhammer_d.visible = false;
 		gPad.btnDynamite_d.visible = false;
-		toolsEnabled == false;
+		toolsEnabled = true;
 	}
 	
 	// gamepad

@@ -164,6 +164,9 @@ function moveAllowed(piece) {
 	} else if (piece.type != 'water' && miner.tool == 'pump') {
 		showMessage("There's no water in that direction!", 'error');
 		return false;
+	} else if (piece.type == 'cavein' && miner.tool != 'dynamite') {
+		showMessage('You can only use dynamite on a cave in!', 'error');
+		return false;
 	} else if (piece.type == 'rock' && miner.tool != 'jackhammer' && miner.tool != 'dynamite') {
 		showMessage('Solid rock, you can only use the Jackhammer or Dynamite!', 'error');
 		return false;
@@ -191,7 +194,7 @@ function checkAction(piece, btn) {
 		showMessage('Found gold nugget - ' + oz + ' oz!', 'gold', vol=.5);
 		piece.setType('gold');
 		movePiece(piece, btn);
-	} else if(rnd > 10) {
+	} else if(rnd > 9) {
 		// rock
 		piece.setType('rock');
 		if(miner.tool == 'jackhammer' || miner.oldTool == 'dynamite') { 

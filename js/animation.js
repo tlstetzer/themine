@@ -382,7 +382,7 @@ function playPump(piece, btn) {
 					piece.setType('dug');
 					movePiece(piece, btn);
 				}
-			}, 1000);
+			}, 2000);
 		});
 	});
 }
@@ -400,17 +400,30 @@ function playDynamite(piece, btn) {
 			animMiner.gotoAndStop('stand');
 			miner.setPosition(animMiner, 'tunnelEnd');
 			setSelected('pickaxe');
-	
-			// move piece
+			
 			setTimeout(function() { 
-				enableButtons('all');
-				miner.bankTotal -= 80;
-				goldPrice();
-		
+				// cave in other pieces
+				var aPieces = [];
+				var id = parseInt(piece.ID.slice(-5));
+				for(var r=-2; r<3; r++) {
+					for(var c=1; c< 5; c++) {
+						var newID = id + (r * 40) - random(4) - c;
+						var newPID = 'p' + newID;
+						var newPiece = getPiece(newPID);
+						if(newPiece) {
+							if(newPiece.type == 'start' || newPiece.type == 'cavein' || newPiece.type == 'rock') { aPieces.push(newPID); }
+						}
+					}
+				}
+				
+				dynamitePiece(aPieces, aPieces.length - 1);
+
+				// move piece
 				if(piece.type == 'action') { checkAction(piece, btn) ; }
 				else {
 					piece.setType('dug');
 					movePiece(piece, btn);
+					enableButtons('all');
 				}
 			}, 1000);
 		});
@@ -464,6 +477,7 @@ function playCaveIn(piece, btn) {
 			miner.setPosition(animMiner, 'tunnelEnd');
 			setSelected('pickaxe');
 			enableButtons('all');
+			var newPiece = getPiece(piece.idRight);
 
 			setTimeout(function() { 
 				// cave in other pieces
@@ -473,14 +487,14 @@ function playCaveIn(piece, btn) {
 					for(var c=-2; c<3; c++) {
 						var id = piece.ID.slice(-5);
 						var newID = id - c + row;
-						aPieces.push('p' + newID);
+						var newPID = 'p' + newID;
+						if(newPID != newPiece.ID) { aPieces.push(newPID); }
 					}
 				}
 				
 				caveInPiece(aPieces, 14);
 
 				// move piece
-				var newPiece = getPiece(piece.idRight);
 				piece.setType('cavein');
 				newPiece.setType('dug');
 				movePiece(newPiece, btn);
@@ -535,6 +549,15 @@ function caveInPiece(aPieces, loop) {
 			cPiece.setType('start');
 		}
 		if(loop > 0) { caveInPiece(aPieces, loop - 1); }
+	}, 200);
+}
+
+function dynamitePiece(aPieces, loop) {
+	setTimeout(function() {
+		var cPiece = getPiece(aPieces[loop]);
+		soundEffect('radar', 0, 0.5);
+		cPiece.setType('dug');
+		if(loop > 0) { dynamitePiece(aPieces, loop - 1); }
 	}, 200);
 }
 
