@@ -485,14 +485,14 @@ function playCaveIn(piece, btn) {
 				for(var r=-1; r<2; r++) {
 					var row = random(3) + 40 * r;
 					for(var c=-2; c<3; c++) {
-						var id = piece.ID.slice(-5);
+						var id = parseInt(piece.ID.slice(-5));
 						var newID = id - c + row;
 						var newPID = 'p' + newID;
 						if(newPID != newPiece.ID) { aPieces.push(newPID); }
 					}
 				}
 				
-				caveInPiece(aPieces, 14);
+				caveInPiece(aPieces, aPieces.length - 1);
 
 				// move piece
 				piece.setType('cavein');
